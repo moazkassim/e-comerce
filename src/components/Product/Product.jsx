@@ -5,7 +5,7 @@ import { Heart } from "lucide-react";
 
 export default function Product(props) {
   return (
-    <section className="container-categories pr-20 pl-20 flex flex-row flex-wrap justify-center gap-12">
+    <section className="container-categories mb-20 pr-20 pl-20 flex flex-row flex-wrap justify-center gap-12">
       {props.productsArray.map((product) => {
         return (
           <div
@@ -38,10 +38,7 @@ export default function Product(props) {
                   className="addProductToCart text-sm  rounded bg-[#ee50ff] text-white p-[3px] absolute right-2"
                   onClick={() => {
                     props.setCartProducts([product, ...props.cartProducts]);
-                    console.log(
-                      "cart propducts after adding",
-                      props.cartProducts.length
-                    );
+
                     localStorage.setItem(
                       "cartArray",
                       JSON.stringify(props.cartProducts)

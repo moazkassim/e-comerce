@@ -5,6 +5,9 @@ import Logo from "../../../public/Navbar-img/Logo.png";
 import { ShoppingCart, Search, User } from "lucide-react";
 
 export default function Navbar(props) {
+  function handleChange(e) {
+    props.setSearchedProduct(e.target.value);
+  }
   return (
     <nav
       className="z-50 flex justify-center h-[73px] bg-white relative border-solid border-black border-b-[0.5px] border-opacity-30 
@@ -20,10 +23,11 @@ export default function Navbar(props) {
         <div className="ms-5 flex w-[30%] items-center justify-between">
           <input
             type="search"
-            className="relative m-0 block w-[1px] min-w-0 flex-auto rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-surface transition duration-300 ease-in-out focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-body-dark dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill"
+            className="relative m-0 block w-[1px] min-w-0 flex-auto rounded border border-solid border-gray-700  bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-surface transition duration-300 ease-in-out focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-body-dark dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill"
             placeholder="Search for products"
             aria-label="Search"
             aria-describedby="button-addon2"
+            onChange={handleChange}
           />
 
           <span
@@ -67,13 +71,16 @@ export default function Navbar(props) {
               className="flex justify-center pr-10 items-center h-16 relative text-black overflow-hidden text-lg"
               to=""
             >
-              <ShoppingCart onClick={() => props.setVisible((prev) => !prev)} />
+              <ShoppingCart
+                className="hover:text-[#ee50ff]"
+                onClick={() => props.setVisible((prev) => !prev)}
+              />
             </i>
           </li>
           <li className="">
             <Link
-              className="flex justify-center items-center h-16 relative overflow-hidden text-lg"
-              to="./register"
+              className="flex justify-center items-center h-16 relative overflow-hidden text-lg hover:text-[#ee50ff]"
+              to="./login"
             >
               <User />
             </Link>

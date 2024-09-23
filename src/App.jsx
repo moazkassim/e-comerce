@@ -13,21 +13,21 @@ import { useState, useEffect } from "react";
 import Cart from "./components/Cart/Cart";
 
 function App() {
-  const [categoryNameTitle, setCategoryNameTitle] = useState("electronics");
   const [cartProducts, setCartProducts] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [searchedProduct, setSearchedProduct] = useState("");
 
   useEffect(() => {
     if (localStorage.getItem("cartArray"))
       setCartProducts(JSON.parse(localStorage.getItem("cartArray")));
-    console.log(
-      "cart propducts after pooling from local storage",
-      cartProducts.length
-    );
   }, []);
   return (
     <>
-      <Navbar cartSize={cartProducts.length} setVisible={setVisible} />
+      <Navbar
+        cartSize={cartProducts.length}
+        setVisible={setVisible}
+        setSearchedProduct={setSearchedProduct}
+      />
       <GoToTop />
       <Cart
         setCartProducts={setCartProducts}
@@ -39,10 +39,9 @@ function App() {
           path="/"
           element={
             <Home
-              categoryNameTitle={categoryNameTitle}
-              setCategoryNameTitle={setCategoryNameTitle}
               setCartProducts={setCartProducts}
               cartProducts={cartProducts}
+              searchedProduct={searchedProduct}
             />
           }
         ></Route>
