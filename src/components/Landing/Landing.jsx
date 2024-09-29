@@ -48,9 +48,9 @@ export default function Landing(props) {
             );
           })}
         </ul>
-        <div className="max-lg:hidden w-[0.5px] bg-black opacity-30"></div>
+        <div className="hidden w-[0.5px] bg-black opacity-30 md:flex"></div>
 
-        <div className="relative m-10 flex w-full flex-col justify-between gap-10 bg-black py-8 md:flex-row">
+        <div className="relative flex w-full flex-col justify-between gap-10 bg-black py-8 md:flex-row">
           <ul className="ml-8 flex flex-col p-7">
             <li className="mb-8 flex items-center justify-start gap-6">
               <img className="" src={Apple} />
@@ -64,7 +64,7 @@ export default function Landing(props) {
                 off Voucher
               </p>
             </li>
-            <li className="mt-5 flex items-center gap-2 text-center">
+            <li className="ite mt-5 flex gap-2 text-center">
               <a
                 className="text-center text-base font-normal text-white underline"
                 href="#"
@@ -90,7 +90,7 @@ export default function Landing(props) {
               </svg>
             </li>
           </ul>
-          <div className="relative flex items-center justify-center overflow-hidden md:static">
+          <div className="li-advertisement relative flex items-center justify-center overflow-hidden md:static">
             <SlideLeftButton
               imageIndex={imageIndex}
               setImageIndex={setImageIndex}
