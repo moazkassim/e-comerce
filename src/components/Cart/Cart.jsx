@@ -4,7 +4,7 @@ import React from "react";
 export default function Cart(props) {
   return (
     <section
-      className={` delay-700 z-50 border-slate-100 bg-[#F5F7F8]  max-w-full right-6 border-2 border-solid  flex-col w-96 p-3 rounded mt-7 shadow-xl ${
+      className={`border-slate-100 right-6 z-50 mt-7 max-w-96 flex-col rounded border-2 border-solid bg-white p-1 shadow-xl delay-700 ${
         props.cartVisible ? "absolute" : "hidden"
       }`}
     >
@@ -12,38 +12,37 @@ export default function Cart(props) {
         return (
           <div
             key={index}
-            className="product mb-2 border-2 border-solid p-5 z-20 flex-row flex gap-14 relative items-center "
+            className="relative z-40 my-1 flex flex-row items-center gap-14 border-2 border-solid bg-[#F5F7F8] p-3"
           >
-            <div className="product-image border-2 border-solid p-2">
+            <div className="border-2 border-solid p-2">
               <img
-                className="w-[105px] h-[115px]  object-scale-down"
+                className="h-[115px] w-[105px] object-scale-down"
                 src={product.image}
                 alt=""
               />
             </div>
-            <div className="product-details flex flex-col - items-center justify-between ">
-              <p className="text-[#505050] text-base font-normal">
+            <div className="flex flex-col items-center justify-between">
+              <p className="text-base font-normal text-[#505050]">
                 {product.title.slice(0, 35)}
               </p>
-              <span className="text-[#333] text-base font-semibold mt-2 mb-2 bold">
+              <span className="bold mb-2 mt-2 text-base font-semibold text-[#333]">
                 {product.price} $
               </span>
               <div className="buttons flex flex-row">
-                <button className="confirm-btn border-2 border-solid text-sm font-medium text-[#0D6EFD] mr-3 bg-white p-[6px] rounded">
+                <button className="confirm-btn mr-3 rounded border-2 border-solid bg-white p-[6px] text-sm font-medium text-[#0D6EFD]">
                   Confirm
                 </button>
                 <button
                   onClick={() => {
-                    props.setCartProducts((oldValues) => {
-                      return oldValues.filter(( i) => i !== index);
-                    });
-                 
-                    localStorage.setItem(
-                      "cartArray",
-                      JSON.stringify(props.cartProducts)
-                    );
+                    let testArr = [];
+                    testArr = props.cartProducts.filter((_, i) => i !== index);
+
+                    props.setCartProducts(testArr);
+                    // );
+                    console.log("after removing", testArr);
+                    localStorage.setItem("cartArray", JSON.stringify(testArr));
                   }}
-                  className="remove-btn border-2 border-solid text-sm font-medium text-[#FA3434] p-[6px] bg-white rounded"
+                  className=" rounded border-2 border-solid bg-white p-[6px] text-sm font-medium text-[#FA3434]"
                 >
                   Remove
                 </button>

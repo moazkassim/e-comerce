@@ -5,69 +5,72 @@ import { Heart } from "lucide-react";
 
 export default function Product(props) {
   return (
-    <section className="container-categories mb-20 pr-20 pl-20 flex flex-row flex-wrap justify-center gap-12">
+    <section className="container-categories mb-20 flex flex-row flex-wrap justify-center gap-12 pl-20 pr-20">
       {props.productsArray.map((product) => {
         return (
           <div
-            className="cate p-[2px] pt-6 outline-white  bg-white relative border-2 rounded-md w-64 flex items-center justify-center cursor-pointer flex-col shadow-md"
+            className="relative flex w-64 cursor-pointer flex-col items-center justify-center rounded-md border-2 bg-white p-[2px] pt-6 shadow-md outline-white"
             key={product.id}
           >
-            <div className="action-icons top-1 right-1 absolute">
+            <div className="action-icons absolute right-1 top-1">
               <Heart
                 size={30}
-                className="mb-1 cursor-pointer bg-white rounded-full p-1"
+                className="mb-1 cursor-pointer rounded-full bg-white p-1 hover:text-[#ee50ff]"
               />
 
               <Eye
                 size={30}
-                className="cursor-pointer bg-white rounded-full p-[4px]"
+                className="cursor-pointer rounded-full bg-white p-[4px] hover:text-[#ee50ff]"
               />
             </div>
             <img
               src={product.image}
-              className="pt-8 w-[135px] h-[185px] object-scale-down"
+              className="h-[185px] w-[135px] object-scale-down pt-8"
               alt=""
             />
 
-            <div className="rounded  opacity-80 inner-cat mt-8 border-t-2 pt-3 h-[120px] w-full p-2 truncate">
-              <div className="price-data flex items-center justify-between">
-                <p className="product-Price text-lg font-medium leading-5 mb-3 text-[#ee50ff]">
+            <div className="mt-8 h-[120px] w-full truncate rounded border-t-2 p-2 pt-3 opacity-80">
+              <div className="flex items-center justify-between">
+                <p className="product-Price mb-3 text-lg font-medium leading-5 text-[#ee50ff]">
                   {product.price} $
                 </p>
                 <button
-                  className="addProductToCart text-sm  rounded bg-[#ee50ff] text-white p-[3px] absolute right-2"
+                  className="right-2 rounded bg-[#ee50ff] p-[3px] text-sm text-white"
                   onClick={() => {
-                    props.setCartProducts([product, ...props.cartProducts]);
+                    const newProducts = [product, ...props.cartProducts];
+                    props.setCartProducts(newProducts);
 
                     localStorage.setItem(
                       "cartArray",
-                      JSON.stringify(props.cartProducts)
+                      JSON.stringify(newProducts),
+                    );
+                    console.log(
+                      "cart size after adding the product",
+                      props.cartProducts.length,
                     );
                   }}
                 >
                   Add
                 </button>
               </div>
-              <ul className="flex items-center mt-2">
+              <ul className="mt-2 flex items-center">
                 <li>
-                  <Star size={18} color="#FFDE21" className=" fill-[#FFDE21]" />
+                  <Star size={18} color="#FFDE21" className="fill-[#FFDE21]" />
                 </li>
                 <li>
-                  <Star size={18} color="#FFDE21" className=" fill-[#FFDE21]" />
+                  <Star size={18} color="#FFDE21" className="fill-[#FFDE21]" />
                 </li>
                 <li>
-                  <Star size={18} color="#FFDE21" className=" fill-[#FFDE21]" />
+                  <Star size={18} color="#FFDE21" className="fill-[#FFDE21]" />
                 </li>
 
                 <li>
-                  <span className="font-semibold text-sm opacity-50 ml-2">
+                  <span className="ml-2 text-sm font-semibold opacity-50">
                     (88)
                   </span>
                 </li>
               </ul>
-              <p className="mt-3 text-[#8B96A5] text-over">
-                {product.description}
-              </p>
+              <p className="text-over mt-3 text-[#8B96A5]">{product.title}</p>
             </div>
           </div>
         );

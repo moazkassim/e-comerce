@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../../public/Navbar-img/Logo.png";
+import NanMenu from "../Menu/NavMenu";
 
 import { ShoppingCart, Search, User } from "lucide-react";
 
@@ -9,21 +9,87 @@ export default function Navbar(props) {
     props.setSearchedProduct(e.target.value);
   }
   return (
-    <nav
-      className="z-50 flex justify-center h-[73px] bg-white relative border-solid border-black border-b-[0.5px] border-opacity-30 
-      "
-    >
-      <div className="container flex justify-between text-center relative items-center w-[1200px] max-lg:w-[1600px] max-sm:w-fit max-sm:gap-2">
-        <Link
-          className="text-2xl font-bold h-2 flex justify-center items-center max-sm:mb-4"
-          to="/"
-        >
-          <img src={Logo} className="w-[145px] h-[70px]" />
-        </Link>
-        <div className="ms-5 flex w-[30%] items-center justify-between">
+    <nav className="relative z-50 flex items-center justify-center border-b-[0.5px] border-solid border-black border-opacity-30 bg-white">
+      <div className="flex w-full flex-col items-center justify-center md:mx-14">
+        <div className="m:m-0 container relative flex flex-1 items-center justify-center">
+          <Link
+            className="m:m-0 flex h-2 w-full items-center justify-start text-2xl font-bold"
+            to="/"
+          >
+            <img src={Logo} className="h-[60px] w-[60px]" />
+          </Link>
+          <div className="mr-10 hidden w-full items-center justify-center md:flex">
+            <input
+              type="search"
+              className="text-surface focus:border-primary focus:shadow-inset dark:bg-body-dark dark:autofill:shadow-autofill dark:placeholder:text-neutral-300 relative m-0 block w-[1px] min-w-0 flex-auto rounded border border-solid border-gray-700 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:text-gray-700 focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white"
+              placeholder="Search for products"
+              aria-label="Search"
+              onChange={handleChange}
+            />
+
+            <span className="flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal dark:text-white [&>svg]:w-5">
+              <Search className="text-gray-600" />
+            </span>
+          </div>
+          <ul className="top-0 flex w-full items-center justify-end">
+            <li className="hidden md:flex">
+              <Link
+                className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#ee50ff]"
+                to="/"
+              >
+                Home
+              </Link>
+            </li>
+            <li className="hidden md:flex">
+              <Link
+                className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#ee50ff]"
+                to="/contact"
+              >
+                Contact
+              </Link>
+            </li>
+            <li className="hidden md:flex">
+              <Link
+                className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#ee50ff]"
+                to="/about"
+              >
+                About
+              </Link>
+            </li>
+            <li className="cart-icon relative mx-3 cursor-pointer">
+              <span className="product-span count absolute top-1 z-10 block h-4 w-4 translate-x-0 translate-y-2 rounded-full bg-[#ee50ff] text-center text-xs leading-4 text-white">
+                {props.cartSize}
+              </span>
+              <i
+                className="relative flex h-16 items-center justify-center overflow-hidden text-lg text-black"
+                to=""
+              >
+                <ShoppingCart
+                  className="hover:text-[#ee50ff]"
+                  onClick={() => props.setVisible((prev) => !prev)}
+                />
+              </i>
+            </li>
+            <li className="">
+              <Link
+                className="relative mx-3 flex h-16 items-center justify-center overflow-hidden text-lg hover:text-[#ee50ff]"
+                to="./login"
+              >
+                <User />
+              </Link>
+            </li>
+            <li className="flex md:hidden">
+              <NanMenu
+                setCategoryNameTitle={props.setCategoryNameTitle}
+                category={props.category}
+              />
+            </li>
+          </ul>
+        </div>
+        <div className="flex w-full items-center justify-center md:hidden">
           <input
             type="search"
-            className="relative m-0 block w-[1px] min-w-0 flex-auto rounded border border-solid border-gray-700  bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-surface transition duration-300 ease-in-out focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-body-dark dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill"
+            className="text-surface focus:border-primary focus:shadow-inset dark:bg-body-dark dark:autofill:shadow-autofill dark:placeholder:text-neutral-300 relative mx-6 my-2 block w-[1px] min-w-0 flex-auto rounded border border-solid border-gray-700 bg-transparent bg-clip-padding px-2 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:text-gray-700 focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white"
             placeholder="Search for products"
             aria-label="Search"
             aria-describedby="button-addon2"
@@ -31,61 +97,12 @@ export default function Navbar(props) {
           />
 
           <span
-            className="flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal dark:text-white [&>svg]:w-5"
+            className="flex items-center whitespace-nowrap rounded py-1.5 text-center text-base font-normal dark:text-white [&>svg]:w-5"
             id="basic-addon2"
           >
-            <Search className="text-gray-600 " />
+            <Search className="text-gray-600" />
           </span>
         </div>
-        <ul className="nav flex max-sm:gap-1 max-sm:items-end">
-          <li>
-            <Link
-              className="max-sm:hidden transition-duration: 500ms hover:text-[#ee50ff] flex justify-center px-6 items-center h-16 relative text-black overflow-hidden text-lg"
-              to="/"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="max-sm:hidden transition-duration: 500ms hover:text-[#ee50ff] flex justify-center px-6 items-center h-16 relative text-black overflow-hidden text-lg"
-              to="/contact"
-            >
-              Contact
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="max-sm:hidden transition-duration: 500ms hover:text-[#ee50ff] flex justify-center px-6 items-center h-16 relative text-black overflow-hidden text-lg"
-              to="/about"
-            >
-              About
-            </Link>
-          </li>
-          <li></li>
-          <li className="relative cursor-pointer cart-icon">
-            <span className="product-span translate-y-2 rounded-full count absolute top-1 right-8 bg-[#ee50ff] w-4 h-4 leading-4 block text-center translate-x-0 text-xs z-10 text-white">
-              {props.cartSize}
-            </span>
-            <i
-              className="flex justify-center pr-10 items-center h-16 relative text-black overflow-hidden text-lg"
-              to=""
-            >
-              <ShoppingCart
-                className="hover:text-[#ee50ff]"
-                onClick={() => props.setVisible((prev) => !prev)}
-              />
-            </i>
-          </li>
-          <li className="">
-            <Link
-              className="flex justify-center items-center h-16 relative overflow-hidden text-lg hover:text-[#ee50ff]"
-              to="./login"
-            >
-              <User />
-            </Link>
-          </li>
-        </ul>
       </div>
     </nav>
   );

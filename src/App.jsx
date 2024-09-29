@@ -11,15 +11,30 @@ import Footer from "./components/Footer/Footer";
 import GoToTop from "./components/GoToTop";
 import { useState, useEffect } from "react";
 import Cart from "./components/Cart/Cart";
+import axios from "axios";
 
 function App() {
   const [cartProducts, setCartProducts] = useState([]);
   const [visible, setVisible] = useState(false);
   const [searchedProduct, setSearchedProduct] = useState("");
+  const [category, setCategory] = useState([]);
+  const [categoryNameTitle, setCategoryNameTitle] = useState("electronics");
 
   useEffect(() => {
     if (localStorage.getItem("cartArray"))
       setCartProducts(JSON.parse(localStorage.getItem("cartArray")));
+    console.log("cart product size at opening", cartProducts.length);
+  }, []);
+  useEffect(() => {
+    axios
+      .get("https://fakestoreapi.com/products/categories")
+      .then((res) => {
+        setCategory(res.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   }, []);
   return (
     <>
@@ -27,6 +42,8 @@ function App() {
         cartSize={cartProducts.length}
         setVisible={setVisible}
         setSearchedProduct={setSearchedProduct}
+        category={category}
+        setCategoryNameTitle={setCategoryNameTitle}
       />
       <GoToTop />
       <Cart
@@ -34,23 +51,28 @@ function App() {
         cartProducts={cartProducts}
         cartVisible={visible}
       />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              setCartProducts={setCartProducts}
-              cartProducts={cartProducts}
-              searchedProduct={searchedProduct}
-            />
-          }
-        ></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="*" element={<NoMatch />} />
-      </Routes>
+      <div className="md:mx-14">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                setCartProducts={setCartProducts}
+                cartProducts={cartProducts}
+                searchedProduct={searchedProduct}
+                category={category}
+                setCategoryNameTitle={setCategoryNameTitle}
+                categoryNameTitle={categoryNameTitle}
+              />
+            }
+          ></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
+      </div>
       <Footer />
     </>
   );
