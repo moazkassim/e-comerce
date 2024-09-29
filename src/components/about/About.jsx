@@ -21,7 +21,7 @@ export default function About() {
               About us
             </h2>
 
-            <p>
+            <p className="text-justify text-gray-700">
               At SHOPLAND, we're passionate about redefining your shopping
               experience. Our mission is simple: to provide you with a seamless,
               secure, and enjoyable way to discover and purchase the products
