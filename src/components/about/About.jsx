@@ -14,7 +14,7 @@ export default function About() {
             <polygon points="50,0 100,0 50,100 0,100"></polygon>
           </svg>
 
-          <main className="mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+          <main className="max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
             <h2 className="my-6 text-2xl font-extrabold text-gray-900 sm:text-3xl md:text-4xl">
               About us
             </h2>
@@ -35,7 +35,7 @@ export default function About() {
       </div>
       <div className="mx-4 md:mx-0 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
         <img
-          className="h-full w-full object-cover object-top"
+          className="h-full w-full object-cover object-top md:w-full"
           src={Sales}
           alt="about-us-image"
         />

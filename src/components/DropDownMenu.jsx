@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   Menu,
   MenuHandler,
@@ -8,6 +9,7 @@ import {
 import { Link } from "react-router-dom";
 
 export default function DropDownMenu(props) {
+  const navigate = useNavigate();
   return (
     <Menu>
       <MenuHandler>
@@ -23,9 +25,12 @@ export default function DropDownMenu(props) {
           return (
             <MenuItem key={index}>
               <Link
+                to="/"
                 aria-label="set-category-name"
                 className="hover:[#ee50ff] flex items-start text-black md:gap-4"
-                onClick={() => props.setCategoryNameTitle(cate)}
+                onClick={() => {
+                  props.setCategoryNameTitle(cate);
+                }}
               >
                 {cate}
               </Link>

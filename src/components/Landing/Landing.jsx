@@ -101,7 +101,7 @@ export default function Landing(props) {
 
             <img
               src={imageSliderArr[imageIndex].src}
-              className="h-[300px] w-[410px] shrink-0 bg-transparent"
+              className="aspect-auto h-[300px] w-[410px] shrink-0 bg-transparent"
               alt="slider-img"
             />
 

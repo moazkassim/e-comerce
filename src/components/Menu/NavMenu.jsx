@@ -1,11 +1,12 @@
 import React from "react";
+
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import {
   Menu,
   MenuHandler,
   MenuList,
   MenuItem,
-} from "@material-tailwind/react";
+} from "@material-tailwind/react";  
 import { AlignJustify } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -60,9 +61,12 @@ export default function NanMenu(props) {
               return (
                 <MenuItem key={index}>
                   <Link
+                    to="/"
                     aria-label="set-category-name-title"
                     className="flex items-start text-black hover:text-red-500 md:gap-4"
-                    onClick={() => props.setCategoryNameTitle(cate)}
+                    onClick={() => {
+                      props.setCategoryNameTitle(cate);
+                    }}
                   >
                     {cate}
                   </Link>

@@ -72,7 +72,7 @@ export default function Navbar(props) {
               </Link>
             </li>
             <li className="cart-icon relative mx-3 cursor-pointer">
-              <span className="product-span count absolute top-1 z-10 block h-4 w-4 translate-x-0 translate-y-2 rounded-full bg-[#ee50ff] text-center text-xs leading-4 text-white">
+              <span className="product-span count absolute top-1 z-10 block h-4 w-4 translate-x-0 translate-y-2 rounded-full bg-[#ee50ff] text-center text-[13px] leading-4 text-white">
                 {props.cartSize}
               </span>
               <i
