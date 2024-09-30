@@ -34,6 +34,7 @@ export default function GoToTop() {
         <button
           type="button"
           onClick={backToTop}
+          name="go-back-to-top"
           className="fixed bottom-10 right-10 z-50 rounded-full bg-[#ee50ff] p-3 text-xs font-medium uppercase text-white transition duration-150 ease-in-out"
         >
           <svg

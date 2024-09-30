@@ -15,19 +15,23 @@ export default function NanMenu(props) {
   return (
     <Menu>
       <MenuHandler>
-        <button className="border-none bg-white px-3 py-0">
+        <button name="menu-button" className="border-none bg-white px-3 py-0">
           <AlignJustify color="black" />
         </button>
       </MenuHandler>
       <MenuList className="">
         <MenuItem>
-          <Link to="/">Home</Link>
+          <Link aria-label="Home-page" to="/">
+            Home
+          </Link>
         </MenuItem>
         <MenuItem>
-          <Link to="/about">About</Link>
+          <Link aria-label="about-page" to="/about">
+            About
+          </Link>
         </MenuItem>
         <MenuItem>
-          <Link className="flex-1" to="/contact">
+          <Link aria-label="contact-page" className="flex-1" to="/contact">
             Contact
           </Link>
         </MenuItem>
@@ -51,13 +55,14 @@ export default function NanMenu(props) {
             </MenuItem>
           </MenuHandler>
 
-          <MenuList className="z-50 bg-red-700">
+          <MenuList className="z-50">
             {props.category.map((cate, index) => {
               return (
                 <MenuItem key={index}>
                   <Link
+                    aria-label="set-category-name-title"
                     className="flex items-start text-black hover:text-red-500 md:gap-4"
-                    // onClick={() => props.setCategoryNameTitle(cate)}
+                    onClick={() => props.setCategoryNameTitle(cate)}
                   >
                     {cate}
                   </Link>

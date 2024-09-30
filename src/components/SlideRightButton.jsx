@@ -3,6 +3,7 @@ export default function SlideRightButton(props) {
     <div className="absolute right-2 top-0 flex h-full items-center justify-center">
       <button
         type="button"
+        name="go-to-previous-img"
         onClick={() => {
           if (props.imageIndex < props.imageSliderArr.length - 1) {
             props.setImageIndex((prevIndex) => prevIndex + 1);

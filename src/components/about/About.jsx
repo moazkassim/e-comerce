@@ -1,5 +1,3 @@
-import React from "react";
-
 import Sales from "../../../public/aboutImg/sales.jpg";
 export default function About() {
   return (
@@ -39,7 +37,7 @@ export default function About() {
         <img
           className="h-full w-full object-cover object-top"
           src={Sales}
-          alt=""
+          alt="about-us-image"
         />
       </div>
     </div>

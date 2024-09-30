@@ -20,13 +20,14 @@ export default function Landing(props) {
   ];
   const [imageIndex, setImageIndex] = useState(0);
   return (
-    <section className="flex items-center justify-center">
-      <div className="flex w-full md:relative">
-        <ul className="links ml-[20px] mt-10 hidden min-w-52 flex-col items-start gap-4 ease-linear lg:inline-flex">
+    <section className="flex w-full items-center justify-center">
+      <div className="flex w-full md:relative lg:m-8">
+        <ul className="links mt-10 hidden min-w-40 flex-col items-start gap-4 ease-linear lg:inline-flex">
           {props.categoriesArr.map((cate, index) => {
             return (
               <li key={index}>
                 <Link
+                  aria-label="set-category-name-title"
                   className="flex items-start text-black hover:text-red-500 md:gap-4"
                   onClick={() => props.setCategoryNameTitle(cate)}
                 >
@@ -48,12 +49,12 @@ export default function Landing(props) {
             );
           })}
         </ul>
-        <div className="hidden w-[0.5px] bg-black opacity-30 md:flex"></div>
+        <div className="mx-10 hidden w-[0.5px] bg-black opacity-30 lg:flex"></div>
 
         <div className="relative flex w-full flex-col justify-between gap-10 bg-black py-8 md:flex-row">
           <ul className="ml-8 flex flex-col p-7">
             <li className="mb-8 flex items-center justify-start gap-6">
-              <img className="" src={Apple} />
+              <img className="h-[49] w-[40]" src={Apple} alt="apple-image" />
               <p className="text-center text-base font-normal text-white">
                 iPhone 14 Series
               </p>
@@ -65,12 +66,13 @@ export default function Landing(props) {
               </p>
             </li>
             <li className="ite mt-5 flex gap-2 text-center">
-              <a
+              <Link
                 className="text-center text-base font-normal text-white underline"
-                href="#"
+                to="/"
+                aria-label="Home-page"
               >
                 Shop Now
-              </a>
+              </Link>
 
               <svg
                 className="h-6 w-6"
@@ -100,6 +102,7 @@ export default function Landing(props) {
             <img
               src={imageSliderArr[imageIndex].src}
               className="h-[300px] w-[410px] shrink-0 bg-transparent"
+              alt="slider-img"
             />
 
             <SlideRightButton

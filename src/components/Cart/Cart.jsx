@@ -1,6 +1,3 @@
-import { MapPinned } from "lucide-react";
-import React from "react";
-
 export default function Cart(props) {
   return (
     <section
@@ -18,7 +15,7 @@ export default function Cart(props) {
               <img
                 className="h-[115px] w-[105px] object-scale-down"
                 src={product.image}
-                alt=""
+                alt="cart-image"
               />
             </div>
             <div className="flex flex-col items-center justify-between">
@@ -29,10 +26,14 @@ export default function Cart(props) {
                 {product.price} $
               </span>
               <div className="buttons flex flex-row">
-                <button className="confirm-btn mr-3 rounded border-2 border-solid bg-white p-[6px] text-sm font-medium text-[#0D6EFD]">
+                <button
+                  name="confirm-product"
+                  className="confirm-btn mr-3 rounded border-2 border-solid bg-white p-[6px] text-sm font-medium text-[#0D6EFD]"
+                >
                   Confirm
                 </button>
                 <button
+                  name="remove-button"
                   onClick={() => {
                     let testArr = [];
                     testArr = props.cartProducts.filter((_, i) => i !== index);
@@ -42,7 +43,7 @@ export default function Cart(props) {
                     console.log("after removing", testArr);
                     localStorage.setItem("cartArray", JSON.stringify(testArr));
                   }}
-                  className=" rounded border-2 border-solid bg-white p-[6px] text-sm font-medium text-[#FA3434]"
+                  className="rounded border-2 border-solid bg-white p-[6px] text-sm font-medium text-[#FA3434]"
                 >
                   Remove
                 </button>

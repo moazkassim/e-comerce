@@ -91,15 +91,17 @@ export default function Login() {
                   </label>
                 </div>
               </div>
-              <a
-                href="#"
+              <Link
+                to="/"
+                aria-label="Home-page"
                 className="text-primary-600 dark:text-primary-500 text-sm font-medium hover:underline"
               >
                 Forgot password?
-              </a>
+              </Link>
             </div>
             <button
               type="submit"
+              name="sign-in"
               className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-full rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
             >
               Sign in
@@ -108,6 +110,7 @@ export default function Login() {
               Don’t have an account yet?{" "}
               <Link
                 to="/register"
+                aria-label="register-page"
                 className="text-primary-600 dark:text-primary-500 font-medium hover:underline"
               >
                 Sign up

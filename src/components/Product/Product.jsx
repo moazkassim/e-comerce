@@ -1,11 +1,10 @@
-import React from "react";
 import { Star } from "lucide-react";
 import { Eye } from "lucide-react";
 import { Heart } from "lucide-react";
 
 export default function Product(props) {
   return (
-    <section className="container-categories mb-20 flex flex-row flex-wrap justify-center gap-12 pl-20 pr-20">
+    <section className="container-categories mb-20 flex flex-row flex-wrap justify-center gap-12">
       {props.productsArray.map((product) => {
         return (
           <div
@@ -26,7 +25,7 @@ export default function Product(props) {
             <img
               src={product.image}
               className="h-[185px] w-[135px] object-scale-down pt-8"
-              alt=""
+              alt={product.title + "image"}
             />
 
             <div className="mt-8 h-[120px] w-full truncate rounded border-t-2 p-2 pt-3 opacity-80">
@@ -35,6 +34,7 @@ export default function Product(props) {
                   {product.price} $
                 </p>
                 <button
+                  name="add-product-to-cart"
                   className="right-2 rounded bg-[#ee50ff] p-[3px] text-sm text-white"
                   onClick={() => {
                     const newProducts = [product, ...props.cartProducts];

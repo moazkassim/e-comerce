@@ -51,7 +51,7 @@ function App() {
         cartProducts={cartProducts}
         cartVisible={visible}
       />
-      <div className="md:mx-14">
+      <div className="lg:mx-8">
         <Routes>
           <Route
             path="/"

@@ -2,54 +2,55 @@ import React from "react";
 
 export default function Contact() {
   return (
-    <section className="bg-white mt-16 mb-8">
-      <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-        <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center">
+    <section className="mb-8 mt-16 bg-white">
+      <div className="mx-auto max-w-screen-md px-4 py-8 lg:py-16">
+        <h2 className="mb-4 text-center text-4xl font-extrabold tracking-tight">
           Contact Us
         </h2>
-        <p className="mb-8 lg:mb-16 font-light text-center sm:text-xl">
+        <p className="mb-8 text-center font-light sm:text-xl lg:mb-16">
           Got a technical issue? Want to send feedback about a beta feature?
           Need details about our Business plan? Let us know.
         </p>
         <form action="#" className="space-y-8">
           <div>
-            <label htmlFor="email" className="block mb-2 text-sm font-medium">
+            <label htmlFor="email" className="mb-2 block text-sm font-medium">
               Your email
             </label>
             <input
               type="email"
               id="email"
-              className="shadow-sm border bg-[#F5F5F5] border-gray-300 text-sm rounded-lg focus:ring-primary-200 focus:border-primary-200 block w-full p-2.5 dark:border-gray-200 dark:placeholder-gray-400 dark:focus:ring-primary-200 dark:focus:border-primary-200 dark:shadow-sm-light"
+              className="focus:ring-primary-200 focus:border-primary-200 dark:focus:ring-primary-200 dark:focus:border-primary-200 dark:shadow-sm-light block w-full rounded-lg border border-gray-300 bg-[#F5F5F5] p-2.5 text-sm shadow-sm dark:border-gray-200 dark:placeholder-gray-400"
               placeholder="name@flowbite.com"
               required
             />
           </div>
           <div>
-            <label htmlFor="subject" className="block mb-2 text-sm font-medium">
+            <label htmlFor="subject" className="mb-2 block text-sm font-medium">
               Subject
             </label>
             <input
               type="text"
               id="subject"
-              className="block p-3 w-full text-sm rounded-lg border bg-[#F5F5F5] shadow-sm focus:ring-primary-200 focus:border-primary-200 dark:placeholder-gray-400 dark:focus:ring-primary-200 dark:focus:border-primary-200 dark:shadow-sm-light"
+              className="focus:ring-primary-200 focus:border-primary-200 dark:focus:ring-primary-200 dark:focus:border-primary-200 dark:shadow-sm-light block w-full rounded-lg border bg-[#F5F5F5] p-3 text-sm shadow-sm dark:placeholder-gray-400"
               placeholder="Let us know how we can help you"
               required
             />
           </div>
           <div className="sm:col-span-2">
-            <label htmlFor="message" className="block mb-2 text-sm font-medium">
+            <label htmlFor="message" className="mb-2 block text-sm font-medium">
               Your message
             </label>
             <textarea
               id="message"
               rows="6"
-              className="block p-2.5 w-full text-sm bg-[#F5F5F5] shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:border-gray-200 dark:placeholder-gray-400 e dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              className="focus:ring-primary-500 focus:border-primary-500 e dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full border border-gray-300 bg-[#F5F5F5] p-2.5 text-sm shadow-sm dark:border-gray-200 dark:placeholder-gray-400"
               placeholder="Leave a comment..."
             ></textarea>
           </div>
           <button
             type="submit"
-            className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-black sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+            name="submit-message"
+            className="hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 rounded-lg bg-black px-5 py-3 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 sm:w-fit"
           >
             Send message
           </button>

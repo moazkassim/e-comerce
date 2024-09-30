@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "../../../public/Navbar-img/Logo.png";
 import NanMenu from "../Menu/NavMenu";
-
+import DropDownMenu from "../DropDownMenu";
 import { ShoppingCart, Search, User } from "lucide-react";
 
 export default function Navbar(props) {
@@ -10,15 +10,20 @@ export default function Navbar(props) {
   }
   return (
     <nav className="relative z-50 flex items-center justify-center border-b-[0.5px] border-solid border-black border-opacity-30 bg-white">
-      <div className="flex w-full flex-col items-center justify-center md:mx-14">
-        <div className="m:m-0 container relative flex flex-1 items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center lg:mx-8">
+        <div className="m:m-0 relative flex w-full flex-1 items-center justify-center">
           <Link
             className="m:m-0 flex h-2 w-full items-center justify-start text-2xl font-bold"
             to="/"
           >
-            <img src={Logo} className="h-[60px] w-[60px]" />
+            <img
+              src={Logo}
+              className="h-[60px] w-[60px]"
+              alt="logo-image"
+              aria-label="Home-page"
+            />
           </Link>
-          <div className="mr-10 hidden w-full items-center justify-center md:flex">
+          <div className="hidden w-full items-center justify-center md:flex">
             <input
               type="search"
               className="text-surface focus:border-primary focus:shadow-inset dark:bg-body-dark dark:autofill:shadow-autofill dark:placeholder:text-neutral-300 relative m-0 block w-[1px] min-w-0 flex-auto rounded border border-solid border-gray-700 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:text-gray-700 focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white"
@@ -32,24 +37,34 @@ export default function Navbar(props) {
             </span>
           </div>
           <ul className="top-0 flex w-full items-center justify-end">
-            <li className="hidden md:flex">
+            <li className="hidden sm:flex lg:hidden">
+              <DropDownMenu
+                setCategoryNameTitle={props.setCategoryNameTitle}
+                category={props.category}
+              />
+            </li>
+            <li className="hidden sm:flex">
               <Link
                 className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#ee50ff]"
                 to="/"
+                aria-label="Home-page"
               >
                 Home
               </Link>
             </li>
-            <li className="hidden md:flex">
+            <li className="hidden sm:flex">
               <Link
                 className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#ee50ff]"
                 to="/contact"
+                aria-label="contact-page"
               >
                 Contact
               </Link>
             </li>
-            <li className="hidden md:flex">
+            <li className="hidden sm:flex">
               <Link
+                to="/about"
+                aria-label="about-page"
                 className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#ee50ff]"
                 to="/about"
               >
@@ -72,13 +87,14 @@ export default function Navbar(props) {
             </li>
             <li className="">
               <Link
+                aria-label="login-page"
                 className="relative mx-3 flex h-16 items-center justify-center overflow-hidden text-lg hover:text-[#ee50ff]"
-                to="./login"
+                to="/login"
               >
                 <User />
               </Link>
             </li>
-            <li className="flex md:hidden">
+            <li className="flex sm:hidden">
               <NanMenu
                 setCategoryNameTitle={props.setCategoryNameTitle}
                 category={props.category}
@@ -89,10 +105,10 @@ export default function Navbar(props) {
         <div className="flex w-full items-center justify-center md:hidden">
           <input
             type="search"
-            className="text-surface focus:border-primary focus:shadow-inset dark:bg-body-dark dark:autofill:shadow-autofill dark:placeholder:text-neutral-300 relative mx-6 my-2 block w-[1px] min-w-0 flex-auto rounded border border-solid border-gray-700 bg-transparent bg-clip-padding px-2 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:text-gray-700 focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white"
+            className="text-surface focus:border-primary focus:shadow-inset dark:bg-body-dark dark:autofill:shadow-autofill dark:placeholder:text-neutral-300 relative mx-2 my-2 block w-[1px] min-w-0 flex-auto rounded border border-solid border-gray-700 bg-transparent bg-clip-padding px-2 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:text-gray-700 focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white"
             placeholder="Search for products"
             aria-label="Search"
-            aria-describedby="button-addon2"
+            // aria-describedby="button-addon2"
             onChange={handleChange}
           />
 

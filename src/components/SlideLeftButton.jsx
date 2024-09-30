@@ -3,6 +3,7 @@ export default function SlideLeftButton(props) {
     <div className="absolute left-2 top-0 flex h-full items-center justify-center">
       <button
         type="button"
+        name="go-to-next-image"
         onClick={() => {
           if (props.imageIndex > 0) {
             props.propssetImageIndex((prevIndex) => prevIndex - 1);
