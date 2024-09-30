@@ -94,7 +94,7 @@ export default function Navbar(props) {
                 <User />
               </Link>
             </li>
-            <li className="flex sm:hidden">
+            <li className="flex items-center justify-center sm:hidden">
               <NanMenu
                 setCategoryNameTitle={props.setCategoryNameTitle}
                 category={props.category}
@@ -105,7 +105,7 @@ export default function Navbar(props) {
         <div className="flex w-full items-center justify-center md:hidden">
           <input
             type="search"
-            className="text-surface focus:border-primary focus:shadow-inset dark:bg-body-dark dark:autofill:shadow-autofill dark:placeholder:text-neutral-300 relative mx-2 my-2 block w-[1px] min-w-0 flex-auto rounded border border-solid border-gray-700 bg-transparent bg-clip-padding px-2 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:text-gray-700 focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white"
+            className="text-surface focus:border-primary focus:shadow-inset dark:bg-body-dark dark:autofill:shadow-autofill dark:placeholder:text-neutral-300 relative my-2 ml-2 block w-[1px] min-w-0 flex-auto rounded border border-solid border-gray-700 bg-transparent bg-clip-padding px-2 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:text-gray-700 focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white"
             placeholder="Search for products"
             aria-label="Search"
             // aria-describedby="button-addon2"
@@ -113,7 +113,7 @@ export default function Navbar(props) {
           />
 
           <span
-            className="flex items-center whitespace-nowrap rounded py-1.5 text-center text-base font-normal dark:text-white [&>svg]:w-5"
+            className="flex items-center whitespace-nowrap rounded px-2 py-1.5 text-center text-base font-normal dark:text-white [&>svg]:w-5"
             id="basic-addon2"
           >
             <Search className="text-gray-600" />
