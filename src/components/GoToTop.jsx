@@ -35,7 +35,7 @@ export default function GoToTop() {
           type="button"
           onClick={backToTop}
           name="go-back-to-top"
-          className="fixed bottom-10 right-10 z-50 rounded-full bg-[#ee50ff] p-3 text-[14px] font-medium uppercase text-white transition duration-150 ease-in-out"
+          className="fixed bottom-10 right-10 z-50 rounded-full bg-[#DB4444] p-3 text-[14px] font-medium uppercase text-white transition duration-150 ease-in-out"
         >
           <svg
             aria-hidden="true"

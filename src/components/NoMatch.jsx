@@ -16,7 +16,7 @@ export default function NoMatch() {
             <button
               name="go-to-home"
               onClick={() => navigate("/")}
-              className="rounded-md bg-[#ee50ff] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#c164cb]"
+              className="rounded-md bg-[#DB4444] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#c164cb]"
             >
               Go back home
             </button>

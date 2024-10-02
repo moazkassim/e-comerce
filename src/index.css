@@ -11,3 +11,6 @@ body::-webkit-scrollbar-thumb {
   background-color: #c770f0;
   border-radius: 20px;
 }
+body {
+  font-family: system-ui;
+}

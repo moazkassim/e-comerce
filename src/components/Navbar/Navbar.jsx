@@ -23,16 +23,16 @@ export default function Navbar(props) {
               aria-label="Home-page"
             />
           </Link>
-          <div className="hidden w-full items-center justify-center md:flex">
+          <div className="focus:border-primary hidden w-full items-center justify-center rounded border border-solid border-gray-700 bg-white focus:text-gray-700 md:flex">
             <input
               type="search"
-              className="text-surface focus:border-primary focus:shadow-inset dark:bg-body-dark dark:autofill:shadow-autofill dark:placeholder:text-neutral-300 relative m-0 block w-[1px] min-w-0 flex-auto rounded border border-solid border-gray-700 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:text-gray-700 focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white"
+              className="focus:shadow-inset dark:bg-body-dark dark:autofill:shadow-autofill dark:placeholder:text-neutral-300 relative m-0 block w-[1px] min-w-0 flex-auto bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:outline-none motion-reduce:transition-none"
               placeholder="Search for products"
               aria-label="Search"
               onChange={handleChange}
             />
 
-            <span className="flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal dark:text-white [&>svg]:w-5">
+            <span className="flex items-center whitespace-nowrap border border-l-[#676666] bg-transparent px-3 py-1.5 text-center text-base font-normal dark:text-white [&>svg]:w-5">
               <Search className="text-gray-600" />
             </span>
           </div>
@@ -45,7 +45,7 @@ export default function Navbar(props) {
             </li>
             <li className="hidden sm:flex">
               <Link
-                className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#ee50ff]"
+                className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#DB4444]"
                 to="/"
                 aria-label="Home-page"
               >
@@ -54,7 +54,7 @@ export default function Navbar(props) {
             </li>
             <li className="hidden sm:flex">
               <Link
-                className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#ee50ff]"
+                className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#DB4444]"
                 to="/contact"
                 aria-label="contact-page"
               >
@@ -65,14 +65,14 @@ export default function Navbar(props) {
               <Link
                 to="/about"
                 aria-label="about-page"
-                className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#ee50ff]"
+                className="transition-duration: 500ms max-sm:hidden relative flex h-16 items-center justify-center overflow-hidden px-6 text-lg text-black hover:text-[#DB4444]"
                 to="/about"
               >
                 About
               </Link>
             </li>
             <li className="cart-icon relative mx-3 cursor-pointer">
-              <span className="product-span count absolute top-1 z-10 block h-4 w-4 translate-x-0 translate-y-2 rounded-full bg-[#ee50ff] text-center text-[13px] leading-4 text-white">
+              <span className="product-span count absolute top-1 z-10 block h-4 w-4 translate-x-3 translate-y-2 rounded-full bg-[#DB4444] text-center text-[13px] leading-4 text-white">
                 {props.cartSize}
               </span>
               <i
@@ -80,7 +80,7 @@ export default function Navbar(props) {
                 to=""
               >
                 <ShoppingCart
-                  className="hover:text-[#ee50ff]"
+                  className="hover:text-[#DB4444]"
                   onClick={() => props.setVisible((prev) => !prev)}
                 />
               </i>
@@ -88,7 +88,7 @@ export default function Navbar(props) {
             <li className="">
               <Link
                 aria-label="login-page"
-                className="relative mx-3 flex h-16 items-center justify-center overflow-hidden text-lg hover:text-[#ee50ff]"
+                className="relative mx-3 flex h-16 items-center justify-center overflow-hidden text-lg hover:text-[#DB4444]"
                 to="/login"
               >
                 <User />
@@ -102,20 +102,16 @@ export default function Navbar(props) {
             </li>
           </ul>
         </div>
-        <div className="flex w-full items-center justify-center md:hidden">
+        <div className="focus:border-primary mx-2 flex w-full items-center justify-center rounded border border-solid border-gray-700 focus:text-gray-700 md:hidden">
           <input
             type="search"
-            className="text-surface focus:border-primary focus:shadow-inset dark:bg-body-dark dark:autofill:shadow-autofill dark:placeholder:text-neutral-300 relative my-2 ml-2 block w-[1px] min-w-0 flex-auto rounded border border-solid border-gray-700 bg-transparent bg-clip-padding px-2 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:text-gray-700 focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white"
+            className="focus:shadow-inset dark:bg-body-dark dark:autofill:shadow-autofill dark:placeholder:text-neutral-300 relative m-0 block w-[1px] min-w-0 flex-auto bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:outline-none motion-reduce:transition-none"
             placeholder="Search for products"
             aria-label="Search"
-            // aria-describedby="button-addon2"
             onChange={handleChange}
           />
 
-          <span
-            className="flex items-center whitespace-nowrap rounded px-2 py-1.5 text-center text-base font-normal dark:text-white [&>svg]:w-5"
-            id="basic-addon2"
-          >
+          <span className="flex items-center whitespace-nowrap border border-l-[#676666] px-3 py-1.5 text-center text-base font-normal dark:text-white [&>svg]:w-5">
             <Search className="text-gray-600" />
           </span>
         </div>

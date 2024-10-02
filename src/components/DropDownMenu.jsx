@@ -27,7 +27,7 @@ export default function DropDownMenu(props) {
               <Link
                 to="/"
                 aria-label="set-category-name"
-                className="hover:[#ee50ff] flex items-start text-black md:gap-4"
+                className="hover:[#DB4444] flex items-start text-black md:gap-4"
                 onClick={() => {
                   props.setCategoryNameTitle(cate);
                 }}

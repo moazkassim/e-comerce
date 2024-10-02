@@ -62,7 +62,7 @@ export default function Home(props) {
       .get("https://fakestoreapi.com/products")
       .then((res) => {
         let arr = res.data.filter((ele) =>
-          ele.title.includes(props.searchedProduct),
+          ele.title.toLowerCase().includes(props.searchedProduct.toLowerCase()),
         );
         setProductsArray(arr);
         console.log("data from search", arr);

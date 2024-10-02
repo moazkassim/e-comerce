@@ -11,9 +11,9 @@ export default function SlideRightButton(props) {
             props.setImageIndex(0);
           }
         }}
-        className="z-50 h-full animate-pulse cursor-pointer ease-linear"
+        className="z-50 animate-pulse cursor-pointer ease-linear"
       >
-        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70">
+        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70">
           <svg
             className="h-4 w-4 text-white"
             aria-hidden="true"
