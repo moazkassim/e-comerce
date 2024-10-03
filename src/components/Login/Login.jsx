@@ -22,7 +22,6 @@ export default function Login() {
     await axios
       .post("https://fakestoreapi.com/auth/login", user)
       .then(function (response) {
-        console.log(response);
         navigate("/");
       })
       .catch(function (error) {

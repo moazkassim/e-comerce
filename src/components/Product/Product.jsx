@@ -1,10 +1,14 @@
 import { Star } from "lucide-react";
 import { Eye } from "lucide-react";
 import { Heart } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Product(props) {
   return (
     <section className="container-categories mb-20 flex w-full flex-row flex-wrap justify-center gap-12">
+      <ToastContainer />
       {props.productsArray.map((product) => {
         return (
           <div
@@ -41,10 +45,16 @@ export default function Product(props) {
                       "cartArray",
                       JSON.stringify(newProducts),
                     );
-                    console.log(
-                      "cart size after adding the product",
-                      props.cartProducts.length,
-                    );
+                    toast.success("Added to cart", {
+                      position: "bottom-right",
+                      autoClose: 3000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                    });
                   }}
                 >
                   Add To Cart

@@ -83,7 +83,7 @@ export default function Landing(props) {
         <div className="mx-10 hidden w-[0.5px] bg-black opacity-30 lg:flex"></div>
 
         <div className="relative flex w-full flex-col justify-between gap-10 bg-black py-8 md:flex-row">
-          <ul className="ml-8 flex flex-col p-7">
+          <ul className="ml-8 flex h-full flex-col p-7">
             <li className="mb-8 flex items-center justify-start gap-6">
               <img
                 className="h-[49px] w-[49px]"

@@ -1,3 +1,5 @@
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Cart(props) {
   return (
     <section
@@ -5,6 +7,7 @@ export default function Cart(props) {
         props.cartVisible ? "absolute" : "hidden"
       }`}
     >
+      <ToastContainer />
       {props.cartProducts.map((product, index) => {
         return (
           <div
@@ -32,14 +35,24 @@ export default function Cart(props) {
                 <span className="text-xs">Qty 1</span>
                 <button
                   name="remove-button"
-                  onClick={() => {
+                  onClick={async () => {
                     let testArr = [];
                     testArr = props.cartProducts.filter((_, i) => i !== index);
-
                     props.setCartProducts(testArr);
-                    // );
-                    console.log("after removing", testArr);
-                    localStorage.setItem("cartArray", JSON.stringify(testArr));
+                    await localStorage.setItem(
+                      "cartArray",
+                      JSON.stringify(testArr),
+                    );
+                    toast.success("Added to cart", {
+                      position: "bottom-right",
+                      autoClose: 2000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: false,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                    });
                   }}
                   className="bg-transparent text-sm font-medium text-[#FA3434]"
                 >

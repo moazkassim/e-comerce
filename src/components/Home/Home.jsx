@@ -65,7 +65,7 @@ export default function Home(props) {
           ele.title.toLowerCase().includes(props.searchedProduct.toLowerCase()),
         );
         setProductsArray(arr);
-        console.log("data from search", arr);
+        
       })
 
       .catch(function (error) {

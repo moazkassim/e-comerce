@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem("cartArray"))
       setCartProducts(JSON.parse(localStorage.getItem("cartArray")));
-    console.log("cart product size at opening", cartProducts.length);
+    
   }, []);
   useEffect(() => {
     axios
