@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function Cart(props) {
   return (
@@ -7,7 +7,6 @@ export default function Cart(props) {
         props.cartVisible ? "absolute" : "hidden"
       }`}
     >
-      <ToastContainer />
       {props.cartProducts.map((product, index) => {
         return (
           <div
@@ -35,15 +34,15 @@ export default function Cart(props) {
                 <span className="text-xs">Qty 1</span>
                 <button
                   name="remove-button"
-                  onClick={async () => {
+                  onClick={() => {
                     let testArr = [];
                     testArr = props.cartProducts.filter((_, i) => i !== index);
+                    console.log("array is filtered");
                     props.setCartProducts(testArr);
-                    await localStorage.setItem(
-                      "cartArray",
-                      JSON.stringify(testArr),
-                    );
-                    toast.success("Added to cart", {
+                    console.log("array is has updated in state");
+                    localStorage.setItem("cartArray", JSON.stringify(testArr));
+                    console.log("array is added to local storage");
+                    toast.success("Item removed", {
                       position: "bottom-right",
                       autoClose: 2000,
                       hideProgressBar: false,

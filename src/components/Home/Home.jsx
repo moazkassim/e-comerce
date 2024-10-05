@@ -65,7 +65,7 @@ export default function Home(props) {
           ele.title.toLowerCase().includes(props.searchedProduct.toLowerCase()),
         );
         setProductsArray(arr);
-        
+        console.log("data from search", arr);
       })
 
       .catch(function (error) {
@@ -77,7 +77,7 @@ export default function Home(props) {
   //  console.log("searched arr", searchedItems);
   //   searchedItems.push(res.data);
   return (
-    <div className="">
+    <div >
       <Landing
         categoriesArr={props.category}
         categoryNameTitle={props.categoryNameTitle}

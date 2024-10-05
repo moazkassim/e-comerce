@@ -12,6 +12,7 @@ import GoToTop from "./components/GoToTop";
 import { useState, useEffect } from "react";
 import Cart from "./components/Cart/Cart";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [cartProducts, setCartProducts] = useState([]);
@@ -23,7 +24,7 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem("cartArray"))
       setCartProducts(JSON.parse(localStorage.getItem("cartArray")));
-    
+    console.log("cart product size at opening", cartProducts.length);
   }, []);
   useEffect(() => {
     axios
@@ -38,10 +39,12 @@ function App() {
   }, []);
   return (
     <>
+      <ToastContainer />
       <Navbar
         cartSize={cartProducts.length}
         setVisible={setVisible}
         setSearchedProduct={setSearchedProduct}
+        searchedProduct={searchedProduct}
         category={category}
         setCategoryNameTitle={setCategoryNameTitle}
       />

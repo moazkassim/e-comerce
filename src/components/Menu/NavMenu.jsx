@@ -6,7 +6,7 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
-} from "@material-tailwind/react";  
+} from "@material-tailwind/react";
 import { AlignJustify } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export default function NanMenu(props) {
   return (
     <Menu>
       <MenuHandler>
-        <button name="menu-button" className="border-none bg-white px-3 py-0">
+        <button name="menu-button" className="border-none bg-white py-0 pr-2">
           <AlignJustify color="black" />
         </button>
       </MenuHandler>

@@ -52,7 +52,7 @@ export default function Landing(props) {
   const [imageIndex, setImageIndex] = useState(0);
   return (
     <section className="flex w-full items-center justify-center">
-      <div className="flex w-full md:relative lg:m-8">
+      <div className="flex w-full md:relative lg:mt-10">
         <ul className="links mt-10 hidden min-w-40 flex-col items-start gap-4 ease-linear lg:inline-flex">
           {props.categoriesArr.map((cate, index) => {
             return (

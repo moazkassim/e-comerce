@@ -1,14 +1,16 @@
 import { Star } from "lucide-react";
 import { Eye } from "lucide-react";
 import { Heart } from "lucide-react";
-import { ToastContainer, toast } from "react-toastify";
-
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import WatchProduct from "../WatchProduct";
+import { useState } from "react";
 
 export default function Product(props) {
+  const [visible, setVisible] = useState(false);
   return (
     <section className="container-categories mb-20 flex w-full flex-row flex-wrap justify-center gap-12">
-      <ToastContainer />
+      <WatchProduct visible={visible} setVisible={setVisible} />
       {props.productsArray.map((product) => {
         return (
           <div
@@ -24,6 +26,7 @@ export default function Product(props) {
                 />
 
                 <Eye
+                  onClick={() => setVisible((prev) => !prev)}
                   size={30}
                   className="cursor-pointer rounded-full bg-white p-[4px] hover:text-[#DB4444]"
                 />
@@ -36,7 +39,7 @@ export default function Product(props) {
                 />
                 <button
                   name="add-to-cart"
-                  className="z-50 block h-9 w-[270px] rounded-b-md bg-black text-white hover:opacity-70"
+                  className="block h-10 w-[270px] rounded-b-md bg-black text-base font-medium text-white hover:opacity-70"
                   onClick={() => {
                     const newProducts = [product, ...props.cartProducts];
                     props.setCartProducts(newProducts);
@@ -50,7 +53,7 @@ export default function Product(props) {
                       autoClose: 3000,
                       hideProgressBar: false,
                       closeOnClick: true,
-                      pauseOnHover: true,
+                      pauseOnHover: false,
                       draggable: true,
                       progress: undefined,
                       theme: "light",
@@ -63,10 +66,10 @@ export default function Product(props) {
             </div>
 
             <div className="flex w-full flex-col items-start justify-center gap-4 truncate px-1 py-4">
-              <p className="text-over text-md font-bold text-black">
+              <p className="text-over text-base font-medium text-black">
                 {product.title.split(" ").slice(0, 4).join(" ")}
               </p>
-              <p className="text-lg font-medium leading-5 text-[#DB4444]">
+              <p className="text-base font-medium leading-5 text-[#DB4444]">
                 {product.price} $
               </p>
               <div className="flex w-full flex-row items-center justify-start gap-3">
@@ -94,7 +97,7 @@ export default function Product(props) {
                   </li>
                 </ul>
 
-                <span className="text-sm font-bold text-black opacity-50">
+                <span className="text-sm font-semibold text-black opacity-50">
                   ({Math.ceil(product.price + 12)})
                 </span>
               </div>
