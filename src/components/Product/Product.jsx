@@ -7,16 +7,24 @@ import WatchProduct from "../WatchProduct";
 import { useState } from "react";
 
 export default function Product(props) {
-  const [visible, setVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <section className="container-categories mb-20 flex w-full flex-row flex-wrap justify-center gap-12">
-      <WatchProduct visible={visible} setVisible={setVisible} />
       {props.productsArray.map((product) => {
         return (
           <div
             className="relative flex w-[270px] cursor-pointer flex-col items-center justify-center outline-white"
             key={product.id}
           >
+            <WatchProduct
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+              image={product.image}
+              title={product.title}
+              category={product.category}
+              description={product.description}
+              price={product.price}
+            />
             {/* heart and watch  */}
             <div className="flex w-[270px] flex-col items-center justify-center rounded bg-[#F5F5F5]">
               <div className="action-icons absolute right-2 top-3">
@@ -26,7 +34,10 @@ export default function Product(props) {
                 />
 
                 <Eye
-                  onClick={() => setVisible((prev) => !prev)}
+                  onClick={() => {
+                    setIsModalOpen((prev) => !prev);
+                    document.body.style.overflow = "unset";
+                  }}
                   size={30}
                   className="cursor-pointer rounded-full bg-white p-[4px] hover:text-[#DB4444]"
                 />

@@ -1,28 +1,48 @@
-import React from "react";
-import imgtest from "../../public/Home-img/mobile.png";
+import { useEffect } from "react";
+
 export default function WatchProduct(props) {
+  useEffect(() => {
+    if (props.isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [props.isModalOpen]);
   return (
     <div
-      className={`bottom-0 left-0 right-0 top-0 z-50 h-full w-full bg-white bg-opacity-90 ${props.visible ? "fixed" : "hidden"}`}
+      className={`main inset-0 z-50 h-full w-full bg-gray-900 bg-opacity-50 ${
+        props.isModalOpen ? "fixed" : "hidden"
+      }`}
     >
-      <div className="absolute right-1/4 top-1/4 flex items-center justify-center bg-blue-gray-500">
-        <div className="">
-          <img alt="product img" src={imgtest} className="" />
+      <div className="inner absolute left-1/2 top-1/2 flex h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 transform bg-blue-gray-500">
+        {/* Product Image Section */}
+        <div>
+          <img alt="product img" src={props.image} className="" />
         </div>
-        <div className="relative flex w-80 flex-col items-start justify-center gap-8">
-          <h1 className="text-xl">a product title for examble</h1>
-          <h3 className="text-gray-700"> categories</h3>
-          <p className="text-gray-700"> description</p>
-          <span className="text-red">220$</span>
+
+        {/* Modal Content Section */}
+        <div className="relative flex w-full flex-col items-start justify-center gap-8 bg-green-400 px-2">
+          <h1 className="font-bold">{props.title}</h1>
+          <h3 className="text-gray-700">{props.category}</h3>
+          <p className="text-gray-700">{props.description}</p>
+          <span className="font-semibold text-red-600">${props.price}</span>
+          <div>
+            <button>Add to Cart</button>
+          </div>
         </div>
+
+        {/* Close Button */}
         <button
-          className="absolute right-1 top-1 h-6 w-6 rounded-full bg-black text-white"
-          onClick={() => props.setVisible((prev) => !prev)}
+          className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-black text-white"
+          onClick={() => props.setIsModalOpen((prev) => !prev)}
         >
-          x
+          &times;
         </button>
       </div>
     </div>
   );
 }
-// i am developing and ecomerce website and i have a products that can be clicked , so i need when i click the   product i need another div to apear like this , how can i do this usinng react js and tailwind css
