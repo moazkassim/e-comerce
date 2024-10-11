@@ -15,7 +15,7 @@ export default function WatchProduct(props) {
           <p className="text-gray-700"> description</p>
           <span className="text-red">220$</span>
         </div>
-        <button
+        <button 
           className="absolute right-1 top-1 h-6 w-6 rounded-full bg-black text-white"
           onClick={() => props.setVisible((prev) => !prev)}
         >
@@ -25,4 +25,3 @@ export default function WatchProduct(props) {
     </div>
   );
 }
-// i am developing and ecomerce website and i have a products that can be clicked , so i need when i click the   product i need another div to apear like this , how can i do this usinng react js and tailwind css
