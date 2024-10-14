@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Landing from "../Landing/Landing";
 import DividingHead from "../DividingHead";
-import Product from "../Product/Product";
+import Product_List from "../Product_List/Product_List";
 import axios from "axios";
 
 export default function Home(props) {
@@ -84,7 +84,7 @@ export default function Home(props) {
         setCategoryNameTitle={props.setCategoryNameTitle}
       />
       <DividingHead title={props.categoryNameTitle} />
-      <Product
+      <Product_List
         productsArray={productsArray}
         setCartProducts={props.setCartProducts}
         cartProducts={props.cartProducts}

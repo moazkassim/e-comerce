@@ -70,7 +70,7 @@ export default function Navbar(props) {
                 onClick={() => props.setVisible((prev) => !prev)}
               />
             </li>
-            <li className="">
+            <li className="flex cursor-pointer items-center justify-center">
               <Link aria-label="login-page" to="/login">
                 <User
                   color="white"
