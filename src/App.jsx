@@ -1,30 +1,20 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import Home from "./components/Home/Home";
-import Contact from "./components/Contact/Contact";
-import About from "./components/about/About";
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
-import NoMatch from "./components/NoMatch";
 import Footer from "./components/Footer/Footer";
 import GoToTop from "./components/GoToTop";
 import { useState, useEffect } from "react";
-import Cart from "./components/Cart/Cart";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
+import Router from "./components/Router/Router";
 
 function App() {
   const [cartProducts, setCartProducts] = useState([]);
-  const [visible, setVisible] = useState(false);
   const [searchedProduct, setSearchedProduct] = useState("");
   const [category, setCategory] = useState([]);
-  const [categoryNameTitle, setCategoryNameTitle] = useState("electronics");
+  const [selectedCategory, setSelectedCategory] = useState("electronics");
 
   useEffect(() => {
     if (localStorage.getItem("cartArray"))
       setCartProducts(JSON.parse(localStorage.getItem("cartArray")));
-    console.log("cart product size at opening", cartProducts.length);
   }, []);
   useEffect(() => {
     axios
@@ -41,40 +31,26 @@ function App() {
     <>
       <ToastContainer />
       <Navbar
-        cartSize={cartProducts.length}
-        setVisible={setVisible}
+        cartProducts={cartProducts}
         setSearchedProduct={setSearchedProduct}
         searchedProduct={searchedProduct}
         category={category}
-        setCategoryNameTitle={setCategoryNameTitle}
+        setSelectedCategory={setSelectedCategory}
+        setCartProducts={setCartProducts}
       />
       <GoToTop />
-      <Cart
-        setCartProducts={setCartProducts}
-        cartProducts={cartProducts}
-        cartVisible={visible}
-      />
-      <div className="lg:mx-8">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                setCartProducts={setCartProducts}
-                cartProducts={cartProducts}
-                searchedProduct={searchedProduct}
-                category={category}
-                setCategoryNameTitle={setCategoryNameTitle}
-                categoryNameTitle={categoryNameTitle}
-              />
-            }
-          ></Route>
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/contact" element={<Contact />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
+
+      <div className="flex w-full items-center justify-center">
+        <div className="md:container">
+          <Router
+            setCartProducts={setCartProducts}
+            cartProducts={cartProducts}
+            searchedProduct={searchedProduct}
+            category={category}
+            setSelectedCategory={setSelectedCategory}
+            selectedCategory={selectedCategory}
+          />
+        </div>
       </div>
       <Footer />
     </>

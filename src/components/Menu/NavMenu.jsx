@@ -16,7 +16,7 @@ export default function NanMenu(props) {
   return (
     <Menu>
       <MenuHandler>
-        <button name="menu-button" className="border-none bg-white py-0 pr-2">
+        <button name="menu-button" className="2 border-none bg-white py-0">
           <AlignJustify color="black" />
         </button>
       </MenuHandler>
@@ -65,7 +65,7 @@ export default function NanMenu(props) {
                     aria-label="set-category-name-title"
                     className="flex items-start text-black hover:text-red-500 md:gap-4"
                     onClick={() => {
-                      props.setCategoryNameTitle(cate);
+                      props.setSelectedCategory(cate);
                     }}
                   >
                     {cate}

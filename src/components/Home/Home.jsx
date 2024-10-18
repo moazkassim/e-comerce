@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Landing from "../Landing/Landing";
 import DividingHead from "../DividingHead";
 import Product_List from "../Product_List/Product_List";
 import axios from "axios";
 
 export default function Home(props) {
+  const {
+    selectedCategory,
+    searchedProduct,
+    category,
+    setSelectedCategory,
+    setCartProducts,
+    cartProducts,
+  } = props;
   const [productsArray, setProductsArray] = useState([]);
 
   useEffect(() => {
     axios
-      .get(
-        `https://fakestoreapi.com/products/category/${props.categoryNameTitle}`,
-      )
+      .get(`https://fakestoreapi.com/products/category/${selectedCategory}`)
       .then((res) => {
         setProductsArray(res.data);
       })
@@ -19,7 +25,7 @@ export default function Home(props) {
         // handle error
         console.log(error);
       });
-  }, [props.categoryNameTitle]);
+  }, [selectedCategory]);
 
   // const getCategoryProducts = async () => {
   //   const res = await axios.get(" https://fakestoreapi.com/products");
@@ -54,41 +60,40 @@ export default function Home(props) {
   // }
 
   // useEffect(() => {
-  //   handelSearchedItems(category, props.searchedProduct);
-  // }, [props.searchedProduct]);
+  //   handelSearchedItems(category, searchedProduct);
+  // }, [searchedProduct]);
   // console.log("searced arr from state outside", productsArray);
   useEffect(() => {
     axios
       .get("https://fakestoreapi.com/products")
       .then((res) => {
         let arr = res.data.filter((ele) =>
-          ele.title.toLowerCase().includes(props.searchedProduct.toLowerCase()),
+          ele.title.toLowerCase().includes(searchedProduct.toLowerCase()),
         );
         setProductsArray(arr);
-        console.log("data from search", arr);
       })
 
       .catch(function (error) {
         // handle error
         console.log(error);
       });
-  }, [props.searchedProduct]);
+  }, [searchedProduct]);
   // console.log("searced arr from state outside", productsArray);
   //  console.log("searched arr", searchedItems);
   //   searchedItems.push(res.data);
   return (
-    <div >
+    <main>
       <Landing
-        categoriesArr={props.category}
-        categoryNameTitle={props.categoryNameTitle}
-        setCategoryNameTitle={props.setCategoryNameTitle}
+        categoriesArr={category}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
       />
-      <DividingHead title={props.categoryNameTitle} />
+      <DividingHead title={selectedCategory} />
       <Product_List
         productsArray={productsArray}
-        setCartProducts={props.setCartProducts}
-        cartProducts={props.cartProducts}
+        setCartProducts={setCartProducts}
+        cartProducts={cartProducts}
       />
-    </div>
+    </main>
   );
 }

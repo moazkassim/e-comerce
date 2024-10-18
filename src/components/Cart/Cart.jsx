@@ -1,13 +1,11 @@
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function Cart(props) {
+  const { cartProducts, cartVisible, setCartProducts } = props;
+  if (!cartVisible) return null;
   return (
-    <section
-      className={`right-6 z-50 mt-1 max-w-96 flex-col rounded bg-[#F5F7F8] shadow-xl delay-700 ${
-        props.cartVisible ? "absolute" : "hidden"
-      }`}
-    >
-      {props.cartProducts.map((product, index) => {
+    <section className="absolute right-0 top-14 z-50 max-w-96 flex-col rounded bg-[#F5F7F8] shadow-xl delay-700">
+      {cartProducts.map((product, index) => {
         return (
           <div
             key={index}
@@ -36,9 +34,9 @@ export default function Cart(props) {
                   name="remove-button"
                   onClick={() => {
                     let testArr = [];
-                    testArr = props.cartProducts.filter((_, i) => i !== index);
+                    testArr = cartProducts.filter((_, i) => i !== index);
                     console.log("array is filtered");
-                    props.setCartProducts(testArr);
+                    setCartProducts(testArr);
                     console.log("array is has updated in state");
                     localStorage.setItem("cartArray", JSON.stringify(testArr));
                     console.log("array is added to local storage");

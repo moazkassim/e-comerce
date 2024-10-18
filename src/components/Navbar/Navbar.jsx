@@ -1,16 +1,26 @@
 import { Link } from "react-router-dom";
 import Logo from "../../../public/Navbar-img/Logo.png";
 import NanMenu from "../Menu/NavMenu";
-import DropDownMenu from "../DropDownMenu";
 import SearchBar from "../SearchBar";
 import { ShoppingCart, User } from "lucide-react";
+import Cart from "../Cart/Cart";
+import { useState } from "react";
 
 export default function Navbar(props) {
+  const {
+    setCartProducts,
+    cartProducts,
+    setSearchedProduct,
+    searchedProduct,
+    setSelectedCategory,
+    category,
+  } = props;
+  const [visible, setVisible] = useState(false);
   return (
-    <nav className="flex w-full items-center justify-center border-b-[0.5px] border-solid border-black border-opacity-30 bg-white py-2">
-      <div className="md:flex-ro flex w-full flex-col items-center justify-center lg:mx-8">
-        <div className="flex w-full items-center justify-between md:justify-center">
-          <Link className="" to="/">
+    <nav className="relative flex w-full justify-center border-b border-[#7D8184] py-2">
+      <div className="container flex w-full flex-col items-center justify-center">
+        <div className="flex w-full items-center justify-between gap-10">
+          <Link to="/">
             <img
               src={Logo}
               className="w-[84px]"
@@ -18,21 +28,15 @@ export default function Navbar(props) {
               aria-label="Home-page"
             />
           </Link>
-          <div className="mr-3 hidden w-full md:block">
+          <div className="hidden w-full md:block">
             <SearchBar
-              setSearchedProduct={props.setSearchedProduct}
-              searchedProduct={props.searchedProduct}
+              setSearchedProduct={setSearchedProduct}
+              searchedProduct={searchedProduct}
             />
           </div>
 
-          <ul className="flex gap-12">
-            <li className="hidden sm:flex lg:hidden">
-              <DropDownMenu
-                setCategoryNameTitle={props.setCategoryNameTitle}
-                category={props.category}
-              />
-            </li>
-            <li className="hidden sm:flex">
+          <ul className="hidden gap-10 lg:flex">
+            <li className="">
               <Link
                 className="max-sm:hidden text-lg hover:text-[#DB4444]"
                 to="/"
@@ -41,7 +45,7 @@ export default function Navbar(props) {
                 Home
               </Link>
             </li>
-            <li className="hidden sm:flex">
+            <li className="">
               <Link
                 className="max-sm:hidden text-lg hover:text-[#DB4444]"
                 to="/contact"
@@ -50,7 +54,7 @@ export default function Navbar(props) {
                 Contact
               </Link>
             </li>
-            <li className="hidden sm:flex">
+            <li className="">
               <Link
                 aria-label="about-page"
                 className="max-sm:hidden text-lg hover:text-[#DB4444]"
@@ -59,36 +63,47 @@ export default function Navbar(props) {
                 About
               </Link>
             </li>
+          </ul>
 
-            <li className="relative flex cursor-pointer items-center justify-center">
-              <span className="absolute right-[-2px] top-[-5px] h-4 w-4 rounded-full bg-[#DB4444] text-center text-[13px] leading-4 text-white">
-                {props.cartSize}
+          <div className="flex items-center justify-center gap-8">
+            <button
+              className="relative flex cursor-pointer items-center justify-center p-1"
+              onClick={() => setVisible((prev) => !prev)}
+            >
+              <span className="absolute right-[-2px] top-[-2px] flex h-4 w-4 items-center justify-center rounded-full bg-[#DB4444] text-sm text-white">
+                {cartProducts.length}
               </span>
 
-              <ShoppingCart
-                className="hover:text-[#DB4444]"
-                onClick={() => props.setVisible((prev) => !prev)}
+              <ShoppingCart className="hover:text-[#DB4444]" />
+              <Cart
+                setCartProducts={setCartProducts}
+                cartProducts={cartProducts}
+                cartVisible={visible}
               />
-            </li>
-            <li className="flex cursor-pointer items-center justify-center">
-              <Link aria-label="login-page" to="/login">
-                <User
-                  color="white"
-                  className="rounded-full bg-[#DB4444] p-1"
-                  size={30}
-                />
-              </Link>
-            </li>
-            <li className="flex items-center justify-center sm:hidden">
+            </button>
+
+            <Link
+              aria-label="login-page"
+              to="/login"
+              className="cursor-pointer"
+            >
+              <User
+                color="white"
+                className="rounded-full bg-[#DB4444] p-1"
+                size={30}
+              />
+            </Link>
+
+            <div className="flex justify-center lg:hidden">
               <NanMenu
-                setCategoryNameTitle={props.setCategoryNameTitle}
-                category={props.category}
+                setSelectedCategory={setSelectedCategory}
+                category={category}
               />
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
         <div className="w-full md:hidden">
-          <SearchBar setSearchedProduct={props.setSearchedProduct} />
+          <SearchBar setSearchedProduct={setSearchedProduct} />
         </div>
       </div>
     </nav>

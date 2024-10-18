@@ -29,7 +29,7 @@ export default function DropDownMenu(props) {
                 aria-label="set-category-name"
                 className="hover:[#DB4444] flex items-start text-black md:gap-4"
                 onClick={() => {
-                  props.setCategoryNameTitle(cate);
+                  props.setSelectedCategory(cate);
                 }}
               >
                 {cate}
