@@ -1,13 +1,7 @@
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 export default function View_Product(props) {
-  const {
-    product,
-    isModalOpen,
-    setIsModalOpen,
-    setCartProducts,
-    cartProducts,
-  } = props;
+  const { product, isModalOpen, setIsModalOpen, setCartProducts } = props;
 
   useEffect(() => {
     if (isModalOpen) {
@@ -46,19 +40,14 @@ export default function View_Product(props) {
             <button
               className="h-10 w-1/2 rounded bg-[#DB4444] text-white"
               onClick={() => {
-                const newProducts = [product, ...cartProducts];
-                setCartProducts(newProducts);
-
-                localStorage.setItem("cartArray", JSON.stringify(newProducts));
-                toast.success("Added to cart", {
-                  position: "bottom-right",
-                  autoClose: 3000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: false,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "light",
+                setCartProducts((prev) => {
+                  const newProducts = [product, ...prev];
+                  localStorage.setItem(
+                    "cartArray",
+                    JSON.stringify(newProducts),
+                  );
+                  toast.success("Added to cart");
+                  return newProducts;
                 });
               }}
             >

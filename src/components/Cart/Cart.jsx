@@ -4,11 +4,11 @@ export default function Cart(props) {
   const { cartProducts, cartVisible, setCartProducts } = props;
   if (!cartVisible) return null;
   return (
-    <section className="absolute right-0 top-14 z-50 max-w-96 flex-col rounded bg-[#F5F7F8] shadow-xl delay-700">
-      {cartProducts.map((product, index) => {
+    <section className="absolute right-0 top-14 z-50 block max-w-96 flex-col rounded bg-[#F5F7F8] shadow-xl delay-700">
+      {cartProducts.map((product) => {
         return (
           <div
-            key={index}
+            key={product.title}
             className="relative z-40 flex w-full min-w-96 flex-row items-center overflow-hidden border-b-2 border-solid"
           >
             <div className="border-r-[1px] border-solid p-2">
@@ -33,23 +33,16 @@ export default function Cart(props) {
                 <button
                   name="remove-button"
                   onClick={() => {
-                    let testArr = [];
-                    testArr = cartProducts.filter((_, i) => i !== index);
-                    console.log("array is filtered");
-                    setCartProducts(testArr);
-                    console.log("array is has updated in state");
-                    localStorage.setItem("cartArray", JSON.stringify(testArr));
-                    console.log("array is added to local storage");
-                    toast.success("Item removed", {
-                      position: "bottom-right",
-                      autoClose: 2000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: false,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "light",
+                    setCartProducts((prev) => {
+                      let testArr = prev.filter((_, i) => i !== index);
+                      localStorage.setItem(
+                        "cartArray",
+                        JSON.stringify(testArr),
+                      );
+                      return testArr;
                     });
+
+                    toast.success("Item removed");
                   }}
                   className="bg-transparent text-sm font-medium text-[#FA3434]"
                 >

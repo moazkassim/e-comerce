@@ -29,7 +29,17 @@ function App() {
   }, []);
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose="2000"
+        hideProgressBar="false"
+        closeOnClick="true"
+        pauseOnHover="false"
+        draggable="true"
+        progressStyle={undefined}
+        theme="light"
+      />
+
       <Navbar
         cartProducts={cartProducts}
         setSearchedProduct={setSearchedProduct}
@@ -39,12 +49,10 @@ function App() {
         setCartProducts={setCartProducts}
       />
       <GoToTop />
-
       <div className="flex w-full items-center justify-center">
         <div className="md:container">
           <Router
             setCartProducts={setCartProducts}
-            cartProducts={cartProducts}
             searchedProduct={searchedProduct}
             category={category}
             setSelectedCategory={setSelectedCategory}

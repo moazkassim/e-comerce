@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Landing from "../Landing/Landing";
 import DividingHead from "../DividingHead";
-import Product_List from "../Product_List/Product_List";
-import axios from "axios";
+import ProductsList from "../ProductsList/ProductsList";
 
 export default function Home(props) {
   const {
@@ -11,21 +10,8 @@ export default function Home(props) {
     category,
     setSelectedCategory,
     setCartProducts,
-    cartProducts,
   } = props;
   const [productsArray, setProductsArray] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`https://fakestoreapi.com/products/category/${selectedCategory}`)
-      .then((res) => {
-        setProductsArray(res.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-  }, [selectedCategory]);
 
   // const getCategoryProducts = async () => {
   //   const res = await axios.get(" https://fakestoreapi.com/products");
@@ -63,24 +49,7 @@ export default function Home(props) {
   //   handelSearchedItems(category, searchedProduct);
   // }, [searchedProduct]);
   // console.log("searced arr from state outside", productsArray);
-  useEffect(() => {
-    axios
-      .get("https://fakestoreapi.com/products")
-      .then((res) => {
-        let arr = res.data.filter((ele) =>
-          ele.title.toLowerCase().includes(searchedProduct.toLowerCase()),
-        );
-        setProductsArray(arr);
-      })
 
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-  }, [searchedProduct]);
-  // console.log("searced arr from state outside", productsArray);
-  //  console.log("searched arr", searchedItems);
-  //   searchedItems.push(res.data);
   return (
     <main>
       <Landing
@@ -89,10 +58,12 @@ export default function Home(props) {
         setSelectedCategory={setSelectedCategory}
       />
       <DividingHead title={selectedCategory} />
-      <Product_List
-        productsArray={productsArray}
+      <ProductsList
         setCartProducts={setCartProducts}
-        cartProducts={cartProducts}
+        selectedCategory={selectedCategory}
+        searchedProduct={searchedProduct}
+        setProductsArray={setProductsArray}
+        productsArray={productsArray}
       />
     </main>
   );

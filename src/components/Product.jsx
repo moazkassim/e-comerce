@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import View_Product from "./View_Product";
 
 export default function Product(props) {
-  const { product, setCartProducts, cartProducts } = props;
+  const { product, setCartProducts } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className="relative flex w-[270px] cursor-pointer flex-col items-center justify-center outline-white">
@@ -15,7 +15,6 @@ export default function Product(props) {
         setIsModalOpen={setIsModalOpen}
         product={product}
         setCartProducts={setCartProducts}
-        cartProducts={cartProducts}
       />
       {/* heart and watch  */}
       <div className="flex w-[270px] flex-col items-center justify-center rounded bg-[#F5F5F5]">
@@ -43,19 +42,11 @@ export default function Product(props) {
             name="add-to-cart"
             className="block h-10 w-[270px] rounded-b-md bg-black text-base font-medium text-white hover:opacity-70"
             onClick={() => {
-              const newProducts = [product, ...cartProducts];
-              setCartProducts(newProducts);
-
-              localStorage.setItem("cartArray", JSON.stringify(newProducts));
-              toast.success("Added to cart", {
-                position: "bottom-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
+              setCartProducts((prev) => {
+                const newProducts = [product, ...prev];
+                localStorage.setItem("cartArray", JSON.stringify(newProducts));
+                toast.success("Added to cart");
+                return newProducts;
               });
             }}
           >

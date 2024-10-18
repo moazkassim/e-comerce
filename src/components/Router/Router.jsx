@@ -8,7 +8,6 @@ import NoMatch from "../NoMatch";
 export default function Router(props) {
   const {
     setCartProducts,
-    cartProducts,
     searchedProduct,
     category,
     setSelectedCategory,
@@ -23,7 +22,6 @@ export default function Router(props) {
           element={
             <Home
               setCartProducts={setCartProducts}
-              cartProducts={cartProducts}
               searchedProduct={searchedProduct}
               category={category}
               setSelectedCategory={setSelectedCategory}
