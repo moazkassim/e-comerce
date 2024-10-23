@@ -15,6 +15,7 @@ export default function Navbar() {
 
   return (
     <nav className="relative flex w-full justify-center border-b border-[#7D8184] py-2">
+      <Cart cartVisible={cartVisible} setCartVisible={setCartVisible} />
       <div className="container flex w-full flex-col items-center justify-center">
         <div className="flex w-full items-center justify-between gap-10">
           <Link to="/">
@@ -69,7 +70,6 @@ export default function Navbar() {
               </span>
 
               <ShoppingCart className="hover:text-[#DB4444]" />
-              <Cart cartVisible={cartVisible} setCartVisible={setCartVisible} />
             </button>
 
             <Link
