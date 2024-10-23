@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function ErrorViewer(props) {
+  ("hi i am from error viewer");
   const { errorMessage } = props;
   return (
     <div

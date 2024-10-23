@@ -3,14 +3,8 @@ import Landing from "../Landing/Landing";
 import DividingHead from "../DividingHead";
 import ProductsList from "../ProductsList/ProductsList";
 
-export default function Home(props) {
-  const {
-    selectedCategory,
-    searchedProduct,
-    category,
-    setSelectedCategory,
-    setCartProducts,
-  } = props;
+export default function Home() {
+   ("hi i am from Home");
   const [productsArray, setProductsArray] = useState([]);
 
   // const getCategoryProducts = async () => {
@@ -21,7 +15,7 @@ export default function Home(props) {
   //   const searchedItems = [];
 
   //   const products = await getCategoryProducts();
-  //   console.log(products);
+  //    (products);
   //   searchedItems.push(
   //     ...products.filter((element) => element.title.includes(searchTerm))
   //   );
@@ -29,7 +23,7 @@ export default function Home(props) {
   //   // axios
   //   //   .get(`https://fakestoreapi.com/products/category/${cat}`)
   //   //   .then((res) => {
-  //   //     console.log("data from search", res.data);
+  //   //      ("data from search", res.data);
   //   //     res.data.forEach((element) => {
   //   //       searchedItems.push(element);
   //   //     });
@@ -39,29 +33,22 @@ export default function Home(props) {
   //   //     console.log(error);
   //   //   });
 
-  //   console.log("finished for");
-  //   // console.log("searced arr items", searchedItems);
+  //    ("finished for");
+  //   //  ("searced arr items", searchedItems);
   //   setProductsArray(searchedItems);
-  //   // console.log("searced arr from state", productsArray);
+  //   //  ("searced arr from state", productsArray);
   // }
 
   // useEffect(() => {
   //   handelSearchedItems(category, searchedProduct);
   // }, [searchedProduct]);
-  // console.log("searced arr from state outside", productsArray);
+  //  ("searced arr from state outside", productsArray);
 
   return (
     <main>
-      <Landing
-        categoriesArr={category}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
-      <DividingHead title={selectedCategory} />
+      <Landing />
+      <DividingHead />
       <ProductsList
-        setCartProducts={setCartProducts}
-        selectedCategory={selectedCategory}
-        searchedProduct={searchedProduct}
         setProductsArray={setProductsArray}
         productsArray={productsArray}
       />

@@ -4,18 +4,15 @@ import NanMenu from "../Menu/NavMenu";
 import SearchBar from "../SearchBar";
 import { ShoppingCart, User } from "lucide-react";
 import Cart from "../Cart/Cart";
-import { useState } from "react";
+import { useContext } from "react";
+import { SearchedProductContext } from "../SearchedProductContext";
 
-export default function Navbar(props) {
-  const {
-    setCartProducts,
-    cartProducts,
-    setSearchedProduct,
-    searchedProduct,
-    setSelectedCategory,
-    category,
-  } = props;
-  const [visible, setVisible] = useState(false);
+export default function Navbar() {
+  ("hi i am from navbar");
+  const { cartProducts, cartVisible, setCartVisible } = useContext(
+    SearchedProductContext,
+  );
+
   return (
     <nav className="relative flex w-full justify-center border-b border-[#7D8184] py-2">
       <div className="container flex w-full flex-col items-center justify-center">
@@ -29,10 +26,7 @@ export default function Navbar(props) {
             />
           </Link>
           <div className="hidden w-full md:block">
-            <SearchBar
-              setSearchedProduct={setSearchedProduct}
-              searchedProduct={searchedProduct}
-            />
+            <SearchBar />
           </div>
 
           <ul className="hidden gap-10 lg:flex">
@@ -68,18 +62,14 @@ export default function Navbar(props) {
           <div className="flex items-center justify-center gap-8">
             <button
               className="relative flex cursor-pointer items-center justify-center p-1"
-              onClick={() => setVisible((prev) => !prev)}
+              onClick={() => setCartVisible((prev) => !prev)}
             >
               <span className="absolute right-[-2px] top-[-2px] flex h-4 w-4 items-center justify-center rounded-full bg-[#DB4444] text-sm text-white">
                 {cartProducts.length}
               </span>
 
               <ShoppingCart className="hover:text-[#DB4444]" />
-              <Cart
-                setCartProducts={setCartProducts}
-                cartProducts={cartProducts}
-                cartVisible={visible}
-              />
+              <Cart cartVisible={cartVisible} setCartVisible={setCartVisible} />
             </button>
 
             <Link
@@ -95,15 +85,12 @@ export default function Navbar(props) {
             </Link>
 
             <div className="flex justify-center lg:hidden">
-              <NanMenu
-                setSelectedCategory={setSelectedCategory}
-                category={category}
-              />
+              <NanMenu />
             </div>
           </div>
         </div>
         <div className="w-full md:hidden">
-          <SearchBar setSearchedProduct={setSearchedProduct} />
+          <SearchBar />
         </div>
       </div>
     </nav>

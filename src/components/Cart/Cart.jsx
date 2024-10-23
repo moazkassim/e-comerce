@@ -1,14 +1,28 @@
+import { useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function Cart(props) {
-  const { cartProducts, cartVisible, setCartProducts } = props;
-  if (!cartVisible) return null;
+import { SearchedProductContext } from "../SearchedProductContext";
+export default function Cart() {
+  ("hi i am from cart");
+  const { cartProducts, setCartProducts, cartVisible } = useContext(
+    SearchedProductContext,
+  );
+
+  useEffect(() => {
+    if (localStorage.getItem("cartArray"))
+      setCartProducts(JSON.parse(localStorage.getItem("cartArray")));
+  }, [setCartProducts]);
+
+  if (!cartVisible) {
+    return null;
+  }
+
   return (
     <section className="absolute right-0 top-14 z-50 block max-w-96 flex-col rounded bg-[#F5F7F8] shadow-xl delay-700">
-      {cartProducts.map((product) => {
+      {cartProducts.map((product, index) => {
         return (
           <div
-            key={product.title}
+            key={index}
             className="relative z-40 flex w-full min-w-96 flex-row items-center overflow-hidden border-b-2 border-solid"
           >
             <div className="border-r-[1px] border-solid p-2">

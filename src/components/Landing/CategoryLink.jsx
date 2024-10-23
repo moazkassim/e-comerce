@@ -1,14 +1,20 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { SearchedProductContext } from "../SearchedProductContext";
+
 const CategoryLink = (props) => {
-  const { setSelectedCategory, category } = props;
+  ("hi i am from categoryLink");
+  const { cate } = props;
+  const { setSelectedCategory } = useContext(SearchedProductContext);
+
   return (
     <li className="cursor-pointer">
       <Link
         aria-label="set-category-name-title"
         className="flex flex-1 items-center justify-between hover:text-[#DB4444]"
-        onClick={() => setSelectedCategory(category)}
+        onClick={() => setSelectedCategory(cate)}
       >
-        <p className="uppercase">{category}</p>
+        <p className="uppercase">{cate}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

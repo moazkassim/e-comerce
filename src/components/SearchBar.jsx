@@ -1,12 +1,17 @@
-import React from "react";
+import { useContext } from "react";
 import { Search, CircleX } from "lucide-react";
+import { SearchedProductContext } from "./SearchedProductContext";
 
-export default function SearchBar(props) {
+export default function SearchBar() {
+  ("hi i am from search bar");
+  let { searchedProduct, setSearchedProduct } = useContext(
+    SearchedProductContext,
+  );
   function handleChange(e) {
-    props.setSearchedProduct(e.target.value);
+    setSearchedProduct(e.target.value);
   }
   function handelSearchButton() {
-    props.setSearchedProduct("");
+    setSearchedProduct("");
   }
   return (
     <div className="flex w-full items-center justify-center rounded border bg-[#F5F5F5] focus-within:border-black">
@@ -15,10 +20,10 @@ export default function SearchBar(props) {
         placeholder="Search for products"
         aria-label="Search"
         onChange={handleChange}
-        value={props.searchedProduct}
+        value={searchedProduct}
         type="search"
       />
-      {props.searchedProduct ? (
+      {searchedProduct ? (
         <button className="px-3" onClick={handelSearchButton}>
           <CircleX className="" />
         </button>

@@ -5,6 +5,7 @@ import ShoppingProducts from "../../../public/Home-img/ShoppingProducts.svg";
 import { useState } from "react";
 import { MoveRight } from "lucide-react";
 export default function BrandingSection(props) {
+  ("hi i am from Branding");
   const { imageSliderArr } = props;
   const [imageIndex, setImageIndex] = useState(0);
   return (

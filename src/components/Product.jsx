@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Star } from "lucide-react";
 import { Eye } from "lucide-react";
 import { Heart } from "lucide-react";
 import { toast } from "react-toastify";
 import View_Product from "./View_Product";
+import { SearchedProductContext } from "./SearchedProductContext";
 
 export default function Product(props) {
-  const { product, setCartProducts } = props;
+  ("hi i am from product");
+  const { setCartProducts } = useContext(SearchedProductContext);
+  const { product } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className="relative flex w-[270px] cursor-pointer flex-col items-center justify-center outline-white">
@@ -14,7 +17,6 @@ export default function Product(props) {
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         product={product}
-        setCartProducts={setCartProducts}
       />
       {/* heart and watch  */}
       <div className="flex w-[270px] flex-col items-center justify-center rounded bg-[#F5F5F5]">

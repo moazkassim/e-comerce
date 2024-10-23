@@ -9,7 +9,8 @@ import {
 import { Link } from "react-router-dom";
 
 export default function DropDownMenu(props) {
-  const navigate = useNavigate();
+  ("hi i am from drop down menu");
+
   return (
     <Menu>
       <MenuHandler>

@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { toast } from "react-toastify";
+import { SearchedProductContext } from "./SearchedProductContext";
 export default function View_Product(props) {
-  const { product, isModalOpen, setIsModalOpen, setCartProducts } = props;
-
+  ("hi i am from view product");
+  const { product, isModalOpen, setIsModalOpen } = props;
+  const { setCartProducts } = useContext(SearchedProductContext);
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden";

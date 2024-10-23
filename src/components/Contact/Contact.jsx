@@ -1,6 +1,5 @@
-import React from "react";
-
 export default function Contact() {
+  ("hi i am from contact");
   return (
     <section className="mb-8 mt-16 bg-white">
       <div className="mx-auto max-w-screen-md px-4 py-8 lg:py-16">

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export default function Login() {
+  ("hi i am from login");
   let navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
@@ -18,7 +19,7 @@ export default function Login() {
 
   async function submitFormData(e) {
     e.preventDefault();
-    console.log("form submit");
+
     await axios
       .post("https://fakestoreapi.com/auth/login", user)
       .then(function (response) {

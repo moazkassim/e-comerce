@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useContext } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import {
   Menu,
@@ -9,9 +8,11 @@ import {
 } from "@material-tailwind/react";
 import { AlignJustify } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SearchedProductContext } from "../SearchedProductContext";
 
-export default function NanMenu(props) {
+export default function NanMenu() {
   const [openMenu, setOpenMenu] = React.useState(false);
+  const { category, setSelectedCategory } = useContext(SearchedProductContext);
 
   return (
     <Menu>
@@ -57,7 +58,7 @@ export default function NanMenu(props) {
           </MenuHandler>
 
           <MenuList className="z-50">
-            {props.category.map((cate, index) => {
+            {category.map((cate, index) => {
               return (
                 <MenuItem key={index}>
                   <Link
@@ -65,7 +66,7 @@ export default function NanMenu(props) {
                     aria-label="set-category-name-title"
                     className="flex items-start text-black hover:text-red-500 md:gap-4"
                     onClick={() => {
-                      props.setSelectedCategory(cate);
+                      setSelectedCategory(cate);
                     }}
                   >
                     {cate}

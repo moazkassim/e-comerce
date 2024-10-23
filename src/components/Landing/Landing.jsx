@@ -5,8 +5,9 @@ import shoes from "../../../public/Home-img/shoes.jpg";
 import shoes22 from "../../../public/Home-img/shoes22.jpg";
 import laptop2 from "../../../public/Home-img/laptop2.jpg";
 
-import CategoryLink from "./CategoryLink";
 import BrandingSection from "./BrandingSection";
+
+import CategoriesList from "./CategoriesList";
 const imageSliderArr = [
   {
     src: mobile,
@@ -45,23 +46,13 @@ const imageSliderArr = [
     details: "Shop adidas for all styles of men's shoes",
   },
 ];
-export default function Landing(props) {
-  const { categoriesArr, setSelectedCategory } = props;
+export default function Landing() {
+  ("hi i am from landing");
 
   return (
     <section className="flex w-full">
       <div className="flex w-full md:mt-10">
-        <ul className="hidden w-48 flex-col gap-4 ease-linear lg:inline-flex">
-          {categoriesArr.map((category) => {
-            return (
-              <CategoryLink
-                key={category}
-                category={category}
-                setSelectedCategory={setSelectedCategory}
-              />
-            );
-          })}
-        </ul>
+        <CategoriesList />
         <div className="mx-10 hidden w-[0.5px] bg-black opacity-30 lg:flex"></div>
 
         <BrandingSection imageSliderArr={imageSliderArr} />

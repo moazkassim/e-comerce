@@ -5,30 +5,12 @@ import Contact from "../Contact/Contact";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NoMatch from "../NoMatch";
-export default function Router(props) {
-  const {
-    setCartProducts,
-    searchedProduct,
-    category,
-    setSelectedCategory,
-    selectedCategory,
-  } = props;
+export default function Router() {
+ 
   return (
     <>
-      {" "}
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              setCartProducts={setCartProducts}
-              searchedProduct={searchedProduct}
-              category={category}
-              setSelectedCategory={setSelectedCategory}
-              selectedCategory={selectedCategory}
-            />
-          }
-        ></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/login" element={<Login />}></Route>
