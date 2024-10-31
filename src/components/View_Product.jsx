@@ -3,7 +3,7 @@ import { useShallow } from "zustand/shallow";
 import { useAppStore } from "./store";
 import { toast } from "react-toastify";
 export default function View_Product(props) {
-  ("hi i am from view product");
+ console.log("hi i am from view product");
   const { product, isModalOpen, setIsModalOpen } = props;
   const { addCartProduct } = useAppStore(
     useShallow((state) => ({

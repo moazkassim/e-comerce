@@ -8,6 +8,7 @@ import { useAppStore } from "../store";
 import { useShallow } from "zustand/shallow";
 
 export default function ProductsList() {
+  console.log("iam from product list");
   const { selectedCategory } = useAppStore(
     useShallow((state) => ({
       selectedCategory: state.selectedCategory,
@@ -18,12 +19,10 @@ export default function ProductsList() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log("getting products for category ", selectedCategory);
     setIsLoading(true);
     axios
       .get(`https://fakestoreapi.com/products/category/${selectedCategory}`)
       .then((res) => {
-        console.log("res.data", res.data);
         setProductsArray(res.data);
         setIsLoading(false);
       })

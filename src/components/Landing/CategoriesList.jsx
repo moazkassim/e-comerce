@@ -5,6 +5,7 @@ import { useShallow } from "zustand/react/shallow";
 import axios from "axios";
 import { useAppStore } from "../store";
 export default function CategoriesList() {
+  console.log("iam from category list")
   const { categories, setCategories, setSelectedCategory } = useAppStore(
     useShallow((state) => ({
       setSelectedCategory: state.setSelectedCategory,
@@ -14,13 +15,13 @@ export default function CategoriesList() {
   );
 
   useEffect(() => {
-    console.log("we getting categories");
+    
     axios
       .get("https://fakestoreapi.com/products/categories")
       .then((res) => {
         const result = res.data;
         setCategories(result);
-        console.log(res.data[0], "first cate");
+       
         setSelectedCategory(result[0]);
       })
       .catch(function (error) {

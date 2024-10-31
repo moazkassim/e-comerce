@@ -10,7 +10,7 @@ import { useShallow } from "zustand/shallow";
 import { useAppStore } from "./store";
 
 export default function DropDownMenu() {
-  ("hi i am from drop down menu");
+  console.log("hi i am from drop down menu");
   const { categories, setSelectedCategory } = useAppStore(
     useShallow((state) => ({
       setSelectedCategory: state.setSelectedCategory,

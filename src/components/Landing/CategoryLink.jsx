@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useAppStore } from "../store";
 
 const CategoryLink = (props) => {
+  console.log(" i am from category link");
   const { cate } = props;
 
   const setSelectedCategory = useAppStore((state) => state.setSelectedCategory);

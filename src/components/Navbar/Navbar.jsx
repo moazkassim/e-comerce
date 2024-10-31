@@ -9,6 +9,7 @@ import { useAppStore } from "../store";
 import { useShallow } from "zustand/shallow";
 
 export default function Navbar() {
+  console.log("iam from navbar");
   const { cartVisible, setCartVisible, cartProducts } = useAppStore(
     useShallow((state) => ({
       cartVisible: state.cartVisible,

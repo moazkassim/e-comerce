@@ -5,7 +5,7 @@ import { useShallow } from "zustand/shallow";
 
 import CartProduct from "./CartProduct";
 export default function Cart() {
-  ("hi i am from cart");
+  console.log("hi i am from cart");
 
   const { cartVisible, cartProducts } = useAppStore(
     useShallow((state) => ({

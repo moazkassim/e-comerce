@@ -1,5 +1,5 @@
 export default function SlideLeftButton(props) {
-  ("hi i am from slide left button");
+ console.log("hi i am from slide left button");
   return (
     <div className="absolute left-2 top-0 flex h-full items-center justify-center">
       <button

@@ -1,7 +1,7 @@
-import React from "react";
+
 
 export default function LoadingSpinner() {
-  ("hi i am from Loading spinner");
+  console.log("hi i am from Loading spinner");
   return (
     <svg
       className="animate-spin text-gray-300"

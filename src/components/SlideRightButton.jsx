@@ -1,5 +1,5 @@
 export default function SlideRightButton(props) {
-  ("hi i am from slide right button");
+  console.log("hi i am from slide right button");
   return (
     <div className="absolute right-2 top-0 flex h-full items-center justify-center">
       <button

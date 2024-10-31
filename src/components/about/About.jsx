@@ -1,6 +1,6 @@
 import Sales from "../../../public/aboutImg/sales.jpg";
 export default function About() {
-  ("hi i am from about");
+  console.log("hi i am from about");
   return (
     <div id="about" className="relative mb-20 mt-28 bg-white">
       <div className="mx-auto max-w-7xl">

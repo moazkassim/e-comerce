@@ -13,7 +13,7 @@ import { useAppStore } from "../store";
 import { useState } from "react";
 export default function NanMenu() {
   const [openMenu, setOpenMenu] = useState(false);
-
+  console.log("iam from navmenu");
   const { categories, setSelectedCategory } = useAppStore(
     useShallow((state) => ({
       categories: state.categories,

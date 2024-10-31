@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 export default function NoMatch() {
-  ("hi i am from no match");
+  console.log("hi i am from no match");
   const navigate = useNavigate();
   return (
     <>

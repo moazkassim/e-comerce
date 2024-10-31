@@ -1,10 +1,11 @@
-import { useState } from "react";
+
 import { toast } from "react-toastify";
 import { useShallow } from "zustand/shallow";
 import { useAppStore } from "../store";
 import { Plus, Minus } from "lucide-react";
 
 export default function CartProduct(props) {
+  console.log("iam from cart product");
   const { removeCartProduct, addCartProduct, decreaseProductQuantity } =
     useAppStore(
       useShallow((state) => ({

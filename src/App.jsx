@@ -4,20 +4,20 @@ import GoToTop from "./components/GoToTop";
 
 import { ToastContainer } from "react-toastify";
 import Router from "./components/Router/Router";
-import { useAppStore } from "./components/store";
-import { useShallow } from "zustand/shallow";
-import { useEffect } from "react";
+// import { useAppStore } from "./components/store";
+// import { useShallow } from "zustand/shallow";
+// import { useEffect } from "react";
 
 function App() {
   console.log("hi i am from App");
-  const { hydrateCartProducts } = useAppStore(
-    useShallow((state) => ({
-      hydrateCartProducts: state.hydrateCartProducts,
-    })),
-  );
-  useEffect(() => {
-    hydrateCartProducts();
-  }, [hydrateCartProducts]);
+  // const { hydrateCartProducts } = useAppStore(
+  //   useShallow((state) => ({
+  //     hydrateCartProducts: state.hydrateCartProducts,
+  //   })),
+  // );
+  // useEffect(() => {
+  //   hydrateCartProducts();
+  // }, [hydrateCartProducts]);
 
   return (
     <>

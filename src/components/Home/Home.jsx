@@ -3,7 +3,7 @@ import DividingHead from "../DividingHead";
 import ProductsList from "../ProductsList/ProductsList";
 
 export default function Home() {
-  ("hi i am from Home");
+  console.log("hi i am from Home");
 
   // const getCategoryProducts = async () => {
   //   const res = await axios.get(" https://fakestoreapi.com/products");

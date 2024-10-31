@@ -6,7 +6,8 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NoMatch from "../NoMatch";
 export default function Router() {
- 
+  console.log("iam from router");
+
   return (
     <>
       <Routes>

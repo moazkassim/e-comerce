@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function Footer() {
-  ("hi i am from footer");
+  console.log("hi i am from footer");
   return (
     <footer className="footer bg-black">
       <div className="container mx-auto max-w-screen-xl space-y-8 overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
