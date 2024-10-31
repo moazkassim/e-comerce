@@ -75,29 +75,34 @@ export const useAppStore = create((set, get) => ({
   decreaseProductQuantity: (product) => {
     const previousCartProducts = get().cartProducts;
     let newCartProducts = [];
-    let indexOfExistElement = previousCartProducts.findIndex(
+    let existElementIndex = previousCartProducts.findIndex(
       (prod) => prod.id == product.id,
     );
-    const existingCartProduct = previousCartProducts[indexOfExistElement];
-    const newProduct = {
-      ...existingCartProduct,
-      quantity: existingCartProduct.quantity - 1,
-    };
-    newCartProducts = [...previousCartProducts];
-    newCartProducts[indexOfExistElement] = newProduct;
-
-    set({
-      cartProducts: newCartProducts,
-    });
-    localStorage.setItem(
-      CART_LOCAL_STORAGE_KEY,
-      JSON.stringify(newCartProducts),
-    );
+    const existingCartProduct = previousCartProducts[existElementIndex];
+    if (existingCartProduct.quantity > 1) {
+      const newProduct = {
+        ...existingCartProduct,
+        quantity: existingCartProduct.quantity - 1,
+      };
+      newCartProducts = [...previousCartProducts];
+      newCartProducts[existElementIndex] = newProduct;
+      set({
+        cartProducts: newCartProducts,
+      });
+      localStorage.setItem(
+        CART_LOCAL_STORAGE_KEY,
+        JSON.stringify(newCartProducts),
+      );
+    } else {
+      get().removeCartProduct(product);
+    }
   },
   // TODO remove cart item with id
-  removeCartProduct: (id) => {
+  removeCartProduct: (product) => {
     const previousCartProducts = get().cartProducts;
-    const newCartProducts = previousCartProducts.filter((pro) => pro.id !== id);
+    const newCartProducts = previousCartProducts.filter(
+      (prod) => prod.id !== product.id,
+    );
     set({
       cartProducts: newCartProducts,
     });

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useShallow } from "zustand/shallow";
 import { useAppStore } from "../store";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 
 export default function CartProduct(props) {
   const { removeCartProduct, addCartProduct, decreaseProductQuantity } =
@@ -39,16 +39,11 @@ export default function CartProduct(props) {
         </div>
         <div className="flex items-center justify-between">
           <div className="flex flex-row items-center justify-between gap-8">
-            <Trash2
+            <Minus
               size={16}
               className="cursor-pointer"
               onClick={() => {
-                if (product.quantity > 1) {
-                  decreaseProductQuantity(product);
-                } else {
-                  removeCartProduct(product.id);
-                  toast.success("Item removed");
-                }
+                decreaseProductQuantity(product);
               }}
             />
             <span>{product.quantity}</span>
@@ -63,7 +58,7 @@ export default function CartProduct(props) {
           <button
             name="remove-button"
             onClick={() => {
-              removeCartProduct(product.id);
+              removeCartProduct(product);
               toast.success("Item removed");
             }}
             className="bg-transparent text-sm font-medium text-[#FA3434]"
