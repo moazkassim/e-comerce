@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import SearchedProductContextProvider from "./components/SearchedProductContext.jsx";
-("hi i am from  main js");
+console.log("hi i am from  main js");
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>

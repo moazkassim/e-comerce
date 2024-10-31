@@ -1,17 +1,23 @@
-import { useContext } from "react";
 import { Search, CircleX } from "lucide-react";
-import { SearchedProductContext } from "./SearchedProductContext";
+
+import { useAppStore } from "./store";
+import { useShallow } from "zustand/shallow";
 
 export default function SearchBar() {
-  ("hi i am from search bar");
-  let { searchedProduct, setSearchedProduct } = useContext(
-    SearchedProductContext,
-  );
+  const { searchedProduct, setSearchedProduct, clearSearchedProduct } =
+    useAppStore(
+      useShallow((state) => ({
+        searchedProduct: state.searchedProduct,
+        setSearchedProduct: state.setSearchedProduct,
+        clearSearchedProduct: state.clearSearchedProduct,
+      })),
+    );
+
   function handleChange(e) {
     setSearchedProduct(e.target.value);
   }
   function handelSearchButton() {
-    setSearchedProduct("");
+    clearSearchedProduct();
   }
   return (
     <div className="flex w-full items-center justify-center rounded border bg-[#F5F5F5] focus-within:border-black">

@@ -47,8 +47,6 @@ const imageSliderArr = [
   },
 ];
 export default function Landing() {
-  ("hi i am from landing");
-
   return (
     <section className="flex w-full">
       <div className="flex w-full md:mt-10">

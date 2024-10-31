@@ -1,11 +1,9 @@
-import { useState } from "react";
 import Landing from "../Landing/Landing";
 import DividingHead from "../DividingHead";
 import ProductsList from "../ProductsList/ProductsList";
 
 export default function Home() {
-   ("hi i am from Home");
-  const [productsArray, setProductsArray] = useState([]);
+  ("hi i am from Home");
 
   // const getCategoryProducts = async () => {
   //   const res = await axios.get(" https://fakestoreapi.com/products");
@@ -48,10 +46,7 @@ export default function Home() {
     <main>
       <Landing />
       <DividingHead />
-      <ProductsList
-        setProductsArray={setProductsArray}
-        productsArray={productsArray}
-      />
+      <ProductsList />
     </main>
   );
 }

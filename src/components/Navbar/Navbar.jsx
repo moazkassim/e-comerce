@@ -4,17 +4,24 @@ import NanMenu from "../Menu/NavMenu";
 import SearchBar from "../SearchBar";
 import { ShoppingCart, User } from "lucide-react";
 import Cart from "../Cart/Cart";
-import { useContext } from "react";
-import { SearchedProductContext } from "../SearchedProductContext";
+
+import { useAppStore } from "../store";
+import { useShallow } from "zustand/shallow";
 
 export default function Navbar() {
-  ("hi i am from navbar");
-  const { cartProducts, cartVisible, setCartVisible } = useContext(
-    SearchedProductContext,
+  const { cartVisible, setCartVisible, cartProducts } = useAppStore(
+    useShallow((state) => ({
+      cartVisible: state.cartVisible,
+      setCartVisible: state.setCartVisible,
+      cartProducts: state.cartProducts,
+    })),
   );
+  // const cartVisible = useCartVisible((state) => state.cartVisible);
+  // const setCartVisible = useCartVisible((state) => state.setCartVisible);
 
   return (
     <nav className="relative flex w-full justify-center border-b border-[#7D8184] py-2">
+      <Cart cartVisible={cartVisible} />
       <div className="container flex w-full flex-col items-center justify-center">
         <div className="flex w-full items-center justify-between gap-10">
           <Link to="/">
@@ -62,14 +69,13 @@ export default function Navbar() {
           <div className="flex items-center justify-center gap-8">
             <button
               className="relative flex cursor-pointer items-center justify-center p-1"
-              onClick={() => setCartVisible((prev) => !prev)}
+              onClick={setCartVisible}
             >
               <span className="absolute right-[-2px] top-[-2px] flex h-4 w-4 items-center justify-center rounded-full bg-[#DB4444] text-sm text-white">
                 {cartProducts.length}
               </span>
 
               <ShoppingCart className="hover:text-[#DB4444]" />
-              <Cart cartVisible={cartVisible} setCartVisible={setCartVisible} />
             </button>
 
             <Link

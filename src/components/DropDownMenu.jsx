@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import {
   Menu,
   MenuHandler,
@@ -7,9 +6,17 @@ import {
 } from "@material-tailwind/react";
 
 import { Link } from "react-router-dom";
+import { useShallow } from "zustand/shallow";
+import { useAppStore } from "./store";
 
-export default function DropDownMenu(props) {
+export default function DropDownMenu() {
   ("hi i am from drop down menu");
+  const { categories, setSelectedCategory } = useAppStore(
+    useShallow((state) => ({
+      setSelectedCategory: state.setSelectedCategory,
+      categories: state.categories,
+    })),
+  );
 
   return (
     <Menu>
@@ -22,7 +29,7 @@ export default function DropDownMenu(props) {
         </button>
       </MenuHandler>
       <MenuList className="z-50">
-        {props.category.map((cate, index) => {
+        {categories.map((cate, index) => {
           return (
             <MenuItem key={index}>
               <Link
@@ -30,7 +37,7 @@ export default function DropDownMenu(props) {
                 aria-label="set-category-name"
                 className="hover:[#DB4444] flex items-start text-black md:gap-4"
                 onClick={() => {
-                  props.setSelectedCategory(cate);
+                  setSelectedCategory(cate);
                 }}
               >
                 {cate}

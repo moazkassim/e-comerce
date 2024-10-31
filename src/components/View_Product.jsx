@@ -1,10 +1,15 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+import { useShallow } from "zustand/shallow";
+import { useAppStore } from "./store";
 import { toast } from "react-toastify";
-import { SearchedProductContext } from "./SearchedProductContext";
 export default function View_Product(props) {
   ("hi i am from view product");
   const { product, isModalOpen, setIsModalOpen } = props;
-  const { setCartProducts } = useContext(SearchedProductContext);
+  const { addCartProduct } = useAppStore(
+    useShallow((state) => ({
+      addCartProduct: state.addCartProduct,
+    })),
+  );
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
@@ -42,15 +47,9 @@ export default function View_Product(props) {
             <button
               className="h-10 w-1/2 rounded bg-[#DB4444] text-white"
               onClick={() => {
-                setCartProducts((prev) => {
-                  const newProducts = [product, ...prev];
-                  localStorage.setItem(
-                    "cartArray",
-                    JSON.stringify(newProducts),
-                  );
-                  toast.success("Added to cart");
-                  return newProducts;
-                });
+                addCartProduct(product);
+
+                toast.success("Added to cart");
               }}
             >
               Add to Cart

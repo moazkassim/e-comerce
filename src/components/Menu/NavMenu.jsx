@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import {
   Menu,
@@ -8,12 +7,19 @@ import {
 } from "@material-tailwind/react";
 import { AlignJustify } from "lucide-react";
 import { Link } from "react-router-dom";
-import { SearchedProductContext } from "../SearchedProductContext";
 
+import { useShallow } from "zustand/shallow";
+import { useAppStore } from "../store";
+import { useState } from "react";
 export default function NanMenu() {
-  const [openMenu, setOpenMenu] = React.useState(false);
-  const { category, setSelectedCategory } = useContext(SearchedProductContext);
+  const [openMenu, setOpenMenu] = useState(false);
 
+  const { categories, setSelectedCategory } = useAppStore(
+    useShallow((state) => ({
+      categories: state.categories,
+      setSelectedCategory: state.setSelectedCategory,
+    })),
+  );
   return (
     <Menu>
       <MenuHandler>
@@ -58,7 +64,7 @@ export default function NanMenu() {
           </MenuHandler>
 
           <MenuList className="z-50">
-            {category.map((cate, index) => {
+            {categories.map((cate, index) => {
               return (
                 <MenuItem key={index}>
                   <Link

@@ -1,12 +1,10 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { SearchedProductContext } from "../SearchedProductContext";
+import { useAppStore } from "../store";
 
 const CategoryLink = (props) => {
-  ("hi i am from categoryLink");
   const { cate } = props;
-  const { setSelectedCategory } = useContext(SearchedProductContext);
 
+  const setSelectedCategory = useAppStore((state) => state.setSelectedCategory);
   return (
     <li className="cursor-pointer">
       <Link

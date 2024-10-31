@@ -1,16 +1,29 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Star } from "lucide-react";
 import { Eye } from "lucide-react";
 import { Heart } from "lucide-react";
 import { toast } from "react-toastify";
 import View_Product from "./View_Product";
-import { SearchedProductContext } from "./SearchedProductContext";
-
+import { useAppStore } from "../components/store";
+import { useShallow } from "zustand/shallow";
 export default function Product(props) {
-  ("hi i am from product");
-  const { setCartProducts } = useContext(SearchedProductContext);
+  console.log("hi i am from product");
   const { product } = props;
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { addCartProduct } = useAppStore(
+    useShallow((state) => ({
+      addCartProduct: state.addCartProduct,
+      cartProducts: state.cartProducts,
+    })),
+  );
+  function handelAddToCart(product) {
+    addCartProduct(product);
+
+    toast.success("Added to cart");
+  }
+
   return (
     <div className="relative flex w-[270px] cursor-pointer flex-col items-center justify-center outline-white">
       <View_Product
@@ -18,6 +31,7 @@ export default function Product(props) {
         setIsModalOpen={setIsModalOpen}
         product={product}
       />
+
       {/* heart and watch  */}
       <div className="flex w-[270px] flex-col items-center justify-center rounded bg-[#F5F5F5]">
         <div className="action-icons absolute right-2 top-3">
@@ -43,14 +57,7 @@ export default function Product(props) {
           <button
             name="add-to-cart"
             className="block h-10 w-[270px] rounded-b-md bg-black text-base font-medium text-white hover:opacity-70"
-            onClick={() => {
-              setCartProducts((prev) => {
-                const newProducts = [product, ...prev];
-                localStorage.setItem("cartArray", JSON.stringify(newProducts));
-                toast.success("Added to cart");
-                return newProducts;
-              });
-            }}
+            onClick={() => handelAddToCart(product)}
           >
             Add To Cart
           </button>

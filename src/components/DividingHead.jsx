@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
-import { SearchedProductContext } from "./SearchedProductContext";
+import { useAppStore } from "./store";
 
 export default function DividingHead() {
-  ("hi i am from dividing head");
-  const { selectedCategory } = useContext(SearchedProductContext);
+  const selectedCategory = useAppStore((state) => state.selectedCategory);
   return (
     <div className="mx-auto my-20 max-w-screen-xl px-4 md:px-8">
       <div className="items-start justify-between border-b py-4 md:flex">
