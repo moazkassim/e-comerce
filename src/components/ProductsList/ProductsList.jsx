@@ -20,16 +20,18 @@ export default function ProductsList() {
 
   useEffect(() => {
     setIsLoading(true);
-    axios
-      .get(`https://fakestoreapi.com/products/category/${selectedCategory}`)
-      .then((res) => {
-        setProductsArray(res.data);
-        setIsLoading(false);
-      })
-      .catch(function (error) {
-        setIsLoading(false);
-        setError(error.message);
-      });
+    if (selectedCategory) {
+      axios
+        .get(`https://fakestoreapi.com/products/category/${selectedCategory}`)
+        .then((res) => {
+          setProductsArray(res.data);
+          setIsLoading(false);
+        })
+        .catch(function (error) {
+          setIsLoading(false);
+          setError(error.message);
+        });
+    }
   }, [selectedCategory, setProductsArray]);
   // useEffect(() => {
   //   "getting products for search ", searchedProduct;
@@ -51,6 +53,9 @@ export default function ProductsList() {
   //       });
   //   }
   // }, [searchedProduct, setProductsArray]);
+  if (productsArray.length == 0) {
+    return null;
+  }
 
   if (isLoading) {
     return (
@@ -62,9 +67,7 @@ export default function ProductsList() {
   if (error) {
     return <ErrorViewer errorMessage={error} />;
   }
-  if (productsArray.length == 0) {
-    return null;
-  }
+
   return (
     <section className="container-categories mb-20 flex w-full flex-row flex-wrap justify-center gap-12">
       {productsArray.map((product) => {
