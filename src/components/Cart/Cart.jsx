@@ -1,27 +1,18 @@
-import "react-toastify/dist/ReactToastify.css";
+import CartProduct from "./CartProduct";
 
 import { useAppStore } from "../store";
-import { useShallow } from "zustand/shallow";
-
-import CartProduct from "./CartProduct";
-export default function Cart() {
+export default function Cart(props) {
   console.log("hi i am from cart");
-
-  const { cartVisible, cartProducts } = useAppStore(
-    useShallow((state) => ({
-      cartProducts: state.cartProducts,
-      cartVisible: state.cartVisible,
-    })),
-  );
-
+  const cartProducts = useAppStore((state) => state.cartProducts);
+  const { cartVisible } = props;
   if (!cartVisible) {
     return null;
   }
-  console.log("cart products", cartProducts);
+
   return (
     <section className="absolute right-5 top-20 z-50 block max-w-96 flex-col rounded bg-[#F5F7F8] shadow-xl delay-700">
       {cartProducts.length > 0 ? (
-        cartProducts.map((product,index) => {
+        cartProducts.map((product, index) => {
           return <CartProduct key={index} product={product} />;
         })
       ) : (

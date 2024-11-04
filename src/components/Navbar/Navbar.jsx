@@ -4,25 +4,43 @@ import NanMenu from "../Menu/NavMenu";
 import SearchBar from "../SearchBar";
 import { ShoppingCart, User } from "lucide-react";
 import Cart from "../Cart/Cart";
-
 import { useAppStore } from "../store";
-import { useShallow } from "zustand/shallow";
+
+import { useState } from "react";
+
+const CartCounter = () => {
+  const cartProducts = useAppStore((state) => state.cartProducts);
+  return (
+    <span className="absolute right-[-2px] top-[-2px] flex h-4 w-4 items-center justify-center rounded-full bg-[#DB4444] text-sm text-white">
+      {cartProducts.length}
+    </span>
+  );
+};
+const CartViewer = () => {
+  const [cartVisible, setCartVisible] = useState(false);
+  function toggleCartVisible() {
+    setCartVisible((prev) => !prev);
+  }
+  return (
+    <>
+      <Cart cartVisible={cartVisible} />
+      <button
+        className="relative flex cursor-pointer items-center justify-center p-1"
+        onClick={toggleCartVisible}
+      >
+        <CartCounter />
+
+        <ShoppingCart className="hover:text-[#DB4444]" />
+      </button>
+    </>
+  );
+};
 
 export default function Navbar() {
   console.log("iam from navbar");
-  const { cartVisible, setCartVisible, cartProducts } = useAppStore(
-    useShallow((state) => ({
-      cartVisible: state.cartVisible,
-      setCartVisible: state.setCartVisible,
-      cartProducts: state.cartProducts,
-    })),
-  );
-  // const cartVisible = useCartVisible((state) => state.cartVisible);
-  // const setCartVisible = useCartVisible((state) => state.setCartVisible);
 
   return (
     <nav className="relative flex w-full justify-center border-b border-[#7D8184] py-2">
-      <Cart cartVisible={cartVisible} />
       <div className="container flex w-full flex-col items-center justify-center">
         <div className="flex w-full items-center justify-between gap-10">
           <Link to="/">
@@ -68,16 +86,7 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center justify-center gap-8">
-            <button
-              className="relative flex cursor-pointer items-center justify-center p-1"
-              onClick={setCartVisible}
-            >
-              <span className="absolute right-[-2px] top-[-2px] flex h-4 w-4 items-center justify-center rounded-full bg-[#DB4444] text-sm text-white">
-                {cartProducts.length}
-              </span>
-
-              <ShoppingCart className="hover:text-[#DB4444]" />
-            </button>
+            <CartViewer />
 
             <Link
               aria-label="login-page"

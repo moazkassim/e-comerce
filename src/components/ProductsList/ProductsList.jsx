@@ -5,21 +5,16 @@ import LoadingSpinner from "../LoadingSpinner";
 import ErrorViewer from "../ErrorViewer";
 
 import { useAppStore } from "../store";
-import { useShallow } from "zustand/shallow";
 
 export default function ProductsList() {
   console.log("iam from product list");
-  const { selectedCategory } = useAppStore(
-    useShallow((state) => ({
-      selectedCategory: state.selectedCategory,
-    })),
-  );
+  const selectedCategory = useAppStore((state) => state.selectedCategory);
+
   const [productsArray, setProductsArray] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true);
     if (selectedCategory) {
       axios
         .get(`https://fakestoreapi.com/products/category/${selectedCategory}`)
@@ -33,6 +28,7 @@ export default function ProductsList() {
         });
     }
   }, [selectedCategory, setProductsArray]);
+
   // useEffect(() => {
   //   "getting products for search ", searchedProduct;
   //   if (searchedProduct) {
@@ -53,10 +49,9 @@ export default function ProductsList() {
   //       });
   //   }
   // }, [searchedProduct, setProductsArray]);
-  if (productsArray.length == 0) {
-    return null;
+  if (error) {
+    return <ErrorViewer errorMessage={error} />;
   }
-
   if (isLoading) {
     return (
       <div className="my-20 flex items-center justify-center">
@@ -64,10 +59,9 @@ export default function ProductsList() {
       </div>
     );
   }
-  if (error) {
-    return <ErrorViewer errorMessage={error} />;
+  if (productsArray.length == 0) {
+    return <p>there is no products</p>;
   }
-
   return (
     <section className="container-categories mb-20 flex w-full flex-row flex-wrap justify-center gap-12">
       {productsArray.map((product) => {
