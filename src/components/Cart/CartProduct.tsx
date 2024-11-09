@@ -3,7 +3,19 @@ import { useShallow } from "zustand/shallow";
 import { useAppStore } from "../store";
 import { Plus, Minus } from "lucide-react";
 
-export default function CartProduct(props) {
+interface CartProductProps {
+  key: number;
+  product: {
+    id: number;
+    title: string;
+    price: number;
+    category: string;
+    description: string;
+    image: string;
+    quantity: number;
+  };
+}
+export default function CartProduct(props: CartProductProps) {
   console.log("iam from cart product");
   const { removeCartProduct, addCartProduct, decreaseProductQuantity } =
     useAppStore(

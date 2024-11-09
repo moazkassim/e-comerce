@@ -13,7 +13,7 @@ export default function SearchBar() {
       })),
     );
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchedProduct(e.target.value);
   }
   function handelSearchButton() {

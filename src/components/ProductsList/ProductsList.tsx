@@ -5,14 +5,22 @@ import LoadingSpinner from "../LoadingSpinner";
 import ErrorViewer from "../ErrorViewer";
 
 import { useAppStore } from "../store";
+interface ProductInterface {
+  id: number;
+  title: string;
+  price: number;
+  category: string;
+  description: string;
+  image: string;
+}
 
 export default function ProductsList() {
   console.log("iam from product list");
   const selectedCategory = useAppStore((state) => state.selectedCategory);
 
-  const [productsArray, setProductsArray] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [productsArray, setProductsArray] = useState<[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (selectedCategory) {
@@ -64,7 +72,7 @@ export default function ProductsList() {
   }
   return (
     <section className="container-categories mb-20 flex w-full flex-row flex-wrap justify-center gap-12">
-      {productsArray.map((product) => {
+      {productsArray.map((product: ProductInterface) => {
         return <Product key={product.id} product={product} />;
       })}
     </section>

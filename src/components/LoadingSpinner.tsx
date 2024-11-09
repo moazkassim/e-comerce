@@ -1,5 +1,3 @@
-
-
 export default function LoadingSpinner() {
   console.log("hi i am from Loading spinner");
   return (

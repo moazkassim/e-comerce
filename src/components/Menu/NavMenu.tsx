@@ -10,9 +10,10 @@ import { Link } from "react-router-dom";
 
 import { useShallow } from "zustand/shallow";
 import { useAppStore } from "../store";
+
 import { useState } from "react";
 export default function NanMenu() {
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
   console.log("iam from navmenu");
   const { categories, setSelectedCategory } = useAppStore(
     useShallow((state) => ({
@@ -27,7 +28,7 @@ export default function NanMenu() {
           <AlignJustify color="black" />
         </button>
       </MenuHandler>
-      <MenuList className="">
+      <MenuList>
         <MenuItem>
           <Link aria-label="Home-page" to="/">
             Home
@@ -64,7 +65,7 @@ export default function NanMenu() {
           </MenuHandler>
 
           <MenuList className="z-50">
-            {categories.map((cate, index) => {
+            {categories.map((cate: string, index: number) => {
               return (
                 <MenuItem key={index}>
                   <Link

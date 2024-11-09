@@ -17,7 +17,7 @@ const CartCounter = () => {
   );
 };
 const CartViewer = () => {
-  const [cartVisible, setCartVisible] = useState(false);
+  const [cartVisible, setCartVisible] = useState<boolean>(false);
   function toggleCartVisible() {
     setCartVisible((prev) => !prev);
   }

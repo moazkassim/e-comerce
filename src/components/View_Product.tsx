@@ -2,8 +2,20 @@ import { useEffect } from "react";
 import { useShallow } from "zustand/shallow";
 import { useAppStore } from "./store";
 import { toast } from "react-toastify";
-export default function View_Product(props) {
- console.log("hi i am from view product");
+interface View_ProductProps {
+  product: {
+    id: number;
+    title: string;
+    price: number;
+    category: string;
+    description: string;
+    image: string;
+  };
+  isModalOpen: boolean;
+  setIsModalOpen: (value: boolean | ((value: boolean) => boolean)) => void;
+}
+export default function View_Product(props: View_ProductProps) {
+  console.log("hi i am from view product");
   const { product, isModalOpen, setIsModalOpen } = props;
   const { addCartProduct } = useAppStore(
     useShallow((state) => ({

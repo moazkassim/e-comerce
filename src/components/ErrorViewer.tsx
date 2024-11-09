@@ -1,6 +1,8 @@
 import React from "react";
-
-export default function ErrorViewer(props) {
+interface ErrorViewerProps {
+  errorMessage: string;
+}
+export default function ErrorViewer(props: ErrorViewerProps) {
   ("hi i am from error viewer");
   const { errorMessage } = props;
   return (

@@ -29,7 +29,7 @@ export default function DropDownMenu() {
         </button>
       </MenuHandler>
       <MenuList className="z-50">
-        {categories.map((cate, index) => {
+        {categories.map((cate: string, index: number) => {
           return (
             <MenuItem key={index}>
               <Link
