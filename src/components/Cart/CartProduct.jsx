@@ -1,4 +1,3 @@
-
 import { toast } from "react-toastify";
 import { useShallow } from "zustand/shallow";
 import { useAppStore } from "../store";
@@ -19,7 +18,7 @@ export default function CartProduct(props) {
   return (
     <div
       key={product.id}
-      className="relative z-40 flex w-full min-w-96 flex-row items-center overflow-hidden border-b-2 border-solid"
+      className="relative z-40 flex w-full min-w-96 flex-row items-center overflow-hidden border-solid"
     >
       <div className="border-r-[1px] border-solid p-2">
         <img

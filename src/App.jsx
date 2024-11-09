@@ -3,7 +3,8 @@ import Footer from "./components/Footer/Footer";
 import GoToTop from "./components/GoToTop";
 
 import { ToastContainer } from "react-toastify";
-import Router from "./components/Router/Router";
+import { router } from "./components/Router/Router.jsx";
+import { RouterProvider } from "react-router-dom";
 // import { useAppStore } from "./components/store";
 // import { useShallow } from "zustand/shallow";
 // import { useEffect } from "react";
@@ -32,13 +33,7 @@ function App() {
         theme="light"
       />
       <GoToTop />
-      <Navbar />
-      <div className="flex w-full items-center justify-center">
-        <div className="md:container">
-          <Router />
-        </div>
-      </div>
-      <Footer />
+      <RouterProvider router={router} />,
     </>
   );
 }
