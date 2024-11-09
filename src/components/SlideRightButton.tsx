@@ -1,4 +1,16 @@
-export default function SlideRightButton(props) {
+import React from "react";
+interface SlideLeftButtonProps {
+  imageIndex: number;
+  setImageIndex: (value: number | ((value: number) => number)) => void;
+  imageSliderArr: {
+    src: string;
+    ket: number;
+    description: string;
+    details: string;
+  }[];
+}
+export default function SlideRightButton(props: SlideLeftButtonProps) {
+  const { imageIndex, setImageIndex, imageSliderArr } = props;
   console.log("hi i am from slide right button");
   return (
     <div className="absolute right-2 top-0 flex h-full items-center justify-center">
@@ -6,10 +18,10 @@ export default function SlideRightButton(props) {
         type="button"
         name="go-to-previous-img"
         onClick={() => {
-          if (props.imageIndex < props.imageSliderArr.length - 1) {
-            props.setImageIndex((prevIndex) => prevIndex + 1);
+          if (imageIndex < imageSliderArr.length - 1) {
+            setImageIndex((prevIndex) => prevIndex + 1);
           } else {
-            props.setImageIndex(0);
+            setImageIndex(0);
           }
         }}
         className="z-50 animate-pulse cursor-pointer ease-linear"

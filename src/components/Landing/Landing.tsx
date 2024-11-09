@@ -4,9 +4,7 @@ import laptop from "../../../public/Home-img/laptop.jpg";
 import shoes from "../../../public/Home-img/shoes.jpg";
 import shoes22 from "../../../public/Home-img/shoes22.jpg";
 import laptop2 from "../../../public/Home-img/laptop2.jpg";
-
 import BrandingSection from "./BrandingSection";
-
 import CategoriesList from "./CategoriesList";
 const imageSliderArr = [
   {
@@ -47,7 +45,7 @@ const imageSliderArr = [
   },
 ];
 export default function Landing() {
-  console.log("hi iam from landing")
+  console.log("hi iam from landing");
   return (
     <section className="flex w-full">
       <div className="flex w-full md:mt-10">

@@ -4,10 +4,20 @@ import SlideRightButton from "../SlideRightButton";
 import ShoppingProducts from "../../../public/Home-img/ShoppingProducts.svg";
 import { useState } from "react";
 import { MoveRight } from "lucide-react";
-export default function BrandingSection(props) {
+
+interface BrandingSectionProps {
+  imageSliderArr: {
+    src: string;
+    ket: number;
+    description: string;
+    details: string;
+  }[];
+}
+
+export default function BrandingSection(props: BrandingSectionProps) {
   console.log("hi i am from Branding");
   const { imageSliderArr } = props;
-  const [imageIndex, setImageIndex] = useState(0);
+  const [imageIndex, setImageIndex] = useState<number>(0);
   return (
     <div className="relative flex flex-1 flex-col items-center justify-between gap-2 bg-black px-8 py-8 md:flex-row">
       <div className="flex h-72 flex-col items-start justify-center gap-8 p-7 md:h-[350px] md:flex-1">

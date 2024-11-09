@@ -1,15 +1,31 @@
-export default function SlideLeftButton(props) {
- console.log("hi i am from slide left button");
+import { value } from "@material-tailwind/react/types/components/chip";
+import React from "react";
+
+interface SlideLeftButtonProps {
+  imageIndex: number;
+  setImageIndex: (value: number | ((value: number) => number)) => void;
+  imageSliderArr: {
+    src: string;
+    ket: number;
+    description: string;
+    details: string;
+  }[];
+}
+// setImageIndex: (value: number | ((value: number) => number)) => void;
+export default function SlideLeftButton(props: SlideLeftButtonProps) {
+  const { imageIndex, setImageIndex, imageSliderArr } = props;
+  console.log("hi i am from slide left button");
+
   return (
     <div className="absolute left-2 top-0 flex h-full items-center justify-center">
       <button
         type="button"
         name="go-to-next-p"
         onClick={() => {
-          if (props.imageIndex > 0) {
-            props.setImageIndex((prevIndex) => prevIndex - 1);
+          if (imageIndex > 0) {
+            setImageIndex((prevIndex) => prevIndex - 1);
           } else {
-            props.setImageIndex(props.imageSliderArr.length - 1);
+            setImageIndex(imageSliderArr.length - 1);
           }
         }}
         className="slider-left-button group animate-pulse cursor-pointer focus:outline-none"

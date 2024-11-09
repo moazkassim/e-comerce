@@ -41,7 +41,7 @@ export default function Contact() {
             </label>
             <textarea
               id="message"
-              rows="6"
+              rows={6}
               className="focus:ring-primary-500 focus:border-primary-500 e dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full border border-gray-300 bg-[#F5F5F5] p-2.5 text-sm shadow-sm dark:border-gray-200 dark:placeholder-gray-400"
               placeholder="Leave a comment..."
             ></textarea>

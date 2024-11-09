@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
 import { useAppStore } from "../store";
-
-const CategoryLink = (props) => {
+interface CategoryLinkProps {
+  cate: string;
+}
+const CategoryLink = (props: CategoryLinkProps) => {
   console.log(" i am from category link");
   const { cate } = props;
 
   const setSelectedCategory = useAppStore((state) => state.setSelectedCategory);
   return (
     <li className="cursor-pointer">
-      <Link
+      <a
         aria-label="set-category-name-title"
         className="flex flex-1 items-center justify-between hover:text-[#DB4444]"
         onClick={() => setSelectedCategory(cate)}
@@ -26,7 +27,7 @@ const CategoryLink = (props) => {
             fill="black"
           />
         </svg>
-      </Link>
+      </a>
     </li>
   );
 };
