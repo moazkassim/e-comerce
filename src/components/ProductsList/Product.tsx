@@ -3,24 +3,16 @@ import { Star } from "lucide-react";
 import { Eye } from "lucide-react";
 import { Heart } from "lucide-react";
 import { toast } from "react-toastify";
-import View_Product from "./View_Product";
-import { useAppStore } from "../stores/app-store";
+import View_Product from "./ViewProduct";
+import { Product as IProduct, useAppStore } from "../stores/app-store";
 import { useShallow } from "zustand/shallow";
 
 interface ProductProps {
-  key: number;
-  product: {
-    id: number;
-    title: string;
-    price: number;
-    category: string;
-    description: string;
-    image: string;
-  };
+  product: IProduct;
 }
 export default function Product(props: ProductProps) {
   console.log("hi i am from product");
-  const { key, product } = props;
+  const { product } = props;
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -30,24 +22,14 @@ export default function Product(props: ProductProps) {
       cartProducts: state.cartProducts,
     })),
   );
-  function handelAddToCart(product: {
-    id: number;
-    title: string;
-    price: number;
-    category: string;
-    description: string;
-    image: string;
-  }) {
+  function handelAddToCart(product: IProduct) {
     addCartProduct(product);
 
     toast.success("Added to cart");
   }
 
   return (
-    <div
-      key={key}
-      className="relative flex w-[270px] cursor-pointer flex-col items-center justify-center outline-white"
-    >
+    <div className="relative flex w-[270px] cursor-pointer flex-col items-center justify-center outline-white">
       <View_Product
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}

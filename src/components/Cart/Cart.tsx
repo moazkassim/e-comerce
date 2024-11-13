@@ -17,22 +17,9 @@ export default function Cart(props: CartProps) {
     <section className="absolute right-5 top-20 z-50 block max-w-96 flex-col rounded bg-[#F5F7F8] shadow-xl delay-700">
       {cartProducts.length > 0 ? (
         <div>
-          {cartProducts.map(
-            (
-              product: {
-                id: number;
-                title: string;
-                price: number;
-                category: string;
-                description: string;
-                image: string;
-                quantity: number;
-              },
-              index: number,
-            ) => {
-              return <CartProduct key={index} product={product} />;
-            },
-          )}
+          {cartProducts.map((product, index) => {
+            return <CartProduct key={index} product={product} />;
+          })}
           {/* <div>
             <div>
               <p>Subtotal</p>

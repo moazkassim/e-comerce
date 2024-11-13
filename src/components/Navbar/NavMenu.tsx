@@ -65,7 +65,7 @@ export default function NanMenu() {
           </MenuHandler>
 
           <MenuList className="z-50">
-            {categories.map((cate: string, index: number) => {
+            {categories.map((category: string, index: number) => {
               return (
                 <MenuItem key={index}>
                   <Link
@@ -73,10 +73,10 @@ export default function NanMenu() {
                     aria-label="set-category-name-title"
                     className="flex items-start text-black hover:text-red-500 md:gap-4"
                     onClick={() => {
-                      setSelectedCategory(cate);
+                      setSelectedCategory(category);
                     }}
                   >
-                    {cate}
+                    {category}
                   </Link>
                 </MenuItem>
               );

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "../../../public/Navbar-img/Logo.png";
-import NanMenu from "../Menu/NavMenu";
+import NanMenu from "./NavMenu";
 import SearchBar from "../SearchBar";
 import { ShoppingCart, User } from "lucide-react";
 import Cart from "../Cart/Cart";

@@ -1,19 +1,14 @@
 import { toast } from "react-toastify";
 import { useShallow } from "zustand/shallow";
-import { useAppStore } from "../../stores/app-store";
+import {
+  CartProduct as ICartProduct,
+  useAppStore,
+} from "../../stores/app-store";
 import { Plus, Minus } from "lucide-react";
 
 interface CartProductProps {
   key: number;
-  product: {
-    id: number;
-    title: string;
-    price: number;
-    category: string;
-    description: string;
-    image: string;
-    quantity: number;
-  };
+  product: ICartProduct;
 }
 export default function CartProduct(props: CartProductProps) {
   console.log("iam from cart product");

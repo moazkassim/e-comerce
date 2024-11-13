@@ -14,9 +14,9 @@ export default function Login() {
   ("hi i am from login");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const setIsAuthenticated = useAppStore(
-    (state: any) => state.setIsAuthenticated,
-  ) as () => void;
+  const toggleIsAuthenticated = useAppStore(
+    (state) => state.toggleIsAuthenticated,
+  );
   let navigate = useNavigate();
   const [user, setUser] = useState<LoginObject>({
     username: "",
@@ -34,7 +34,7 @@ export default function Login() {
     await axios
       .post("https://fakestoreapi.com/auth/login", user)
       .then(function (response) {
-        setIsAuthenticated();
+        toggleIsAuthenticated();
         navigate("/");
         setIsLoading(false);
       })

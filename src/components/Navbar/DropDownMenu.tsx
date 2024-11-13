@@ -29,7 +29,7 @@ export default function DropDownMenu() {
         </button>
       </MenuHandler>
       <MenuList className="z-50">
-        {categories.map((cate: string, index: number) => {
+        {categories.map((category: string, index: number) => {
           return (
             <MenuItem key={index}>
               <Link
@@ -37,10 +37,10 @@ export default function DropDownMenu() {
                 aria-label="set-category-name"
                 className="hover:[#DB4444] flex items-start text-black md:gap-4"
                 onClick={() => {
-                  setSelectedCategory(cate);
+                  setSelectedCategory(category);
                 }}
               >
-                {cate}
+                {category}
               </Link>
             </MenuItem>
           );

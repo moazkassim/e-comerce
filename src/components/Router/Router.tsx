@@ -7,10 +7,10 @@ import {
   // Navigate,
 } from "react-router-dom";
 import Home from "../Home/Home";
-import About from "../about/About";
+import About from "../About";
 import Contact from "../Contact/Contact";
 import Login from "../Login/Login";
-import Register from "../Register/Register";
+import Register from "../Auth/Register/Register";
 import NoMatch from "../NoMatch";
 import Checkout from "../Checkout/Checkout";
 // import Navbar from "../Navbar/Navbar";
