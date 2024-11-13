@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { useShallow } from "zustand/shallow";
-import { useAppStore } from "../store";
+import { useAppStore } from "../../stores/app-store";
 import { Plus, Minus } from "lucide-react";
 
 interface CartProductProps {

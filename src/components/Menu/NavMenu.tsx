@@ -9,7 +9,7 @@ import { AlignJustify } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { useShallow } from "zustand/shallow";
-import { useAppStore } from "../store";
+import { useAppStore } from "../../stores/app-store";
 
 import { useState } from "react";
 export default function NanMenu() {

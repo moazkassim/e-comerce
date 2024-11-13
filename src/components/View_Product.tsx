@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useShallow } from "zustand/shallow";
-import { useAppStore } from "./store";
+import { useAppStore } from "../stores/app-store";
 import { toast } from "react-toastify";
 interface View_ProductProps {
   product: {

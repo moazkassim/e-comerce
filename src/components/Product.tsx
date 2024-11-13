@@ -4,7 +4,7 @@ import { Eye } from "lucide-react";
 import { Heart } from "lucide-react";
 import { toast } from "react-toastify";
 import View_Product from "./View_Product";
-import { useAppStore } from "./store";
+import { useAppStore } from "../stores/app-store";
 import { useShallow } from "zustand/shallow";
 
 interface ProductProps {

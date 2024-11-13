@@ -1,4 +1,4 @@
-import { useAppStore } from "../store";
+import { useAppStore } from "../../stores/app-store";
 interface CategoryLinkProps {
   cate: string;
 }

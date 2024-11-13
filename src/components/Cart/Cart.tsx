@@ -1,6 +1,6 @@
 import CartProduct from "./CartProduct";
 
-import { useAppStore } from "../store";
+import { useAppStore } from "../../stores/app-store";
 
 interface CartProps {
   cartVisible: boolean;

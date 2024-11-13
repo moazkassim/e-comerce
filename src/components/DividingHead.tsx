@@ -1,4 +1,4 @@
-import { useAppStore } from "./store";
+import { useAppStore } from "../stores/app-store";
 
 export default function DividingHead() {
   const selectedCategory = useAppStore((state) => state.selectedCategory);

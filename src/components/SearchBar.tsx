@@ -1,6 +1,6 @@
 import { Search, CircleX } from "lucide-react";
 
-import { useAppStore } from "./store";
+import { useAppStore } from "../stores/app-store";
 import { useShallow } from "zustand/shallow";
 
 export default function SearchBar() {

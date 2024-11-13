@@ -4,7 +4,7 @@ import axios from "axios";
 import LoadingSpinner from "../LoadingSpinner";
 import ErrorViewer from "../ErrorViewer";
 
-import { useAppStore } from "../store";
+import { useAppStore } from "../../stores/app-store";
 interface ProductInterface {
   id: number;
   title: string;

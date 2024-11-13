@@ -4,7 +4,7 @@ import NanMenu from "../Menu/NavMenu";
 import SearchBar from "../SearchBar";
 import { ShoppingCart, User } from "lucide-react";
 import Cart from "../Cart/Cart";
-import { useAppStore } from "../store";
+import { useAppStore } from "../../stores/app-store";
 
 import { useState } from "react";
 
