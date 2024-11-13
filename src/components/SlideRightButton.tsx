@@ -1,13 +1,10 @@
 import React from "react";
+import { Slide } from "../stores/app-store";
+
 interface SlideLeftButtonProps {
   imageIndex: number;
-  setImageIndex: (value: number | ((value: number) => number)) => void;
-  imageSliderArr: {
-    src: string;
-    ket: number;
-    description: string;
-    details: string;
-  }[];
+  setImageIndex: (prevIndex: number | ((prevIndex: number) => number)) => void;
+  imageSliderArr: Slide[];
 }
 export default function SlideRightButton(props: SlideLeftButtonProps) {
   const { imageIndex, setImageIndex, imageSliderArr } = props;

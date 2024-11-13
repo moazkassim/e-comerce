@@ -1,6 +1,6 @@
-import { useAppStore } from "../../stores/app-store";
+import { Category, useAppStore } from "../../stores/app-store";
 interface CategoryLinkProps {
-  cate: string;
+  cate: Category;
 }
 const CategoryLink = (props: CategoryLinkProps) => {
   console.log(" i am from category link");

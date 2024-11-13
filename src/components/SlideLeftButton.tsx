@@ -1,15 +1,13 @@
-import { value } from "@material-tailwind/react/types/components/chip";
-import React from "react";
-
+interface Slide {
+  src: string;
+  ket: number;
+  description: string;
+  details: string;
+}
 interface SlideLeftButtonProps {
   imageIndex: number;
-  setImageIndex: (value: number | ((value: number) => number)) => void;
-  imageSliderArr: {
-    src: string;
-    ket: number;
-    description: string;
-    details: string;
-  }[];
+  setImageIndex: (prevIndex: number | ((prevIndex: number) => number)) => void;
+  imageSliderArr: Slide[];
 }
 // setImageIndex: (value: number | ((value: number) => number)) => void;
 export default function SlideLeftButton(props: SlideLeftButtonProps) {

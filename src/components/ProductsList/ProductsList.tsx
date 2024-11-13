@@ -4,28 +4,22 @@ import axios from "axios";
 import LoadingSpinner from "../LoadingSpinner";
 import ErrorViewer from "../ErrorViewer";
 
-import { useAppStore } from "../../stores/app-store";
-interface ProductInterface {
-  id: number;
-  title: string;
-  price: number;
-  category: string;
-  description: string;
-  image: string;
-}
+import { Product as IProduct, useAppStore } from "../../stores/app-store";
 
 export default function ProductsList() {
   console.log("iam from product list");
   const selectedCategory = useAppStore((state) => state.selectedCategory);
 
-  const [productsArray, setProductsArray] = useState<[]>([]);
+  const [productsArray, setProductsArray] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (selectedCategory) {
       axios
-        .get(`https://fakestoreapi.com/products/category/${selectedCategory}`)
+        .get<IProduct[]>(
+          `https://fakestoreapi.com/products/category/${selectedCategory}`,
+        )
         .then((res) => {
           setProductsArray(res.data);
           setIsLoading(false);
@@ -72,7 +66,7 @@ export default function ProductsList() {
   }
   return (
     <section className="container-categories mb-20 flex w-full flex-row flex-wrap justify-center gap-12">
-      {productsArray.map((product: ProductInterface) => {
+      {productsArray.map((product: IProduct) => {
         return <Product key={product.id} product={product} />;
       })}
     </section>

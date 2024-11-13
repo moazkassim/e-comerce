@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useShallow } from "zustand/shallow";
-import { AppStore, useAppStore } from "../../stores/app-store";
+import { useAppStore } from "../../stores/app-store";
 import ErrorViewer from "../ErrorViewer";
 import LoadingSpinner from "../LoadingSpinner";
 interface LoginObject {
@@ -14,8 +14,8 @@ export default function Login() {
   ("hi i am from login");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const setIsAuthenticated = useAppStore(
-    (state: any) => state.setIsAuthenticated,
+  const toggleIsAuthenticated = useAppStore(
+    (state: any) => state.toggleIsAuthenticated,
   ) as () => void;
   let navigate = useNavigate();
   const [user, setUser] = useState<LoginObject>({
@@ -34,7 +34,7 @@ export default function Login() {
     await axios
       .post("https://fakestoreapi.com/auth/login", user)
       .then(function (response) {
-        setIsAuthenticated();
+        toggleIsAuthenticated();
         navigate("/");
         setIsLoading(false);
       })
