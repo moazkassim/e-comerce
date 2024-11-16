@@ -6,11 +6,11 @@ import { useShallow } from "zustand/react/shallow";
 interface BillingData {
   firstName: string | null;
   companyName?: string | null;
-  streetAddress: string | null;
+  address: string | null;
   apartment?: string | null;
-  town: string | null;
-  phoneNumber: number | null;
-  email: string | null;
+  city: string | null;
+  Phone: number | null;
+  Email: string | null;
   saveInformationStatus: boolean | null;
 }
 
@@ -26,11 +26,11 @@ export default function Checkout() {
   const [billingData, setBillingData] = useState<BillingData>({
     firstName: null,
     companyName: null,
-    streetAddress: null,
+    address: null,
     apartment: null,
-    town: null,
-    phoneNumber: null,
-    email: null,
+    city: null,
+    Phone: null,
+    Email: null,
     saveInformationStatus: false,
   });
   // const [checked, setChecked] = useState<boolean>(false);
@@ -91,14 +91,14 @@ export default function Checkout() {
           <div className="flex flex-col gap-2">
             <label
               className="cursor-pointer text-base text-[#7D8184]"
-              htmlFor="streetAddress"
+              htmlFor="address"
             >
               Street Address <span className="text-[#DB4444]">*</span>
             </label>
             <input
               onChange={handleChange}
-              id="streetAddress"
-              name="streetAddress"
+              id="address"
+              name="address"
               type="text"
               autoComplete="given-name"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -123,14 +123,15 @@ export default function Checkout() {
           <div className="flex flex-col gap-2">
             <label
               className="cursor-pointer text-base text-[#7D8184]"
-              htmlFor="town"
+              htmlFor="city"
             >
-              Town/City <span className="text-[#DB4444]">*</span>
+              Town/City
+              <span className="text-[#DB4444]">*</span>
             </label>
             <input
               onChange={handleChange}
-              name="town"
-              id="town"
+              name="city"
+              id="city"
               type="text"
               autoComplete="given-name"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -139,15 +140,15 @@ export default function Checkout() {
           <div className="flex flex-col gap-2">
             <label
               className="cursor-pointer text-base text-[#7D8184]"
-              htmlFor="phoneNumber"
+              htmlFor="Phone"
             >
               Phone Number <span className="text-[#DB4444]">*</span>
             </label>
             <input
               onChange={handleChange}
-              name="phoneNumber"
-              id="phoneNumber"
-              type="text"
+              name="Phone"
+              id="Phone"
+              type="tel"
               autoComplete="given-name"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
@@ -155,15 +156,15 @@ export default function Checkout() {
           <div className="flex flex-col gap-2">
             <label
               className="cursor-pointer text-base text-[#7D8184]"
-              htmlFor="email"
+              htmlFor="Email"
             >
               Email Address <span className="text-[#DB4444]">*</span>
             </label>
             <input
               onChange={handleChange}
-              name="email"
-              id="email"
-              type="email"
+              name="Email"
+              id="Email"
+              type="Email"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
