@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import SlideLeftButton from "../SlideLeftButton";
-import SlideRightButton from "../SlideRightButton";
+import SlideLeftButton from "./SlideLeftButton";
+import SlideRightButton from "./SlideRightButton";
 import ShoppingProducts from "../../../public/Home-img/ShoppingProducts.svg";
 import { useState } from "react";
 import { MoveRight } from "lucide-react";

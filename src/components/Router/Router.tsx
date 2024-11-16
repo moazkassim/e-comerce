@@ -12,10 +12,12 @@ import Contact from "../Contact/Contact";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NoMatch from "../NoMatch";
-import Checkout from "../Checkout/Checkout";
+// import Checkout from "../Checkout/Checkout";
 // import Navbar from "../Navbar/Navbar";
 // import Footer from "../Footer/Footer";
 import AuthRequired from "./AuthRequired";
+import ProductDetails from "../ProductsList/ProductDetails";
+import Checkout from "../Checkout/Checkout";
 export default function Router() {
   console.log("iam from router");
 
@@ -23,12 +25,13 @@ export default function Router() {
     <Routes>
       <Route path="/" element={<Home />}></Route>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="*" element={<NoMatch />} />
       <Route element={<AuthRequired />}>
         <Route path="/about" element={<About />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/products/:productId" element={<ProductDetails />}></Route>
         <Route path="/checkout" element={<Checkout />}></Route>
-        <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
   );

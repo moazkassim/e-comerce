@@ -7,7 +7,7 @@ import {
 
 import { Link } from "react-router-dom";
 import { useShallow } from "zustand/shallow";
-import { useAppStore } from "../stores/app-store";
+import { useAppStore } from "../../stores/app-store";
 
 export default function DropDownMenu() {
   console.log("hi i am from drop down menu");

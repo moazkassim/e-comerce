@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Product from "../Product";
+import Product from "./ProductCard";
 import axios from "axios";
 import LoadingSpinner from "../LoadingSpinner";
 import ErrorViewer from "../ErrorViewer";

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "../../../public/Navbar-img/Logo.png";
-import NanMenu from "../Menu/NavMenu";
-import SearchBar from "../SearchBar";
+import NanMenu from "./NavMenu";
+import SearchBar from "./SearchBar";
 import { ShoppingCart, User } from "lucide-react";
 import Cart from "../Cart/Cart";
 import { useAppStore } from "../../stores/app-store";
@@ -23,7 +23,7 @@ const CartViewer = () => {
   }
   return (
     <>
-      <Cart cartVisible={cartVisible} />
+      <Cart cartVisible={cartVisible} setCartVisible={setCartVisible} />
       <button
         className="relative flex cursor-pointer items-center justify-center p-1"
         onClick={toggleCartVisible}

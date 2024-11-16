@@ -4,8 +4,9 @@ import { Eye } from "lucide-react";
 import { Heart } from "lucide-react";
 import { toast } from "react-toastify";
 import View_Product from "./ViewProduct";
-import { Product as IProduct, useAppStore } from "../stores/app-store";
+import { Product as IProduct, useAppStore } from "../../stores/app-store";
 import { useShallow } from "zustand/shallow";
+import { Link } from "react-router-dom";
 
 interface ProductProps {
   product: IProduct;
@@ -29,7 +30,7 @@ export default function Product(props: ProductProps) {
   }
 
   return (
-    <div className="relative flex w-[270px] cursor-pointer flex-col items-center justify-center outline-white">
+    <div className="relative flex w-[270px] flex-col items-center justify-center outline-white">
       <View_Product
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
@@ -53,11 +54,13 @@ export default function Product(props: ProductProps) {
           />
         </div>
         <div className="flex h-64 flex-col items-center justify-between bg-transparent">
-          <img
-            src={product.image}
-            className="mt-5 h-[185px] w-[135px] bg-transparent object-scale-down"
-            alt={product.title + "image"}
-          />
+          <Link to={`/products/${product.id}`}>
+            <img
+              src={product.image}
+              className="mt-5 h-[185px] w-[135px] bg-transparent object-scale-down"
+              alt={product.title + "image"}
+            />
+          </Link>
           <button
             name="add-to-cart"
             className="block h-10 w-[270px] rounded-b-md bg-black text-base font-medium text-white hover:opacity-70"
@@ -69,9 +72,11 @@ export default function Product(props: ProductProps) {
       </div>
 
       <div className="flex w-full flex-col items-start justify-center gap-4 truncate px-1 py-4">
-        <p className="text-over text-base font-medium text-black">
-          {product.title.split(" ").slice(0, 4).join(" ")}
-        </p>
+        <Link to={`/products/${product.id}`}>
+          <p className="text-over cursor-pointer text-base font-medium text-black">
+            {product.title.split(" ").slice(0, 4).join(" ")}
+          </p>
+        </Link>
         <p className="text-base font-medium leading-5 text-[#DB4444]">
           {product.price} $
         </p>

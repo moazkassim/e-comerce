@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useShallow } from "zustand/shallow";
+
 import { useAppStore } from "../../stores/app-store";
-import ErrorViewer from "../ErrorViewer";
+
 import LoadingSpinner from "../LoadingSpinner";
-interface LoginObject {
+interface LoginData {
   username: string;
   password: string;
 }
@@ -14,40 +14,35 @@ export default function Login() {
   ("hi i am from login");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const toggleIsAuthenticated = useAppStore(
-    (state: any) => state.toggleIsAuthenticated,
-  ) as () => void;
+  const setUserToken = useAppStore((state) => state.setUserToken);
   let navigate = useNavigate();
-  const [user, setUser] = useState<LoginObject>({
+  const [user, setUser] = useState<LoginData>({
     username: "",
     password: "",
   });
-  function grtUserData(e: React.ChangeEvent<HTMLInputElement>) {
-    let myUser: LoginObject = { ...user };
-    myUser[e.target.name] = e.target.value;
+  function getUserData(e: React.ChangeEvent<HTMLInputElement>) {
+    let myUser: LoginData = { ...user };
+    const inputName = e.target.name as keyof LoginData;
+    myUser[inputName] = e.target.value;
     setUser(myUser);
   }
 
-  async function submitFormData(e: React.ChangeEvent<HTMLInputElement>) {
+  async function submitFormData(event: React.ChangeEvent<HTMLInputElement>) {
     setIsLoading(false);
-    e.preventDefault();
+    event.preventDefault();
     await axios
       .post("https://fakestoreapi.com/auth/login", user)
       .then(function (response) {
-        toggleIsAuthenticated();
+        setUserToken(response.data.token);
         navigate("/");
         setIsLoading(false);
       })
       .catch(function (error) {
         setIsLoading(false);
         setError(error.response.data);
-        console.log(error);
-        console.log("this is err", error);
       });
   }
-  // if (error) {
-  //   <ErrorViewer errorMessage={error} />;
-  // }
+
   if (isLoading) {
     return (
       <div className="my-20 flex items-center justify-center">
@@ -77,7 +72,7 @@ export default function Login() {
                 className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
                 placeholder="name@company.com"
                 required={true}
-                onChange={grtUserData}
+                onChange={getUserData}
               />
             </div>
             <div>
@@ -94,7 +89,7 @@ export default function Login() {
                 placeholder="••••••••"
                 className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
                 required={true}
-                onChange={grtUserData}
+                onChange={getUserData}
               />
             </div>
             <div className="flex items-center justify-between">

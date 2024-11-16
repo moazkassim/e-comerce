@@ -1,7 +1,7 @@
 import { create } from "zustand";
-// import { persist, devtools } from "zustand/middleware";
+import { persist, devtools } from "zustand/middleware";
 
-export const CART_LOCAL_STORAGE_KEY = "cart";
+export const LOCAL_STORAGE_KEY = "App";
 export interface Product {
   id: number;
   title: string;
@@ -15,8 +15,8 @@ export interface CartProduct extends Product {
 }
 export type Category = string;
 interface AppStore {
-  isAuthenticated: boolean;
-  toggleIsAuthenticated: () => void;
+  userToken: string | null;
+  setUserToken: (userToken: string) => void;
   searchedProduct: string;
   setSearchedProduct: (searchedTitle: string) => void;
   clearSearchedProduct: () => void;
@@ -31,95 +31,97 @@ interface AppStore {
 }
 
 export const useAppStore = create<AppStore>()(
-  // persist(
-  // devtools(
-  (set, get) => ({
-    isAuthenticated: false,
-    toggleIsAuthenticated: () => {
-      const previousIsAuthenticated = get().isAuthenticated;
-      set({ isAuthenticated: !previousIsAuthenticated });
-    },
-    searchedProduct: "",
-    setSearchedProduct: (searchedTitle) => {
-      set({ searchedProduct: searchedTitle });
-    },
-    clearSearchedProduct: () => {
-      set({
+  devtools(
+    persist(
+      (set, get) => ({
+        userToken: null,
+        setUserToken: (userToken) => {
+          set({ userToken });
+        },
         searchedProduct: "",
-      });
-    },
-    categories: [],
-    setCategories: (categories) => {
-      set({ categories });
-    },
-    // TODO: fetch first category dynamically
-    selectedCategory: "",
-    setSelectedCategory: (selectedCategoryName) => {
-      set({ selectedCategory: selectedCategoryName });
-    },
-    cartProducts: [],
-    addCartProduct: (product) => {
-      const previousCartProducts = get().cartProducts;
-      let newCartProducts = [];
-      let existingProductIndex = previousCartProducts.findIndex(
-        (prod) => prod.id == product.id,
-      );
-      if (existingProductIndex == -1) {
-        const newCartProduct = { ...product, quantity: 1 };
-        newCartProducts = [...previousCartProducts, newCartProduct];
-      } else {
-        const existingCartProduct = previousCartProducts[existingProductIndex];
-        const newProduct = {
-          ...existingCartProduct,
-          quantity: existingCartProduct.quantity + 1,
-        };
-        newCartProducts = [...previousCartProducts];
-        newCartProducts[existingProductIndex] = newProduct;
-      }
+        setSearchedProduct: (searchedProduct) => {
+          set({ searchedProduct });
+        },
+        clearSearchedProduct: () => {
+          set({
+            searchedProduct: "",
+          });
+        },
+        categories: [],
+        setCategories: (categories) => {
+          set({ categories });
+        },
+        // TODO: fetch first category dynamically
+        selectedCategory: "",
+        setSelectedCategory: (selectedCategory) => {
+          set({ selectedCategory });
+        },
+        cartProducts: [],
+        addCartProduct: (product) => {
+          const previousCartProducts = get().cartProducts;
+          let newCartProducts = [];
+          let existingProductIndex = previousCartProducts.findIndex(
+            (prod) => prod.id == product.id,
+          );
+          if (existingProductIndex == -1) {
+            const newCartProduct = { ...product, quantity: 1 };
+            newCartProducts = [...previousCartProducts, newCartProduct];
+          } else {
+            const existingCartProduct =
+              previousCartProducts[existingProductIndex];
+            const newProduct = {
+              ...existingCartProduct,
+              quantity: existingCartProduct.quantity + 1,
+            };
+            newCartProducts = [...previousCartProducts];
+            newCartProducts[existingProductIndex] = newProduct;
+          }
 
-      set({
-        cartProducts: newCartProducts,
-      });
-    },
-    decreaseProductQuantity: (product) => {
-      const previousCartProducts = get().cartProducts;
-      let newCartProducts = [];
-      let existElementIndex = previousCartProducts.findIndex(
-        (prod) => prod.id == product.id,
-      );
-      const existingCartProduct = previousCartProducts[existElementIndex];
-      if (existingCartProduct.quantity > 1) {
-        const newProduct = {
-          ...existingCartProduct,
-          quantity: existingCartProduct.quantity - 1,
-        };
-        newCartProducts = [...previousCartProducts];
-        newCartProducts[existElementIndex] = newProduct;
-        set({
-          cartProducts: newCartProducts,
-        });
-      } else {
-        get().removeCartProduct(product);
-      }
-    },
-    // TODO remove cart item with id
-    removeCartProduct: (product) => {
-      const previousCartProducts = get().cartProducts;
-      const newCartProducts = previousCartProducts.filter(
-        (prod) => prod.id !== product.id,
-      );
-      set({
-        cartProducts: newCartProducts,
-      });
-    },
-  }),
+          set({
+            cartProducts: newCartProducts,
+          });
+        },
+        decreaseProductQuantity: (product) => {
+          const previousCartProducts = get().cartProducts;
+          let newCartProducts = [];
+          let existElementIndex = previousCartProducts.findIndex(
+            (prod) => prod.id == product.id,
+          );
+          const existingCartProduct = previousCartProducts[existElementIndex];
+          if (existingCartProduct.quantity > 1) {
+            const newProduct = {
+              ...existingCartProduct,
+              quantity: existingCartProduct.quantity - 1,
+            };
+            newCartProducts = [...previousCartProducts];
+            newCartProducts[existElementIndex] = newProduct;
+            set({
+              cartProducts: newCartProducts,
+            });
+          } else {
+            get().removeCartProduct(product);
+          }
+        },
+        // TODO remove cart item with id
+        removeCartProduct: (product) => {
+          const previousCartProducts = get().cartProducts;
+          const newCartProducts = previousCartProducts.filter(
+            (prod) => prod.id !== product.id,
+          );
+          set({
+            cartProducts: newCartProducts,
+          });
+        },
+      }),
 
-  // {
-  //   name: CART_LOCAL_STORAGE_KEY,
-  //   partialize: (state) => ({ cartProducts: state.cartProducts }),
-  // },
-
-  // ),
-  //   { enabled: false, name: "appStore" },
-  // ),
+      {
+        name: LOCAL_STORAGE_KEY,
+        partialize: (state) => ({
+          cartProducts: state.cartProducts,
+          userToken: state.userToken,
+        }),
+      },
+    ),
+    { enabled: false, name: "appStore" },
+  ),
 );

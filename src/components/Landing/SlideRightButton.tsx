@@ -1,6 +1,9 @@
-import React from "react";
-import { Slide } from "../stores/app-store";
-
+interface Slide {
+  src: string;
+  ket: number;
+  description: string;
+  details: string;
+}
 interface SlideLeftButtonProps {
   imageIndex: number;
   setImageIndex: (prevIndex: number | ((prevIndex: number) => number)) => void;

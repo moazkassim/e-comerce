@@ -5,7 +5,7 @@ import GoToTop from "./components/GoToTop";
 import { ToastContainer } from "react-toastify";
 // import Router, { router } from "./components/Router/Router.js";
 import Router from "./components/Router/Router.js";
-import { RouterProvider } from "react-router-dom";
+// import { RouterProvider } from "react-router-dom";
 // import { useAppStore } from "./components/store";
 // import { useShallow } from "zustand/shallow";
 // import { useEffect } from "react";

@@ -1,6 +1,6 @@
 import React from "react";
 interface ErrorViewerProps {
-  errorMessage: string;
+  errorMessage: string | null;
 }
 export default function ErrorViewer(props: ErrorViewerProps) {
   ("hi i am from error viewer");
