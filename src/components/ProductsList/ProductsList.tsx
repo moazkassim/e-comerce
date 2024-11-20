@@ -20,14 +20,9 @@ export default function ProductsList() {
       searchedProduct: state.searchedProduct,
     })),
   );
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(0);
   const [selectedFilter, setSelectedFilter] = useState("");
   // const [productsArray, setProductsArray] = useState<IProduct[]>([]);
-  const handleSelectChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ): void => {
-    setSelectedFilter(event.target.value);
-  };
   // useEffect(() => {
   //   if (selectedCategory) {
   //     axios
@@ -60,18 +55,26 @@ export default function ProductsList() {
   //       });
   //   }
   // }, [currentPage]);
+  const handleSelectChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ): void => {
+    setSelectedFilter(event.target.value);
+  };
   const {
     data = [],
     error,
     isLoading,
   }: UseFetchReturnData = useFetch(
-    `https://fakestoreapi.com/products/category/${selectedCategory}?sort=${selectedFilter}`,
-    // { enabled: selectedCategory ? true : false },
+    searchedProduct
+      ? "https://fakestoreapi.com/products"
+      : `https://fakestoreapi.com/products/category/${selectedCategory}?sort=${selectedFilter}`,
+
     { enabled: Boolean(selectedCategory) },
+    searchedProduct,
   );
 
   const pageArr = data?.filter(
-    (_, index) => index >= 8 * currentPage - 8 && index < currentPage * 8,
+    (_, index) => index >= 4 * currentPage && index < currentPage * 4 + 4,
   );
 
   if (error) {
