@@ -8,7 +8,7 @@ interface ViewProductProps {
   setIsModalOpen: (value: boolean | ((value: boolean) => boolean)) => void;
 }
 export default function ViewProduct(props: ViewProductProps) {
-  console.log("hi i am from view product");
+
   const { product, isModalOpen, setIsModalOpen } = props;
   const { addCartProduct } = useAppStore(
     useShallow((state) => ({

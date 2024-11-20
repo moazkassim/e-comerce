@@ -2,6 +2,7 @@ import CartProduct from "./CartProduct";
 
 import { useAppStore } from "../../stores/app-store";
 import { useNavigate } from "react-router-dom";
+import { useShallow } from "zustand/shallow";
 
 interface CartProps {
   cartVisible: boolean;
@@ -9,7 +10,12 @@ interface CartProps {
 }
 export default function Cart(props: CartProps) {
   console.log("hi i am from cart");
-  const cartProducts = useAppStore((state) => state.cartProducts);
+  const { cartProducts, userToken } = useAppStore(
+    useShallow((state) => ({
+      cartProducts: state.cartProducts,
+      userToken: state.userToken,
+    })),
+  );
   const { cartVisible, setCartVisible } = props;
   let navigate = useNavigate();
   if (!cartVisible) {
@@ -26,7 +32,11 @@ export default function Cart(props: CartProps) {
           <button
             className="my-5 h-[40px] w-[192px] rounded-md bg-[#DB4444] text-base font-medium text-white duration-100 ease-in hover:bg-[#B71F3B]"
             onClick={() => {
-              navigate("/checkout");
+              if (userToken) {
+                navigate("/checkout");
+              } else {
+                navigate("/login");
+              }
               setCartVisible(false);
             }}
           >

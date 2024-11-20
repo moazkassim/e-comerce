@@ -4,14 +4,14 @@ import { useAppStore } from "../../stores/app-store";
 import { Minus, Plus } from "lucide-react";
 import { useShallow } from "zustand/react/shallow";
 interface BillingData {
-  firstName: string | null;
-  companyName?: string | null;
-  address: string | null;
-  apartment?: string | null;
-  city: string | null;
-  Phone: number | null;
-  Email: string | null;
-  saveInformationStatus: boolean | null;
+  firstName: string;
+  companyName?: string;
+  address: string;
+  apartment?: string;
+  city: string;
+  Phone: number;
+  Email: string;
+  saveInformationStatus: boolean;
 }
 
 export default function Checkout() {
@@ -23,16 +23,17 @@ export default function Checkout() {
     })),
   );
 
-  const [billingData, setBillingData] = useState<BillingData>({
-    firstName: null,
-    companyName: null,
-    address: null,
-    apartment: null,
-    city: null,
-    Phone: null,
-    Email: null,
-    saveInformationStatus: false,
-  });
+  const [billingData, setBillingData] = useState<BillingData | null>(null);
+  // const [billingData, setBillingData] = useState<BillingData>({
+  //   firstName: null,
+  //   companyName: null,
+  //   address: null,
+  //   apartment: null,
+  //   city: null,
+  //   Phone: null,
+  //   Email: null,
+  //   saveInformationStatus: false,
+  // });
   // const [checked, setChecked] = useState<boolean>(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -146,8 +147,8 @@ export default function Checkout() {
             </label>
             <input
               onChange={handleChange}
-              name="Phone"
-              id="Phone"
+              name="phone"
+              id="phone"
               type="tel"
               autoComplete="given-name"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -162,9 +163,9 @@ export default function Checkout() {
             </label>
             <input
               onChange={handleChange}
-              name="Email"
-              id="Email"
-              type="Email"
+              name="email"
+              id="email"
+              type="email"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>

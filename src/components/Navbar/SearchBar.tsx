@@ -15,6 +15,7 @@ export default function SearchBar() {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchedProduct(e.target.value);
+
   }
   function handelSearchButton() {
     clearSearchedProduct();

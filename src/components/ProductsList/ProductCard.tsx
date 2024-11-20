@@ -12,7 +12,6 @@ interface ProductProps {
   product: IProduct;
 }
 export default function Product(props: ProductProps) {
-  console.log("hi i am from product");
   const { product } = props;
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

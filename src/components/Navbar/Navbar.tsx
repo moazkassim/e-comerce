@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import Logo from "../../../public/Navbar-img/Logo.png";
 import NanMenu from "./NavMenu";
 import SearchBar from "./SearchBar";
-import { ShoppingCart, User } from "lucide-react";
+import { LogOut, ShoppingCart, User } from "lucide-react";
 import Cart from "../Cart/Cart";
 import { useAppStore } from "../../stores/app-store";
 
 import { useState } from "react";
+import { useShallow } from "zustand/shallow";
 
 const CartCounter = () => {
   const cartProducts = useAppStore((state) => state.cartProducts);
@@ -38,15 +39,21 @@ const CartViewer = () => {
 
 export default function Navbar() {
   console.log("iam from navbar");
+  const { userToken, logOut } = useAppStore(
+    useShallow((state) => ({
+      userToken: state.userToken,
+      logOut: state.logOut,
+    })),
+  );
 
   return (
-    <nav className="relative flex w-full justify-center border-b border-[#7D8184] py-2">
+    <nav className="relative flex w-full justify-center border-b border-[#7D8184] py-2 md:h-[70px]">
       <div className="container flex w-full flex-col items-center justify-center">
-        <div className="flex w-full items-center justify-between gap-10">
+        <div className="flex w-screen items-center justify-between gap-10 px-1 md:w-full md:px-0">
           <Link to="/">
             <img
               src={Logo}
-              className="w-[84px]"
+              className="max-w-[65px]"
               alt="logo-image"
               aria-label="Home-page"
             />
@@ -86,26 +93,36 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center justify-center gap-8">
+            {" "}
             <CartViewer />
-
-            <Link
-              aria-label="login-page"
-              to="/login"
-              className="cursor-pointer"
-            >
-              <User
-                color="white"
-                className="rounded-full bg-[#DB4444] p-1"
-                size={30}
-              />
-            </Link>
-
+            {userToken == null ? (
+              <Link
+                aria-label="login-page"
+                to="/login"
+                className="cursor-pointer"
+              >
+                <User
+                  color="white"
+                  className="rounded-full bg-[#DB4444] p-1"
+                  size={30}
+                />
+              </Link>
+            ) : (
+              <>
+                <LogOut
+                  onClick={() => logOut()}
+                  color="white"
+                  className="cursor-pointer rounded-full bg-[#DB4444] p-1"
+                  size={30}
+                />
+              </>
+            )}
             <div className="flex justify-center lg:hidden">
               <NanMenu />
             </div>
           </div>
         </div>
-        <div className="w-full md:hidden">
+        <div className="w-screen px-1 md:hidden">
           <SearchBar />
         </div>
       </div>

@@ -17,6 +17,7 @@ export type Category = string;
 interface AppStore {
   userToken: string | null;
   setUserToken: (userToken: string) => void;
+  logOut: () => void;
   searchedProduct: string;
   setSearchedProduct: (searchedTitle: string) => void;
   clearSearchedProduct: () => void;
@@ -37,6 +38,9 @@ export const useAppStore = create<AppStore>()(
         userToken: null,
         setUserToken: (userToken) => {
           set({ userToken });
+        },
+        logOut: () => {
+          set({ userToken: null });
         },
         searchedProduct: "",
         setSearchedProduct: (searchedProduct) => {
