@@ -65,7 +65,7 @@ export default function NanMenu() {
           </MenuHandler>
 
           <MenuList className="z-50">
-            {categories.map((category, index) => {
+            {categories?.map((category, index) => {
               return (
                 <MenuItem key={index}>
                   <Link

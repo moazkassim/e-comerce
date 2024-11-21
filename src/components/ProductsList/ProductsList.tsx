@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Product from "./ProductCard";
 import LoadingSpinner from "../LoadingSpinner";
 import ErrorViewer from "../ErrorViewer";
@@ -9,11 +9,6 @@ import { ArrowDownUp } from "lucide-react";
 import { useShallow } from "zustand/shallow";
 
 export default function ProductsList() {
-  interface UseFetchReturnData {
-    data: null | IProduct[];
-    error: string | null;
-    isLoading: boolean;
-  }
   const { selectedCategory, searchedProduct } = useAppStore(
     useShallow((state) => ({
       selectedCategory: state.selectedCategory,
@@ -60,22 +55,23 @@ export default function ProductsList() {
   ): void => {
     setSelectedFilter(event.target.value);
   };
-  const {
-    data = [],
-    error,
-    isLoading,
-  }: UseFetchReturnData = useFetch(
+  const { data, error, isLoading } = useFetch<IProduct[]>(
     searchedProduct
       ? "https://fakestoreapi.com/products"
       : `https://fakestoreapi.com/products/category/${selectedCategory}?sort=${selectedFilter}`,
 
-    { enabled: Boolean(selectedCategory) },
-    searchedProduct,
+    { enabled: searchedProduct ? true : Boolean(selectedCategory) },
   );
+  let pageArr: IProduct[] = [];
 
-  const pageArr = data?.filter(
-    (_, index) => index >= 4 * currentPage && index < currentPage * 4 + 4,
-  );
+  pageArr =
+    data
+      ?.filter((ele) =>
+        ele.title.toLowerCase().includes(searchedProduct.toLowerCase()),
+      )
+      .filter(
+        (_, index) => index >= 4 * currentPage && index < currentPage * 4 + 4,
+      ) || [];
 
   if (error) {
     return <ErrorViewer errorMessage={error} />;
@@ -87,7 +83,7 @@ export default function ProductsList() {
       </div>
     );
   }
-  if (data.length == 0) {
+  if (data?.length == 0) {
     return <p>there is no products</p>;
   }
   return (
@@ -117,7 +113,7 @@ export default function ProductsList() {
         })}
       </div>
       <PaginationButtons
-        productsNumber={data.length}
+        productsNumber={data?.length || 0}
         setCurrentPage={setCurrentPage}
       />
     </div>

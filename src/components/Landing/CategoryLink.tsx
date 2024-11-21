@@ -3,7 +3,6 @@ interface CategoryLinkProps {
   cate: Category;
 }
 const CategoryLink = (props: CategoryLinkProps) => {
-  console.log(" i am from category link");
   const { cate } = props;
 
   const setSelectedCategory = useAppStore((state) => state.setSelectedCategory);
