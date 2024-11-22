@@ -38,7 +38,7 @@ const CartViewer = () => {
 };
 
 export default function Navbar() {
-  console.log("iam from navbar");
+
   const { userToken, logOut } = useAppStore(
     useShallow((state) => ({
       userToken: state.userToken,

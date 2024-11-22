@@ -1,5 +1,5 @@
 export default function LoadingSpinner() {
-  console.log("hi i am from Loading spinner");
+ 
   return (
     <svg
       className="animate-spin text-gray-300"

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Product from "./ProductCard";
 import LoadingSpinner from "../LoadingSpinner";
 import ErrorViewer from "../ErrorViewer";
@@ -7,6 +7,8 @@ import PaginationButtons from "./PaginationButtons";
 import { useFetch } from "../CustomHooks/useFetch";
 import { ArrowDownUp } from "lucide-react";
 import { useShallow } from "zustand/shallow";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "../../services/api/products";
 
 export default function ProductsList() {
   const { selectedCategory, searchedProduct } = useAppStore(
@@ -50,33 +52,44 @@ export default function ProductsList() {
   //       });
   //   }
   // }, [currentPage]);
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ["products", selectedCategory, selectedFilter, searchedProduct],
+    queryFn: () =>
+      getProducts(selectedCategory, selectedFilter, searchedProduct),
+  });
+
   const handleSelectChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ): void => {
     setSelectedFilter(event.target.value);
   };
-  const { data, error, isLoading } = useFetch<IProduct[]>(
-    searchedProduct
-      ? "https://fakestoreapi.com/products"
-      : `https://fakestoreapi.com/products/category/${selectedCategory}?sort=${selectedFilter}`,
+  console.log("the data is returned at the product list", data);
 
-    { enabled: searchedProduct ? true : Boolean(selectedCategory) },
-  );
+  // const { data, error, isLoading } = useFetch<IProduct[]>(
+  // searchedProduct
+  //   ? "https://fakestoreapi.com/products"
+  //   : `https://fakestoreapi.com/products/category/${selectedCategory}?sort=${selectedFilter}`,
 
+  //   { enabled: searchedProduct ? true : Boolean(selectedCategory) },
+  // );
+
+  // let pageArr: IProduct[] | null = [];
+  // pageArr =
+  //   data
+  //     ?.filter((ele) =>
+  //       ele.title.toLowerCase().includes(searchedProduct.toLowerCase()),
+  //     )
   let pageArr: IProduct[] | null = [];
   pageArr =
-    data
-      ?.filter((ele) =>
-        ele.title.toLowerCase().includes(searchedProduct.toLowerCase()),
-      )
-      .filter(
-        (_, index) => index >= 4 * currentPage && index < currentPage * 4 + 4,
-      ) || [];
+    data?.filter(
+      (_, index) => index >= 4 * currentPage && index < currentPage * 4 + 4,
+    ) || [];
 
   if (error) {
-    return <ErrorViewer errorMessage={error} />;
+    return <ErrorViewer errorMessage={error.message} />;
   }
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="my-20 flex items-center justify-center">
         <LoadingSpinner />

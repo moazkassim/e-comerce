@@ -9,7 +9,7 @@ interface CartProps {
   setCartVisible: (cartVisible: boolean) => void;
 }
 export default function Cart(props: CartProps) {
-  console.log("hi i am from cart");
+
   const { cartProducts, userToken } = useAppStore(
     useShallow((state) => ({
       cartProducts: state.cartProducts,

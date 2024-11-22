@@ -21,7 +21,7 @@ export default function CategoriesList() {
     queryKey: ["categories"],
     queryFn: getCategories,
   });
-  console.log("data", data);
+
   useEffect(() => {
     if (data) {
       setSelectedCategory(data[0]);

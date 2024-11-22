@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -6,14 +6,15 @@ import { Link } from "react-router-dom";
 import { useAppStore } from "../../stores/app-store";
 
 import LoadingSpinner from "../LoadingSpinner";
+import authenticate from "../../services/api/login";
+import { useMutation, useQuery } from "@tanstack/react-query";
 interface LoginData {
   username: string;
   password: string;
 }
 export default function Login() {
   ("hi i am from login");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+
   const setUserToken = useAppStore((state) => state.setUserToken);
   let navigate = useNavigate();
   const [user, setUser] = useState<LoginData>({
@@ -27,23 +28,15 @@ export default function Login() {
     setUser(myUser);
   }
 
-  async function submitFormData(event: React.ChangeEvent<HTMLInputElement>) {
-    setIsLoading(false);
-    event.preventDefault();
-    await axios
-      .post("https://fakestoreapi.com/auth/login", user)
-      .then(function (response) {
-        setUserToken(response.data.token);
-        navigate("/");
-        setIsLoading(false);
-      })
-      .catch(function (error) {
-        setIsLoading(false);
-        setError(error.response.data);
-      });
-  }
+  const { data, isPending, error, mutate } = useMutation({
+    mutationFn: authenticate,
+    onSuccess: (data) => {
+      setUserToken(data.token);
+      navigate("/");
+    },
+  });
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="my-20 flex items-center justify-center">
         <LoadingSpinner />
@@ -57,7 +50,13 @@ export default function Login() {
           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
             Sign in to your account
           </h1>
-          <form onSubmit={submitFormData} className="space-y-4 md:space-y-6">
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              mutate(user);
+            }}
+            className="space-y-4 md:space-y-6"
+          >
             <div>
               <label
                 htmlFor="email"
@@ -129,7 +128,7 @@ export default function Login() {
             >
               Sign in
             </button>
-            <p className="text-sm text-red-600">{error}</p>
+            <p className="text-sm text-red-600">{error?.message}</p>
             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
               Don’t have an account yet?
               <Link

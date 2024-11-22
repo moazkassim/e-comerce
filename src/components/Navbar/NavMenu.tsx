@@ -7,12 +7,10 @@ import {
 } from "@material-tailwind/react";
 import { AlignJustify } from "lucide-react";
 import { Link } from "react-router-dom";
-
 import { useShallow } from "zustand/shallow";
 import { useAppStore } from "../../stores/app-store";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import axios from "axios";
 import { getCategories } from "../../services/api/categories";
 
 const CategoryList = () => {
@@ -27,7 +25,7 @@ const CategoryList = () => {
     queryFn: getCategories,
   });
   if (isPending) return "Loading...";
-  console.log("this is the data from the query", data?.data);
+
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -54,7 +52,7 @@ const CategoryList = () => {
 };
 export default function NanMenu() {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  console.log("iam from navmenu");
+
 
   return (
     <Menu>

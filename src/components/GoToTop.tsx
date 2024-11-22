@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 export default function GoToTop() {
-  console.log("hi i am from goToTop");
   const [showButton, setShowButton] = useState<boolean>(false);
 
   // Throttled scroll handler to reduce performance overhead
