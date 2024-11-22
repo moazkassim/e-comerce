@@ -1,29 +1,39 @@
 import CategoryLink from "./CategoryLink";
-import { useEffect } from "react";
+
 import { useShallow } from "zustand/react/shallow";
 import axios from "axios";
-import { Category as ICategory, useAppStore } from "../../stores/app-store";
-import { useFetch } from "../CustomHooks/useFetch";
+import { useAppStore } from "../../stores/app-store";
+
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
+import {
+  getCategories,
+  Category as ICategory,
+} from "../../services/api/categories";
 export default function CategoriesList() {
-  const { categories, setCategories, setSelectedCategory } = useAppStore(
+  const { setSelectedCategory } = useAppStore(
     useShallow((state) => ({
       setSelectedCategory: state.setSelectedCategory,
-      categories: state.categories,
-      setCategories: state.setCategories,
     })),
   );
 
-  const { data, error, isLoading } = useFetch<ICategory[]>(
-    "https://fakestoreapi.com/products/categories",
-  );
-
+  const { isPending, error, data } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
+  console.log("data", data);
   useEffect(() => {
-    if (data && data.length > 0) {
-      setCategories(data);
-      const result = data[0];
-      setSelectedCategory(result);
+    if (data) {
+      setSelectedCategory(data[0]);
     }
   }, [data]);
+
+  if (isPending || !data) return "Loading...";
+  if (error) return "An error has occurred: " + error.message;
+
+  // const { data, error, isLoading } = useFetch<ICategory[]>(
+  //   "https://fakestoreapi.com/products/categories",
+  // );
 
   // useEffect(() => {
   //   axios
@@ -41,7 +51,7 @@ export default function CategoriesList() {
   // }, [setCategories]);
   return (
     <ul className="hidden w-48 flex-col gap-4 ease-linear lg:inline-flex">
-      {categories.map((cate: string) => {
+      {data?.map((cate: string) => {
         return <CategoryLink key={cate} cate={cate} />;
       })}
     </ul>

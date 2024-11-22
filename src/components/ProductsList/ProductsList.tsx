@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Product from "./ProductCard";
 import LoadingSpinner from "../LoadingSpinner";
 import ErrorViewer from "../ErrorViewer";
@@ -62,8 +62,8 @@ export default function ProductsList() {
 
     { enabled: searchedProduct ? true : Boolean(selectedCategory) },
   );
-  let pageArr: IProduct[] = [];
 
+  let pageArr: IProduct[] | null = [];
   pageArr =
     data
       ?.filter((ele) =>

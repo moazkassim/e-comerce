@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
+import { Category } from "../services/api/categories";
 
 export const LOCAL_STORAGE_KEY = "App";
 export interface Product {
@@ -13,7 +14,7 @@ export interface Product {
 export interface CartProduct extends Product {
   quantity: number;
 }
-export type Category = string;
+
 interface AppStore {
   userToken: string | null;
   setUserToken: (userToken: string) => void;
@@ -21,8 +22,7 @@ interface AppStore {
   searchedProduct: string;
   setSearchedProduct: (searchedTitle: string) => void;
   clearSearchedProduct: () => void;
-  categories: Category[];
-  setCategories: (categories: Category[]) => void;
+
   selectedCategory: Category;
   setSelectedCategory: (selectedCategoryName: Category) => void;
   cartProducts: CartProduct[];
@@ -51,10 +51,7 @@ export const useAppStore = create<AppStore>()(
             searchedProduct: "",
           });
         },
-        categories: [],
-        setCategories: (categories) => {
-          set({ categories });
-        },
+
         // TODO: fetch first category dynamically
         selectedCategory: "",
         setSelectedCategory: (selectedCategory) => {

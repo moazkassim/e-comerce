@@ -10,17 +10,52 @@ import { Link } from "react-router-dom";
 
 import { useShallow } from "zustand/shallow";
 import { useAppStore } from "../../stores/app-store";
-
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-export default function NanMenu() {
-  const [openMenu, setOpenMenu] = useState<boolean>(false);
-  console.log("iam from navmenu");
-  const { categories, setSelectedCategory } = useAppStore(
+import axios from "axios";
+import { getCategories } from "../../services/api/categories";
+
+const CategoryList = () => {
+  const { setSelectedCategory } = useAppStore(
     useShallow((state) => ({
-      categories: state.categories,
       setSelectedCategory: state.setSelectedCategory,
     })),
   );
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
+  if (isPending) return "Loading...";
+  console.log("this is the data from the query", data?.data);
+
+  if (error) return "An error has occurred: " + error.message;
+
+  return (
+    <>
+      {data?.map((category, index) => {
+        return (
+          <MenuItem key={index}>
+            <Link
+              to="/"
+              aria-label="set-category-name-title"
+              className="flex items-start text-black hover:text-red-500 md:gap-4"
+              onClick={() => {
+                setSelectedCategory(category);
+              }}
+            >
+              {category}
+            </Link>
+          </MenuItem>
+        );
+      })}
+    </>
+  );
+};
+export default function NanMenu() {
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  console.log("iam from navmenu");
+
   return (
     <Menu>
       <MenuHandler>
@@ -65,22 +100,7 @@ export default function NanMenu() {
           </MenuHandler>
 
           <MenuList className="z-50">
-            {categories?.map((category, index) => {
-              return (
-                <MenuItem key={index}>
-                  <Link
-                    to="/"
-                    aria-label="set-category-name-title"
-                    className="flex items-start text-black hover:text-red-500 md:gap-4"
-                    onClick={() => {
-                      setSelectedCategory(category);
-                    }}
-                  >
-                    {category}
-                  </Link>
-                </MenuItem>
-              );
-            })}
+            <CategoryList />
           </MenuList>
         </Menu>
       </MenuList>
