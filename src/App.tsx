@@ -1,48 +1,38 @@
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import GoToTop from "./components/GoToTop";
-// import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-// import Router, { router } from "./components/Router/Router.js";
 import Router from "./components/Router/Router.js";
-// import { RouterProvider } from "react-router-dom";
-// import { useAppStore } from "./components/store";
-// import { useShallow } from "zustand/shallow";
-// import { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function App() {
   console.log("hi i am from App");
-  // const { hydrateCartProducts } = useAppStore(
-  //   useShallow((state) => ({
-  //     hydrateCartProducts: state.hydrateCartProducts,
-  //   })),
-  // );
-  // useEffect(() => {
-  //   hydrateCartProducts();
-  // }, [hydrateCartProducts]);
-
+  const queryClient = new QueryClient();
   return (
-    <>
-      <Navbar />
-      <ToastContainer
-        position="bottom-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        closeOnClick={true}
-        pauseOnHover={false}
-        draggable={true}
-        progressStyle={undefined}
-        theme="light"
-      />
-      <GoToTop />
-      <div className="flex w-full items-center justify-center">
-        <div className="md:container">
-          <Router />
+    <QueryClientProvider client={queryClient}>
+      <>
+        <Navbar />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          closeOnClick={true}
+          pauseOnHover={false}
+          draggable={true}
+          progressStyle={undefined}
+          theme="light"
+        />
+        <GoToTop />
+        <div className="flex w-full items-center justify-center">
+          <div className="md:container">
+            <Router />
+          </div>
         </div>
-      </div>
-      <Footer />
-      {/* <RouterProvider router={router} />, */}
-    </>
+        <Footer />
+        {/* <RouterProvider router={router} />, */}
+      </>
+    </QueryClientProvider>
   );
 }
 

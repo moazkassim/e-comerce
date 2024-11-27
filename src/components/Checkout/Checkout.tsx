@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAppStore } from "../../stores/app-store";
 import { Minus, Plus } from "lucide-react";
 import { useShallow } from "zustand/react/shallow";
+import { useForm, SubmitHandler } from "react-hook-form";
 interface BillingData {
   firstName: string;
   companyName?: string;
@@ -22,8 +23,19 @@ export default function Checkout() {
       addCartProduct: state.addCartProduct,
     })),
   );
+  const onInvalid = (errors) => {
+    console.log(errors);
+  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<BillingData>({
+    mode: "onChange",
+    delayError: 400,
+  });
+  const onSubmit: SubmitHandler<BillingData> = (data) => console.log(data);
 
-  const [billingData, setBillingData] = useState<BillingData | null>(null);
   // const [billingData, setBillingData] = useState<BillingData>({
   //   firstName: null,
   //   companyName: null,
@@ -36,17 +48,17 @@ export default function Checkout() {
   // });
   // const [checked, setChecked] = useState<boolean>(false);
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    let myBillingData: BillingData = { ...billingData };
-    const inputName = e.target.name as keyof BillingData;
-    myBillingData[inputName] = e.target.value;
-    setBillingData(myBillingData);
-  }
+  // function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  //   let myBillingData: BillingData = { ...billingData };
+  //   const inputName = e.target.name as keyof BillingData;
+  //   myBillingData[inputName] = e.target.value;
+  //   setBillingData(myBillingData);
+  // }
   let totalPrice: number = 0;
   cartProducts.forEach((product) => {
     totalPrice += product.price * product.quantity;
   });
-  console.log("data is ", billingData);
+
   return (
     <div className="flex flex-col p-2">
       <p className="my-10 text-sm text-[#7D8184]">
@@ -56,7 +68,10 @@ export default function Checkout() {
       <h1 className="mb-10 text-4xl font-medium">Billing Details</h1>
       {/* first section */}
       <div className="mb-20 flex flex-col gap-20 md:flex-row md:justify-between">
-        <div className="flex flex-col gap-8 md:w-2/5">
+        <form
+          className="flex flex-col gap-8 md:w-2/5"
+          onSubmit={handleSubmit(onSubmit, onInvalid)}
+        >
           <div className="flex flex-col gap-2">
             <label
               className="cursor-pointer text-base text-[#7D8184]"
@@ -65,13 +80,26 @@ export default function Checkout() {
               First Name
             </label>
             <input
-              name="firstName"
               id="firstName"
-              onChange={handleChange}
               type="text"
-              autoComplete="given-name"
+              {...register("firstName", {
+                required: "First name is required",
+                minLength: {
+                  value: 4,
+                  message: "Password must not exceed 4 characters",
+                },
+                pattern: {
+                  value: /^[A-Za-z\s-]+$/,
+                  message: "Name must only contain letters, spaces, or hyphens",
+                },
+              })}
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
+            {errors.firstName && (
+              <span className="text-sm text-red-600">
+                {errors.firstName.message}
+              </span>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <label
@@ -81,14 +109,23 @@ export default function Checkout() {
               Company Name
             </label>
             <input
-              onChange={handleChange}
+              {...register("companyName", {
+                maxLength: {
+                  value: 12,
+                  message: "Company name must not exceed 100 characters",
+                },
+              })}
               id="companyName"
-              name="companyName"
               type="text"
-              autoComplete="given-name"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
+            {errors.companyName && (
+              <span className="text-sm text-red-600">
+                {errors.companyName.message}
+              </span>
+            )}
           </div>
+
           <div className="flex flex-col gap-2">
             <label
               className="cursor-pointer text-base text-[#7D8184]"
@@ -97,14 +134,29 @@ export default function Checkout() {
               Street Address <span className="text-[#DB4444]">*</span>
             </label>
             <input
-              onChange={handleChange}
+              {...register("address", {
+                required: "Address is required",
+                minLength: {
+                  value: 5,
+                  message: "Password must not exceed 4 characters",
+                },
+                pattern: {
+                  value: /^[A-Za-z0-9\s.,-]+$/,
+                  message:
+                    "Input must contain only alphanumeric characters, spaces, commas, periods, or hyphens",
+                },
+              })}
               id="address"
-              name="address"
               type="text"
-              autoComplete="given-name"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
+            {errors.address && (
+              <span className="text-sm text-red-600">
+                {errors.address.message}
+              </span>
+            )}
           </div>
+
           <div className="flex flex-col gap-2">
             <label
               className="cursor-pointer text-base text-[#7D8184]"
@@ -113,14 +165,25 @@ export default function Checkout() {
               Apartment, floor, etc. (optional)
             </label>
             <input
-              onChange={handleChange}
+              {...register("apartment", {
+                pattern: {
+                  value: /^[A-Za-z0-9\s.,-]+$/,
+                  message:
+                    "This field can only contain alphanumeric characters, spaces, commas, periods, and hyphens",
+                },
+              })}
               id="apartment"
-              name="apartment"
               type="text"
               autoComplete="given-name"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
+            {errors.apartment && (
+              <span className="text-sm text-red-600">
+                {errors.apartment.message}
+              </span>
+            )}
           </div>
+
           <div className="flex flex-col gap-2">
             <label
               className="cursor-pointer text-base text-[#7D8184]"
@@ -130,14 +193,31 @@ export default function Checkout() {
               <span className="text-[#DB4444]">*</span>
             </label>
             <input
-              onChange={handleChange}
+              {...register("city", {
+                required: " This field is required",
+                minLength: {
+                  value: 2,
+                  message: "Must not exceed 4 characters",
+                },
+                pattern: {
+                  value: /^[A-Za-z\s-]+$/,
+                  message:
+                    "City or town can only contain alphabetic characters, spaces, and hyphens",
+                },
+              })}
               name="city"
               id="city"
               type="text"
               autoComplete="given-name"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
+            {errors.city && (
+              <span className="text-sm text-red-600">
+                {errors.city.message}
+              </span>
+            )}
           </div>
+
           <div className="flex flex-col gap-2">
             <label
               className="cursor-pointer text-base text-[#7D8184]"
@@ -146,14 +226,25 @@ export default function Checkout() {
               Phone Number <span className="text-[#DB4444]">*</span>
             </label>
             <input
-              onChange={handleChange}
-              name="phone"
+              {...register("Phone", {
+                required: "Phone number is required",
+                pattern: {
+                  value: /^(010|011|012|015)[0-9]{8}$/,
+                  message: "Enter a valid Egyptian phone number",
+                },
+              })}
               id="phone"
               type="tel"
               autoComplete="given-name"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
+            {errors.Phone && (
+              <span className="text-sm text-red-600">
+                {errors.Phone.message}
+              </span>
+            )}
           </div>
+
           <div className="flex flex-col gap-2">
             <label
               className="cursor-pointer text-base text-[#7D8184]"
@@ -162,20 +253,32 @@ export default function Checkout() {
               Email Address <span className="text-[#DB4444]">*</span>
             </label>
             <input
-              onChange={handleChange}
-              name="email"
-              id="email"
+              {...register("Email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Enter a valid email address",
+                },
+              })}
+              id="Email"
               type="email"
               className="h-[50px] w-full rounded-md border bg-[#F5F5F5] p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
+            {errors.Email && (
+              <span className="text-sm text-red-600">
+                {errors.Email.message}
+              </span>
+            )}
           </div>
+
           <div className="flex flex-row items-center justify-start gap-4">
             <input
+              {...register("saveInformationStatus", {
+                required: "You must accept the terms",
+              })}
               className="peer relative h-5 w-5 shrink-0 cursor-pointer appearance-none rounded-sm border border-gray-500 bg-white checked:border-0 checked:bg-red-500"
               type="checkbox"
               id="saveInformationStatus"
-              name="saveInformationStatus"
-              onChange={handleChange}
             />
             <svg
               className="pointer-events-none absolute hidden h-5 w-5 stroke-white outline-none peer-checked:block"
@@ -192,8 +295,19 @@ export default function Checkout() {
             <label htmlFor="saveInformationStatus" className="text-base">
               Save this information for faster check-out next time
             </label>
+            {errors.saveInformationStatus && (
+              <span className="text-sm text-red-600">
+                {errors.saveInformationStatus.message}
+              </span>
+            )}
           </div>
-        </div>
+          <button
+            className="h-[44px] w-[192px] rounded-md bg-[#DB4444] text-base font-medium text-white duration-100 ease-in hover:bg-[#B71F3B]"
+            type="submit"
+          >
+            Save Data
+          </button>
+        </form>
 
         {/* second section */}
         <div className="flex flex-col gap-8 md:w-2/5">
@@ -201,7 +315,10 @@ export default function Checkout() {
           <div className="flex flex-col gap-8">
             {cartProducts.map((product) => {
               return (
-                <div className="flex flex-row items-center justify-between">
+                <div
+                  className="flex flex-row items-center justify-between"
+                  key={product.id}
+                >
                   <div className="flex items-center justify-center gap-4">
                     <div className="min-w-[54px]">
                       <img
