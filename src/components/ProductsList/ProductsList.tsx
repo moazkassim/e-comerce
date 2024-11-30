@@ -19,44 +19,12 @@ export default function ProductsList() {
   );
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [selectedFilter, setSelectedFilter] = useState("");
-  // const [productsArray, setProductsArray] = useState<IProduct[]>([]);
-  // useEffect(() => {
-  //   if (selectedCategory) {
-  //     axios
-  //       .get<IProduct[]>(
-  //         `https://fakestoreapi.com/products/category/${selectedCategory}`,
-  //       )
-  //       .then((res) => {
-  //         setProductsArray(res.data);
-  //         setIsLoading(false);
-  //       })
-  //       .catch(function (error) {
-  //         setIsLoading(false);
-  //         setError(error.message);
-  //       });
-  //   }
-  // }, [selectedCategory, setProductsArray, currentPage]);
-
-  // useEffect(() => {
-  //   if (selectedCategory) {
-  //     axios
-  //       .get<IProduct[]>("https://fakestoreapi.com/products")
-  //       .then((res) => {
-  //         setPosts(res.data);
-  //         setIsLoading(false);
-  //         setPagesNumber(Math.ceil(posts.length / postsPerPage));
-  //       })
-  //       .catch(function (error) {
-  //         setIsLoading(false);
-  //         setError(error.message);
-  //       });
-  //   }
-  // }, [currentPage]);
-
   const { isPending, error, data } = useQuery({
     queryKey: ["products", selectedCategory, selectedFilter, searchedProduct],
     queryFn: () =>
       getProducts(selectedCategory, selectedFilter, searchedProduct),
+    retry: 3,
+    retryDelay: 1000,
   });
 
   const handleSelectChange = (
@@ -64,22 +32,15 @@ export default function ProductsList() {
   ): void => {
     setSelectedFilter(event.target.value);
   };
-  console.log("the data is returned at the product list", data);
 
   // const { data, error, isLoading } = useFetch<IProduct[]>(
-  // searchedProduct
-  //   ? "https://fakestoreapi.com/products"
-  //   : `https://fakestoreapi.com/products/category/${selectedCategory}?sort=${selectedFilter}`,
+  //   searchedProduct
+  //     ? "https://fakestoreapi.com/products"
+  //     : `https://fakestoreapi.com/products/category/${selectedCategory}?sort=${selectedFilter}`,
 
   //   { enabled: searchedProduct ? true : Boolean(selectedCategory) },
   // );
 
-  // let pageArr: IProduct[] | null = [];
-  // pageArr =
-  //   data
-  //     ?.filter((ele) =>
-  //       ele.title.toLowerCase().includes(searchedProduct.toLowerCase()),
-  //     )
   let pageArr: IProduct[] | null = [];
   pageArr =
     data?.filter(
