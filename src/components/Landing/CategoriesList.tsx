@@ -1,15 +1,18 @@
-import CategoryLink from "./CategoryLink";
-
 import { useShallow } from "zustand/react/shallow";
-import axios from "axios";
 import { useAppStore } from "../../stores/app-store";
-
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import {
   getCategories,
   Category as ICategory,
 } from "../../services/api/categories";
+import * as React from "react";
+import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+
 export default function CategoriesList() {
   const { setSelectedCategory } = useAppStore(
     useShallow((state) => ({
@@ -49,11 +52,34 @@ export default function CategoriesList() {
   //       console.log(error);
   //     });
   // }, [setCategories]);
+  // return (
+  //   <ul className="hidden min-w-48 flex-col gap-4 ease-linear lg:inline-flex">
+  //     {data?.map((cate: string) => {
+  //       return <CategoryLink key={cate} cate={cate} />;
+  //     })}
+  //   </ul>
+  // );
   return (
-    <ul className="hidden w-48 flex-col gap-4 ease-linear lg:inline-flex">
+    <List
+      sx={{
+        width: "100%",
+        maxWidth: 260,
+
+        display: { xs: "none", lg: "inline-block" },
+      }}
+      component="nav"
+      aria-labelledby="nested-list-subheader"
+    >
       {data?.map((cate: string) => {
-        return <CategoryLink key={cate} cate={cate} />;
+        return (
+          <ListItemButton onClick={() => setSelectedCategory(cate)} key={cate}>
+            <ListItemText primary={cate} />
+            <ListItemIcon>
+              <ArrowForwardIosSharpIcon />
+            </ListItemIcon>
+          </ListItemButton>
+        );
       })}
-    </ul>
+    </List>
   );
 }

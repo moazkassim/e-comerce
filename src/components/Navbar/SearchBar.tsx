@@ -1,9 +1,11 @@
-import { Search, CircleX } from "lucide-react";
-
 import { useAppStore } from "../../stores/app-store";
 import { useShallow } from "zustand/shallow";
-
-export default function SearchBar() {
+import SearchIcon from "@mui/icons-material/Search";
+import CancelIcon from "@mui/icons-material/Cancel";
+import * as React from "react";
+import { Box } from "@mui/system";
+import { IconButton, Input } from "@mui/material";
+export default function InputAdornments() {
   const { searchedProduct, setSearchedProduct, clearSearchedProduct } =
     useAppStore(
       useShallow((state) => ({
@@ -12,33 +14,36 @@ export default function SearchBar() {
         clearSearchedProduct: state.clearSearchedProduct,
       })),
     );
-
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchedProduct(e.target.value);
-
   }
   function handelSearchButton() {
     clearSearchedProduct();
   }
   return (
-    <div className="flex w-full items-center justify-center rounded border bg-[#F5F5F5] focus-within:border-black">
-      <input
-        className="w-full bg-transparent px-3 py-2 focus:outline-none"
-        placeholder="Search for products"
-        aria-label="Search"
-        onChange={handleChange}
-        value={searchedProduct}
-        type="search"
-      />
-      {searchedProduct ? (
-        <button className="px-3" onClick={handelSearchButton}>
-          <CircleX className="" />
-        </button>
-      ) : (
-        <div className="px-3">
-          <Search />
-        </div>
-      )}
-    </div>
+    <Input
+      sx={{
+        width: "100%",
+        borderRadius: "0.25rem",
+        padding: "5px",
+        color: "White",
+      }}
+      type="text"
+      value={searchedProduct}
+      onChange={handleChange}
+      endAdornment={
+        <IconButton
+          size="small"
+          aria-label="search"
+          onClick={handelSearchButton}
+        >
+          {searchedProduct ? (
+            <CancelIcon fontSize="small" />
+          ) : (
+            <SearchIcon fontSize="small" />
+          )}
+        </IconButton>
+      }
+    />
   );
 }

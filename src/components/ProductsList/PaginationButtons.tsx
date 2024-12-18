@@ -1,5 +1,5 @@
-import { Indent } from "lucide-react";
-
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 interface PaginationButtonsProps {
   productsNumber: number;
   setCurrentPage: (currentPage: number) => void;
@@ -8,23 +8,33 @@ interface PaginationButtonsProps {
 export default function PaginationButtons(props: PaginationButtonsProps) {
   const { productsNumber, setCurrentPage } = props;
   let pageNumber = Math.ceil(productsNumber / 4);
-  function generateArray(pagesNumber: number) {
-    return Array.from({ length: pagesNumber }, (_, index) => index + 1);
-  }
-  let arr = generateArray(pageNumber);
+
   return (
-    <div className="my-3 flex w-full flex-wrap items-center justify-center gap-2">
-      {arr.map((ele) => {
+    <Stack spacing={4} sx={{ margin: 2 }}>
+      {/* {arr.map((ele) => {
         return (
-          <button
+          <Button
+            sx={{
+              maxWidth: "10px",
+              color: "white",
+              // bgcolor: "black",
+            }}
+            variant="contained"
             key={ele}
-            className="rounded bg-blue-500 px-3 py-1 text-white"
             onClick={() => setCurrentPage(ele - 1)}
           >
             {ele}
-          </button>
+          </Button>
         );
-      })}
-    </div>
+      })} */}
+      <Pagination
+        count={pageNumber}
+        variant="outlined"
+        shape="rounded"
+        onChange={(e, value) => {
+          setCurrentPage(value - 1);
+        }}
+      />
+    </Stack>
   );
 }

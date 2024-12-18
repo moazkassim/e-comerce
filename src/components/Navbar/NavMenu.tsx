@@ -26,7 +26,6 @@ const CategoryList = () => {
   });
   if (isPending) return "Loading...";
 
-
   if (error) return "An error has occurred: " + error.message;
 
   return (
@@ -52,7 +51,6 @@ const CategoryList = () => {
 };
 export default function NanMenu() {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-
 
   return (
     <Menu>

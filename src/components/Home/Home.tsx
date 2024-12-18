@@ -1,5 +1,5 @@
 import Landing from "../Landing/Landing";
-import DividingHead from "../DividingHead";
+import { DividingHead } from "../DividingHead";
 import ProductsList from "../ProductsList/ProductsList";
 
 export default function Home() {

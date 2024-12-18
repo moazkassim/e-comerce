@@ -1,16 +1,34 @@
-import BrandingSection from "./BrandingSection";
+import { Box, Container, Divider } from "@mui/material";
 import CategoriesList from "./CategoriesList";
-
+import Carousel from "./Carousel";
 export default function Landing() {
   console.log("hi iam from landing");
   return (
-    <section className="flex w-full">
-      <div className="flex w-full md:mt-10">
-        <CategoriesList />
-        <div className="mx-10 hidden w-[0.5px] bg-black opacity-30 lg:flex"></div>
+    <Box sx={{}}>
+      <Container maxWidth={false}>
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            marginTop: { md: "2.5rem" },
+          }}
+        >
+          <CategoriesList />
 
-        <BrandingSection />
-      </div>
-    </section>
+          <Divider
+            orientation="vertical"
+            sx={{
+              marginRight: "2.5rem",
+              display: { xs: "none", lg: "flex" },
+              width: "0.5px",
+              backgroundColor: "black",
+              opacity: 0.3,
+            }}
+            flexItem
+          />
+          <Carousel />
+        </Box>
+      </Container>
+    </Box>
   );
 }

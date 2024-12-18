@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 import { Category } from "../services/api/categories";
+import { DarkMode } from "@mui/icons-material";
 
 export const LOCAL_STORAGE_KEY = "App";
 export interface Product {

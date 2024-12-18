@@ -4,7 +4,19 @@ import {
   useAppStore,
   CartProduct as ICartProduct,
 } from "../../stores/app-store";
-import { Plus, Minus } from "lucide-react";
+
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Typography,
+} from "@mui/material";
+
+import { Add, Remove } from "@mui/icons-material";
 
 interface CartProductProps {
   product: ICartProduct;
@@ -22,57 +34,129 @@ export default function CartProduct(props: CartProductProps) {
   const { product } = props;
 
   return (
-    <div
+    <Card
       key={product.id}
-      className="relative z-40 flex w-full min-w-96 flex-row items-center overflow-hidden border-solid"
+      sx={{
+        position: "relative",
+        zIndex: 40,
+        display: "flex",
+        width: "100%",
+        minWidth: "24rem",
+        flexDirection: "row",
+        alignItems: "center",
+        overflow: "hidden",
+        borderStyle: "solid",
+      }}
     >
-      <div className="border-r-[1px] border-solid p-2">
-        <img
-          className="h-[95px] w-[85px] object-scale-down"
-          src={product.image}
-          alt="cart-image"
-        />
-      </div>
-      <div className="items-between flex w-full flex-col justify-center gap-2 p-4">
-        <div className="flex flex-row items-start justify-between">
-          <div className="flex flex-col items-start justify-between gap-2">
-            <h1 className="text-md font-medium opacity-80">
-              {product.title.split(" ").slice(0, 2).join(" ")}
-            </h1>
-            <p className="text-sm opacity-60">Salmon</p>
-          </div>
-          <span className="font-semibold">${product.price}</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="flex flex-row items-center justify-between gap-8">
-            <Minus
-              size={16}
-              className="cursor-pointer"
-              onClick={() => {
-                decreaseProductQuantity(product);
-              }}
-            />
-            <span>{product.quantity}</span>
-            <Plus
-              size={16}
-              className="cursor-pointer"
-              onClick={() => {
-                addCartProduct(product);
-              }}
-            />
-          </div>
-          <button
-            name="remove-button"
-            onClick={() => {
-              removeCartProduct(product);
-              toast.success("Item removed");
+      <CardMedia
+        sx={{
+          padding: "10px",
+          maxWidth: "85px",
+        }}
+      >
+        <Box
+          sx={{
+            maxWidth: "85px",
+          }}
+        >
+          <img
+            className="max-h-[95px] max-w-[85px] object-scale-down"
+            src={product.image}
+            alt="cart-image"
+          />
+        </Box>
+      </CardMedia>
+      <CardContent
+        sx={{
+          display: "flex",
+          width: "100%",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "space-between",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              justifyContent: "space-between",
+              gap: "0.5rem",
             }}
-            className="bg-transparent text-sm font-medium text-[#FA3434]"
           >
-            Remove
-          </button>
-        </div>
-      </div>
-    </div>
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: "0.875rem",
+                fontWeight: 500,
+                opacity: 0.8,
+              }}
+            >
+              {product.title.split(" ").slice(0, 2).join(" ")}
+            </Typography>
+            <Typography variant="body2" sx={{ opacity: "0.6" }}>
+              Salmon
+            </Typography>
+          </Box>
+          <Typography sx={{ padding: "0px" }}>${product.price}</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <CardActions>
+              <IconButton
+                size="small"
+                onClick={() => {
+                  decreaseProductQuantity(product);
+                }}
+              >
+                <Remove />
+              </IconButton>
+            </CardActions>
+            <Typography>{product.quantity}</Typography>
+            <CardActions>
+              <IconButton
+                onClick={() => {
+                  addCartProduct(product);
+                }}
+              >
+                <Add />
+              </IconButton>
+            </CardActions>
+          </Box>
+          <CardActions>
+            <Button
+              name="remove-button"
+              onClick={() => {
+                removeCartProduct(product);
+                toast.success("Item removed");
+              }}
+            >
+              Remove
+            </Button>
+          </CardActions>
+        </Box>
+      </CardContent>
+    </Card>
   );
 }

@@ -4,11 +4,17 @@ import LoadingSpinner from "../LoadingSpinner";
 import ErrorViewer from "../ErrorViewer";
 import { Product as IProduct, useAppStore } from "../../stores/app-store";
 import PaginationButtons from "./PaginationButtons";
-import { useFetch } from "../CustomHooks/useFetch";
-import { ArrowDownUp } from "lucide-react";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { useShallow } from "zustand/shallow";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../services/api/products";
+import { Box, Container } from "@mui/material";
 
 export default function ProductsList() {
   const { selectedCategory, searchedProduct } = useAppStore(
@@ -23,30 +29,15 @@ export default function ProductsList() {
     queryKey: ["products", selectedCategory, selectedFilter, searchedProduct],
     queryFn: () =>
       getProducts(selectedCategory, selectedFilter, searchedProduct),
-    retry: 3,
-    retryDelay: 1000,
   });
-
-  const handleSelectChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ): void => {
+  const handleSelectChange = (event: SelectChangeEvent<string>): void => {
     setSelectedFilter(event.target.value);
   };
-
-  // const { data, error, isLoading } = useFetch<IProduct[]>(
-  //   searchedProduct
-  //     ? "https://fakestoreapi.com/products"
-  //     : `https://fakestoreapi.com/products/category/${selectedCategory}?sort=${selectedFilter}`,
-
-  //   { enabled: searchedProduct ? true : Boolean(selectedCategory) },
-  // );
-
   let pageArr: IProduct[] | null = [];
   pageArr =
     data?.filter(
       (_, index) => index >= 4 * currentPage && index < currentPage * 4 + 4,
     ) || [];
-
   if (error) {
     return <ErrorViewer errorMessage={error.message} />;
   }
@@ -61,35 +52,46 @@ export default function ProductsList() {
     return <p>there is no products</p>;
   }
   return (
-    <div className="flex flex-col items-center">
-      <div className="relative mb-10 flex h-12 w-40 overflow-hidden rounded-md bg-black">
-        <select
-          value={selectedFilter}
-          onChange={handleSelectChange}
-          className="flex-1 cursor-pointer appearance-none bg-transparent px-4 py-3 text-white outline-none"
+    <Box>
+      <Container
+        maxWidth={false}
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      >
+        <FormControl sx={{ width: "400px" }}>
+          <InputLabel id="demo-simple-select-label">Sort</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={selectedFilter}
+            label="Age"
+            onChange={handleSelectChange}
+          >
+            <MenuItem value={"asc"}>Desc</MenuItem>
+            <MenuItem value={"desc"}>Asc</MenuItem>
+          </Select>
+        </FormControl>
+
+        <Box
+          sx={{
+            marginBottom: "5rem",
+            display: "flex",
+            width: "100%",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "3rem",
+          }}
         >
-          <option className="bg-black" value="asc">
-            Asc
-          </option>
-          <option className="bg-black" value="desc">
-            Desc
-          </option>
-        </select>
+          {pageArr.map((product: IProduct) => {
+            return <Product key={product.id} product={product} />;
+          })}
+        </Box>
 
-        <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-white">
-          <ArrowDownUp />
-        </span>
-      </div>
-
-      <div className="container-categories mb-20 flex w-full flex-row flex-wrap justify-center gap-12">
-        {pageArr.map((product: IProduct) => {
-          return <Product key={product.id} product={product} />;
-        })}
-      </div>
-      <PaginationButtons
-        productsNumber={data?.length || 0}
-        setCurrentPage={setCurrentPage}
-      />
-    </div>
+        <PaginationButtons
+          productsNumber={data?.length || 0}
+          setCurrentPage={setCurrentPage}
+        />
+      </Container>
+    </Box>
   );
 }
