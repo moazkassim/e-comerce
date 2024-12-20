@@ -37,15 +37,10 @@ export default function CartProduct(props: CartProductProps) {
     <Card
       key={product.id}
       sx={{
-        position: "relative",
         zIndex: 40,
         display: "flex",
-        width: "100%",
+
         minWidth: "24rem",
-        flexDirection: "row",
-        alignItems: "center",
-        overflow: "hidden",
-        borderStyle: "solid",
       }}
     >
       <CardMedia
@@ -72,7 +67,6 @@ export default function CartProduct(props: CartProductProps) {
           width: "100%",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: "space-between",
         }}
       >
         <Box

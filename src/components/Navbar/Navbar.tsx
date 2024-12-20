@@ -1,7 +1,6 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
@@ -30,7 +29,6 @@ import InfoSharpIcon from "@mui/icons-material/InfoSharp";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "@/services/api/categories";
-import { useNavigate } from "react-router-dom";
 import { InboxIcon } from "lucide-react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
@@ -85,13 +83,18 @@ function Navbar() {
           }}
         >
           <Box>
-            <Link component={RouterLink} to="/" sx={{ p: 0, maxWidth: "65px" }}>
-              <img
-                src={Logo}
-                alt="logo-image"
-                aria-label="Home-page"
-                className="max-w-[65px]"
-              />
+            <Link
+              component={RouterLink}
+              to="/"
+              sx={{ textDecoration: "none", p: 0, maxWidth: "65px" }}
+            >
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ display: { xs: "none", sm: "block" } }}
+              >
+                Exclusive
+              </Typography>
             </Link>
           </Box>
 

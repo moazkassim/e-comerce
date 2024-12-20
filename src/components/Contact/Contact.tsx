@@ -1,60 +1,155 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import authenticate from "../../services/api/login";
+import { useMutation } from "@tanstack/react-query";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import {
+  Box,
+  Button,
+  Card,
+  CircularProgress,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
+
 export default function Contact() {
-  console.log("hi i am from contact");
+  let navigate = useNavigate();
+  interface Inputs {
+    email: string;
+    subject: string;
+    message: string;
+  }
+  const {
+    control,
+
+    handleSubmit,
+  } = useForm<Inputs>({
+    mode: "onChange",
+    delayError: 400,
+  });
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log("well done");
+
+  const {
+    isPending,
+
+    mutate,
+  } = useMutation({
+    mutationFn: authenticate,
+    onSuccess: (data) => {
+      navigate("/");
+    },
+  });
+
+  if (isPending) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
   return (
-    <section className="mb-8 mt-16 bg-white">
-      <div className="mx-auto max-w-screen-md px-4 py-8 lg:py-16">
-        <h2 className="mb-4 text-center text-4xl font-extrabold tracking-tight">
+    <Box sx={{ marginY: "30px" }}>
+      <Container maxWidth="md">
+        <Typography variant="h1" sx={{ textAlign: "center" }}>
           Contact Us
-        </h2>
-        <p className="mb-8 text-center font-light sm:text-xl lg:mb-16">
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{ textAlign: "center", marginY: "20px" }}
+        >
           Got a technical issue? Want to send feedback about a beta feature?
           Need details about our Business plan? Let us know.
-        </p>
-        <form action="#" className="space-y-8">
-          <div>
-            <label htmlFor="email" className="mb-2 block text-sm font-medium">
-              Your email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="focus:ring-primary-200 focus:border-primary-200 dark:focus:ring-primary-200 dark:focus:border-primary-200 dark:shadow-sm-light block w-full rounded-lg border border-gray-300 bg-[#F5F5F5] p-2.5 text-sm shadow-sm dark:border-gray-200 dark:placeholder-gray-400"
-              placeholder="name@flowbite.com"
-              required
+        </Typography>
+        <Card
+          component="form"
+          variant="outlined"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "30px",
+            padding: "40px",
+          }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Box sx={{ width: 1000, maxWidth: "100%" }}>
+            <Controller
+              control={control}
+              name="email"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextField
+                  required
+                  fullWidth
+                  onChange={onChange}
+                  label="Email"
+                  id="email-input"
+                  type="email"
+                  autoComplete="current-email"
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
             />
-          </div>
-          <div>
-            <label htmlFor="subject" className="mb-2 block text-sm font-medium">
-              Subject
-            </label>
-            <input
-              type="text"
-              id="subject"
-              className="focus:ring-primary-200 focus:border-primary-200 dark:focus:ring-primary-200 dark:focus:border-primary-200 dark:shadow-sm-light block w-full rounded-lg border bg-[#F5F5F5] p-3 text-sm shadow-sm dark:placeholder-gray-400"
-              placeholder="Let us know how we can help you"
-              required
+          </Box>
+          <Box sx={{ width: 1000, maxWidth: "100%" }}>
+            <Controller
+              control={control}
+              name="subject"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextField
+                  required
+                  fullWidth
+                  onChange={onChange}
+                  label="Subject"
+                  id="subject-input"
+                  type="text"
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
             />
-          </div>
-          <div className="sm:col-span-2">
-            <label htmlFor="message" className="mb-2 block text-sm font-medium">
-              Your message
-            </label>
-            <textarea
-              id="message"
-              rows={6}
-              className="focus:ring-primary-500 focus:border-primary-500 e dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full border border-gray-300 bg-[#F5F5F5] p-2.5 text-sm shadow-sm dark:border-gray-200 dark:placeholder-gray-400"
-              placeholder="Leave a comment..."
-            ></textarea>
-          </div>
-          <button
+          </Box>
+          <Box
+            sx={{
+              width: 1000,
+              maxWidth: "100%",
+            }}
+          >
+            <Controller
+              control={control}
+              name="message"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextField
+                  required
+                  fullWidth
+                  onChange={onChange}
+                  label="Message"
+                  id="message-input"
+                  type="text"
+                  autoComplete="current-message"
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
+            />
+          </Box>
+          <Button
+            sx={{ width: 150 }}
+            variant="contained"
             type="submit"
             name="submit-message"
-            className="hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 rounded-lg bg-black px-5 py-3 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 sm:w-fit"
           >
             Send message
-          </button>
-        </form>
-      </div>
-    </section>
+          </Button>
+        </Card>
+      </Container>
+    </Box>
   );
 }

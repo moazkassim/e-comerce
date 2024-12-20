@@ -12,9 +12,13 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
-body {
+html,
+body,
+#root {
   font-family: "Poppins", sans-serif;
+  height: 100%;
 }
+
 /* clears the 'X' from Chrome */
 
 [type="search"]::-webkit-search-cancel-button,

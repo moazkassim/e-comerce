@@ -79,6 +79,7 @@ export default function App() {
           disableOnInteraction: false,
         }}
         pagination={{
+          bulletClass: "",
           clickable: true,
         }}
         navigation={true}
@@ -87,7 +88,10 @@ export default function App() {
       >
         {imageSliderArr.map((ele) => {
           return (
-            <SwiperSlide key={ele.description}>
+            <SwiperSlide
+              key={ele.description}
+              onClick={() => console.log("first")}
+            >
               <BrandingSlide
                 src={ele.src}
                 description={ele.description}

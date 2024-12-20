@@ -9,7 +9,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 function App() {
   console.log("hi i am from App");
@@ -29,11 +29,17 @@ function App() {
           theme="light"
         />
         <GoToTop />
-        <div className="flex items-center justify-center">
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center", // Aligns items vertically at the center
+            justifyContent: "center", // Aligns items horizontally at the center
+          }}
+        >
           <Container maxWidth={false}>
             <Router />
           </Container>
-        </div>
+        </Box>
         <Footer />
       </>
     </QueryClientProvider>

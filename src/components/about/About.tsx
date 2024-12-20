@@ -5,7 +5,7 @@ export default function About() {
     <Box
       component="section"
       sx={{
-        marginY: "7rem",
+        marginY: "80px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

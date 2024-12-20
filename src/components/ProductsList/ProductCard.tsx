@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { Star } from "lucide-react";
 import { toast } from "react-toastify";
-import View_Product from "./ViewProduct";
 import { Product as IProduct, useAppStore } from "../../stores/app-store";
 import { useShallow } from "zustand/shallow";
 import {
@@ -14,10 +12,9 @@ import {
   ListItem,
   Typography,
 } from "@mui/material";
-import Modal from "@mui/material/Modal";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
-import { Favorite, RemoveRedEye } from "@mui/icons-material";
+import { Favorite, RemoveRedEye, Grade } from "@mui/icons-material";
 import ProductModal from "./ProductModal";
 interface ProductProps {
   product: IProduct;
@@ -126,7 +123,7 @@ export default function Product(props: ProductProps) {
           display: "flex",
           width: "100%",
           flexDirection: "column",
-          alignItems: "flex-start",
+          alignItems: "flex-Gradet",
           gap: "5px",
           paddingX: "10px",
         }}
@@ -168,9 +165,9 @@ export default function Product(props: ProductProps) {
           }}
         >
           <ListItem disablePadding sx={{ gap: "5px" }}>
-            <Star size={18} color="#FFAD33" className="fill-[#FFAD33]" />
-            <Star size={18} color="#FFAD33" className="fill-[#FFAD33]" />
-            <Star size={18} color="#FFAD33" className="fill-[#FFAD33]" />
+            <Grade sx={{ color: "#FFAD33" }} />
+            <Grade sx={{ color: "#FFAD33" }} />
+            <Grade sx={{ color: "#FFAD33" }} />
           </ListItem>
 
           <Typography

@@ -36,7 +36,6 @@ export default function Cart(props: CartProps) {
           md: "24rem",
         },
         flexDirection: "column",
-        borderRadius: "0.25rem",
       }}
     >
       {cartProducts.length > 0 ? (
@@ -52,20 +51,11 @@ export default function Cart(props: CartProps) {
             return <CartProduct key={index} product={product} />;
           })}
           <Button
+            variant="contained"
             sx={{
               my: "20px",
-
               width: "152px",
-              borderRadius: "2px",
-              backgroundColor: "#DB4444",
-              fontSize: "1rem",
-
               color: "white",
-              transitionDuration: "100ms",
-              transitionTimingFunction: "ease-in",
-              "&:hover": {
-                backgroundColor: "#B71F3B",
-              },
             }}
             onClick={() => {
               if (userToken) {
