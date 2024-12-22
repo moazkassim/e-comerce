@@ -58,7 +58,7 @@ export default function Contact() {
   return (
     <Box sx={{ marginY: "30px" }}>
       <Container maxWidth="md">
-        <Typography variant="h1" sx={{ textAlign: "center" }}>
+        <Typography variant="h2" sx={{ textAlign: "center" }}>
           Contact Us
         </Typography>
         <Typography

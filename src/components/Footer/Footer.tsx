@@ -56,16 +56,32 @@ export default function Footer() {
             gap: "25px",
           }}
         >
-          <Link aria-label="facebook" href="https://www.facebook.com/">
+          <Link
+            aria-label="facebook"
+            href="https://www.facebook.com/"
+            sx={{ textDecoration: "none", color: "#9e9e9e " }}
+          >
             <Facebook />
           </Link>
-          <Link href="https://www.instagram.com/" aria-label="instagram">
+          <Link
+            href="https://www.instagram.com/"
+            aria-label="instagram"
+            sx={{ textDecoration: "none", color: "#9e9e9e " }}
+          >
             <Instagram />
           </Link>
-          <Link href="https://www.twitter.com/" aria-label="twitter">
+          <Link
+            href="https://www.twitter.com/"
+            aria-label="twitter"
+            sx={{ textDecoration: "none", color: "#9e9e9e " }}
+          >
             <X />
           </Link>
-          <Link href="https://github.com/" aria-label="GitHub">
+          <Link
+            href="https://github.com/"
+            aria-label="GitHub"
+            sx={{ textDecoration: "none", color: "#9e9e9e " }}
+          >
             <GitHub />
           </Link>
         </Box>

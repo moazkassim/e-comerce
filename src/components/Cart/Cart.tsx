@@ -1,5 +1,4 @@
 import CartProduct from "./CartProduct";
-
 import { useAppStore } from "../../stores/app-store";
 import { useNavigate } from "react-router-dom";
 import { useShallow } from "zustand/shallow";
@@ -27,14 +26,14 @@ export default function Cart(props: CartProps) {
       sx={{
         position: "absolute",
         alignContent: "center",
-        right: "0px",
-        top: "55px",
+        right: {
+          md: "1px",
+          xs: "-140px",
+        },
+        top: "65px",
         zIndex: 50,
         display: "block",
-        width: {
-          xs: "100%",
-          md: "24rem",
-        },
+
         flexDirection: "column",
       }}
     >
@@ -55,7 +54,6 @@ export default function Cart(props: CartProps) {
             sx={{
               my: "20px",
               width: "152px",
-              color: "white",
             }}
             onClick={() => {
               if (userToken) {

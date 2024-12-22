@@ -17,6 +17,7 @@ import shoes22 from "../../../public/Home-img/shoes22.jpg";
 import laptop2 from "../../../public/Home-img/laptop2.jpg";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Box } from "@mui/material";
 
 export default function App() {
   const progressCircle = useRef<any>(null);
@@ -70,7 +71,7 @@ export default function App() {
     },
   ];
   return (
-    <>
+   
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -79,7 +80,6 @@ export default function App() {
           disableOnInteraction: false,
         }}
         pagination={{
-          bulletClass: "",
           clickable: true,
         }}
         navigation={true}
@@ -101,6 +101,6 @@ export default function App() {
           );
         })}
       </Swiper>
-    </>
+    
   );
 }

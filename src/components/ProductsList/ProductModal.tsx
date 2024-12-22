@@ -1,4 +1,3 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -6,17 +5,7 @@ import Modal from "@mui/material/Modal";
 import { Product as IProduct, useAppStore } from "@/stores/app-store";
 import { useShallow } from "zustand/shallow";
 import { toast } from "react-toastify";
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+
 interface IProductModal {
   handleClose: () => void;
   open: boolean;
@@ -31,7 +20,7 @@ export default function ProductModal(props: IProductModal) {
     })),
   );
   return (
-    <div>
+    <Box>
       <Modal
         open={open}
         onClose={handleClose}
@@ -67,7 +56,7 @@ export default function ProductModal(props: IProductModal) {
               flexDirection: "column",
               alignItems: "flex-start",
               justifyContent: "space-between",
-              gap: "6px",
+              gap: "16px",
               paddingX: "8px",
             }}
           >
@@ -76,7 +65,7 @@ export default function ProductModal(props: IProductModal) {
             </Typography>
             <Typography variant="body1">{product.category}</Typography>
             <Typography variant="body2">{product.description}</Typography>
-            <Typography variant="button" sx={{ color: "#e53935 " }}>
+            <Typography variant="button" color="primary">
               ${product.price}
             </Typography>
             <Box
@@ -88,7 +77,7 @@ export default function ProductModal(props: IProductModal) {
               }}
             >
               <Button
-                color="secondary"
+                variant="contained"
                 onClick={() => {
                   addCartProduct(product);
                   toast.success("Added to cart");
@@ -102,6 +91,6 @@ export default function ProductModal(props: IProductModal) {
           {/* Close Button */}
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 }

@@ -38,7 +38,7 @@ export default function Product(props: ProductProps) {
   const handleClose = () => setOpen(false);
 
   return (
-    <Card
+    <Box
       sx={{
         display: "flex",
         width: "270px",
@@ -48,11 +48,10 @@ export default function Product(props: ProductProps) {
     >
       <ProductModal open={open} handleClose={handleClose} product={product} />
 
-      <Box
+      <Card
         sx={{
           position: "relative",
           width: "270px",
-          backgroundColor: "#F5F5F5",
         }}
       >
         <Box
@@ -68,20 +67,19 @@ export default function Product(props: ProductProps) {
           }}
         >
           <IconButton>
-            <Favorite color="secondary" />
+            <Favorite color="primary" />
           </IconButton>
-          <IconButton>
-            <RemoveRedEye color="secondary" onClick={handleOpen} />
+          <IconButton onClick={handleOpen}>
+            <RemoveRedEye color="primary" />
           </IconButton>
         </Box>
         <Box
           sx={{
             display: "flex",
-            height: "16rem",
+            height: "270px",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "space-between",
-            backgroundColor: "transparent",
           }}
         >
           <Link
@@ -91,12 +89,13 @@ export default function Product(props: ProductProps) {
           >
             <CardMedia
               component="img"
+              color="inherit"
               alt={product.title + "image"}
               image={product.image}
               sx={{
                 marginTop: "1.25rem",
-                height: "185px",
-                width: "135px",
+                height: "175px",
+                width: "125px",
                 objectFit: "scale-down",
               }}
             />
@@ -107,7 +106,7 @@ export default function Product(props: ProductProps) {
             sx={{
               height: "2.5rem",
               width: "270px",
-              borderRadius: "3px",
+
               fontSize: "1rem",
             }}
             color="primary"
@@ -116,14 +115,14 @@ export default function Product(props: ProductProps) {
             Add To Cart
           </Button>
         </Box>
-      </Box>
+      </Card>
 
       <CardContent
         sx={{
           display: "flex",
           width: "100%",
           flexDirection: "column",
-          alignItems: "flex-Gradet",
+          alignItems: "flex-start",
           gap: "5px",
           paddingX: "10px",
         }}
@@ -134,6 +133,7 @@ export default function Product(props: ProductProps) {
           to={`/products/${product.id}`}
         >
           <Typography
+            color="secondary"
             gutterBottom
             variant="h5"
             component="p"
@@ -146,12 +146,7 @@ export default function Product(props: ProductProps) {
             {product.title.split(" ").slice(0, 4).join(" ")}
           </Typography>
         </Link>
-        <Typography
-          gutterBottom
-          variant="h6"
-          component="p"
-          sx={{ color: "#DB4444" }}
-        >
+        <Typography gutterBottom variant="body2" component="p">
           {product.price} $
         </Typography>
         <Box
@@ -179,6 +174,6 @@ export default function Product(props: ProductProps) {
           </Typography>
         </Box>
       </CardContent>
-    </Card>
+    </Box>
   );
 }

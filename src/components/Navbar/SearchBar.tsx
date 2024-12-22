@@ -3,7 +3,6 @@ import { useShallow } from "zustand/shallow";
 import SearchIcon from "@mui/icons-material/Search";
 import CancelIcon from "@mui/icons-material/Cancel";
 import * as React from "react";
-import { Box } from "@mui/system";
 import { IconButton, Input } from "@mui/material";
 export default function InputAdornments() {
   const { searchedProduct, setSearchedProduct, clearSearchedProduct } =
@@ -22,11 +21,11 @@ export default function InputAdornments() {
   }
   return (
     <Input
+      color="secondary"
       sx={{
         width: "100%",
         borderRadius: "0.25rem",
         padding: "5px",
-        color: "White",
       }}
       type="text"
       value={searchedProduct}

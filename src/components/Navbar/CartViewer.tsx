@@ -19,10 +19,11 @@ export const CartViewer = () => {
       color="primary"
       showZero
       max={999}
+      sx={{ position: "relative" }}
     >
       <Cart cartVisible={cartVisible} setCartVisible={setCartVisible} />
       <IconButton onClick={toggleCartVisible}>
-        <ShoppingCartIcon sx={{ color: "white" }} />
+        <ShoppingCartIcon color="secondary" />
       </IconButton>
     </Badge>
   );

@@ -33,11 +33,10 @@ export default function About() {
           }}
         >
           <Typography
-            component="h2"
+            variant="h4"
+            component="h1"
             sx={{
               marginY: "1.5rem",
-              fontSize: "1.5rem",
-              fontWeight: 800,
             }}
           >
             About us

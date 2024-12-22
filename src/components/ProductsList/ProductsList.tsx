@@ -6,10 +6,13 @@ import { Product as IProduct, useAppStore } from "../../stores/app-store";
 import PaginationButtons from "./PaginationButtons";
 import {
   FormControl,
+  Grid,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
+  Skeleton,
+  Typography,
 } from "@mui/material";
 import { useShallow } from "zustand/shallow";
 import { useQuery } from "@tanstack/react-query";
@@ -43,9 +46,30 @@ export default function ProductsList() {
   }
   if (isPending) {
     return (
-      <div className="my-20 flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
+      <Box
+        sx={{
+          marginY: "80px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "50px",
+        }}
+      >
+        {Array.from(new Array(4)).map((item) => {
+          return (
+            <Box key={item}>
+              <Skeleton
+                variant="rounded"
+                width={250}
+                height={150}
+                sx={{ borderRadius: "10px" }}
+              />
+              <Skeleton width={250} height={50} />
+              <Skeleton width={250} height={140} />
+            </Box>
+          );
+        })}
+      </Box>
     );
   }
   if (data?.length == 0) {
@@ -57,7 +81,7 @@ export default function ProductsList() {
         maxWidth={false}
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        <FormControl sx={{ width: "400px" }}>
+        <FormControl sx={{ width: "400px" }} color="inherit">
           <InputLabel id="demo-simple-select-label">Sort</InputLabel>
           <Select
             labelId="demo-simple-select-label"

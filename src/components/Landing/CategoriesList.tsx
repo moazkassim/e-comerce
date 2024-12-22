@@ -12,6 +12,7 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { Box, Paper, Skeleton } from "@mui/material";
 
 export default function CategoriesList() {
   const { setSelectedCategory } = useAppStore(
@@ -31,55 +32,56 @@ export default function CategoriesList() {
     }
   }, [data]);
 
-  if (isPending || !data) return "Loading...";
+  if (isPending || !data)
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          gap: "10px",
+          flexDirection: "column",
+          padding: "20px",
+        }}
+      >
+        <Skeleton variant="rectangular" width="260px" height="48px" />
+        <Skeleton variant="rectangular" width="260px" height="48px" />
+        <Skeleton variant="rectangular" width="260px" height="48px" />
+        <Skeleton variant="rectangular" width="260px" height="48px" />
+      </Box>
+    );
   if (error) return "An error has occurred: " + error.message;
 
-  // const { data, error, isLoading } = useFetch<ICategory[]>(
-  //   "https://fakestoreapi.com/products/categories",
-  // );
-
-  // useEffect(() => {
-  //   axios
-  //     .get<Category[]>("https://fakestoreapi.com/products/categories")
-  //     .then((res) => {
-  //       const result = res.data;
-  //       setCategories(result);
-
-  //       setSelectedCategory(result[0]);
-  //     })
-  //     .catch(function (error) {
-  //       // handle error
-  //       console.log(error);
-  //     });
-  // }, [setCategories]);
-  // return (
-  //   <ul className="hidden min-w-48 flex-col gap-4 ease-linear lg:inline-flex">
-  //     {data?.map((cate: string) => {
-  //       return <CategoryLink key={cate} cate={cate} />;
-  //     })}
-  //   </ul>
-  // );
   return (
-    <List
+    <Paper
+      elevation={1}
       sx={{
         width: "100%",
         maxWidth: 260,
-
         display: { xs: "none", lg: "inline-block" },
       }}
-      component="nav"
-      aria-labelledby="nested-list-subheader"
     >
-      {data?.map((cate: string) => {
-        return (
-          <ListItemButton onClick={() => setSelectedCategory(cate)} key={cate}>
-            <ListItemText primary={cate} />
-            <ListItemIcon>
-              <ArrowForwardIosSharpIcon />
-            </ListItemIcon>
-          </ListItemButton>
-        );
-      })}
-    </List>
+      <List
+        sx={{
+          width: "100%",
+          maxWidth: 260,
+          display: { xs: "none", lg: "inline-block" },
+        }}
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+      >
+        {data?.map((cate: string) => {
+          return (
+            <ListItemButton
+              onClick={() => setSelectedCategory(cate)}
+              key={cate}
+            >
+              <ListItemText primary={cate} />
+              <ListItemIcon>
+                <ArrowForwardIosSharpIcon />
+              </ListItemIcon>
+            </ListItemButton>
+          );
+        })}
+      </List>
+    </Paper>
   );
 }

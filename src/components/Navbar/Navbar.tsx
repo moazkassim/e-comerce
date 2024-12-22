@@ -7,7 +7,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
-import Logo from "../../../public/Navbar-img/Logo.png";
+
 import SearchBar from "./SearchBar";
 import { CartViewer } from "./CartViewer";
 import { useShallow } from "zustand/shallow";
@@ -15,7 +15,6 @@ import { useAppStore } from "@/stores/app-store";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link as RouterLink } from "react-router-dom";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
 import {
   Collapse,
   Link,
@@ -31,6 +30,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "@/services/api/categories";
 import { InboxIcon } from "lucide-react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import CustomizedSwitches from "./ThemeController";
 
 function Navbar() {
   const { userToken, logOut, setSelectedCategory } = useAppStore(
@@ -69,7 +69,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="transparent" sx={{ paddingY: "5px" }}>
       <Container maxWidth={false}>
         <Box
           flex={3}
@@ -88,11 +88,7 @@ function Navbar() {
               to="/"
               sx={{ textDecoration: "none", p: 0, maxWidth: "65px" }}
             >
-              <Typography
-                variant="h6"
-                component="div"
-                sx={{ display: { xs: "none", sm: "block" } }}
-              >
+              <Typography color="secondary" variant="h6" component="div">
                 Exclusive
               </Typography>
             </Link>
@@ -116,12 +112,12 @@ function Navbar() {
                 to={page.path}
                 key={page.component}
                 onClick={handleCloseNavMenu}
+                color="secondary"
                 sx={{
                   my: 2,
                   display: "block",
                   marginX: "10px",
                   textDecoration: "none",
-                  color: "white",
                 }}
               >
                 {page.component}
@@ -151,29 +147,24 @@ function Navbar() {
             <Box sx={{ gap: "1rem" }}>
               {userToken == null ? (
                 <Link
+                  color="secondary"
                   component={RouterLink}
                   aria-label="login-page"
                   to="/login"
                   sx={{
                     cursor: "pointer",
-                    color: "white",
                   }}
                 >
                   <PersonIcon />
                 </Link>
               ) : (
-                <LogoutIcon onClick={() => logOut()} />
+                <LogoutIcon
+                  onClick={() => logOut()}
+                  sx={{ cursor: "pointer" }}
+                />
               )}
             </Box>
-            <DarkModeIcon
-              onClick={() => {
-                console.log("first");
-                let darkMode = localStorage.getItem("darkMode");
-                let data = darkMode == "true" ? "false" : "true";
-                localStorage.setItem("darkMode", data);
-              }}
-              sx={{ cursor: "pointer" }}
-            />
+            <CustomizedSwitches />
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"

@@ -22,7 +22,6 @@ interface CartProductProps {
   product: ICartProduct;
 }
 export default function CartProduct(props: CartProductProps) {
-  console.log("iam from cart product");
   const { removeCartProduct, addCartProduct, decreaseProductQuantity } =
     useAppStore(
       useShallow((state) => ({
@@ -39,7 +38,6 @@ export default function CartProduct(props: CartProductProps) {
       sx={{
         zIndex: 40,
         display: "flex",
-
         minWidth: "24rem",
       }}
     >
@@ -54,11 +52,7 @@ export default function CartProduct(props: CartProductProps) {
             maxWidth: "85px",
           }}
         >
-          <img
-            className="max-h-[95px] max-w-[85px] object-scale-down"
-            src={product.image}
-            alt="cart-image"
-          />
+          <img src={product.image} alt="cart-image" />
         </Box>
       </CardMedia>
       <CardContent
