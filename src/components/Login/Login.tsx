@@ -108,6 +108,7 @@ export default function Login() {
                   <TextField
                     required
                     fullWidth
+                    color="secondary"
                     onChange={onChange}
                     label="Username"
                     id="username-input"
@@ -137,6 +138,7 @@ export default function Login() {
                   fieldState: { invalid, error },
                 }) => (
                   <TextField
+                    color="secondary"
                     fullWidth
                     label="Password"
                     id="outlined-password-input"
@@ -161,10 +163,16 @@ export default function Login() {
               }}
             >
               <FormControlLabel
+                color="secondary"
                 control={<Checkbox defaultChecked />}
                 label="Remember me"
               />
-              <Link component={RouterLink} to="/" aria-label="Home-page">
+              <Link
+                component={RouterLink}
+                to="/"
+                aria-label="Home-page"
+                color="secondary"
+              >
                 Forgot password?
               </Link>
             </FormGroup>
@@ -187,6 +195,7 @@ export default function Login() {
             <Typography variant="body2">
               Don’t have an account yet?
               <Link
+                color="secondary"
                 component={RouterLink}
                 to="/register"
                 aria-label="register-page"

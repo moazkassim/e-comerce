@@ -30,6 +30,10 @@ interface AppStore {
   addCartProduct: (product: Product) => void;
   decreaseProductQuantity: (cartProduct: CartProduct) => void;
   removeCartProduct: (product: Product) => void;
+  darkMode: boolean;
+  toggleDarkMode: () => void;
+  currentPage: number;
+  setCurrentPage: (value: number) => void;
 }
 
 export const useAppStore = create<AppStore>()(
@@ -113,6 +117,15 @@ export const useAppStore = create<AppStore>()(
           set({
             cartProducts: newCartProducts,
           });
+        },
+        darkMode: false,
+        toggleDarkMode: () => {
+          const previousDarkThemeStatus = get().darkMode;
+          set({ darkMode: !previousDarkThemeStatus });
+        },
+        currentPage: 0,
+        setCurrentPage: (value) => {
+          set({ currentPage: value });
         },
       }),
 

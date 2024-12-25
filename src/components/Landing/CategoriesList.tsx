@@ -15,9 +15,10 @@ import ListItemText from "@mui/material/ListItemText";
 import { Box, Paper, Skeleton } from "@mui/material";
 
 export default function CategoriesList() {
-  const { setSelectedCategory } = useAppStore(
+  const { setSelectedCategory, setCurrentPage } = useAppStore(
     useShallow((state) => ({
       setSelectedCategory: state.setSelectedCategory,
+      setCurrentPage: state.setCurrentPage,
     })),
   );
 
@@ -71,7 +72,10 @@ export default function CategoriesList() {
         {data?.map((cate: string) => {
           return (
             <ListItemButton
-              onClick={() => setSelectedCategory(cate)}
+              onClick={() => {
+                setSelectedCategory(cate);
+                setCurrentPage(0);
+              }}
               key={cate}
             >
               <ListItemText primary={cate} />

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Product from "./ProductCard";
-import LoadingSpinner from "../LoadingSpinner";
 import ErrorViewer from "../ErrorViewer";
 import { Product as IProduct, useAppStore } from "../../stores/app-store";
 import PaginationButtons from "./PaginationButtons";
@@ -12,7 +11,6 @@ import {
   Select,
   SelectChangeEvent,
   Skeleton,
-  Typography,
 } from "@mui/material";
 import { useShallow } from "zustand/shallow";
 import { useQuery } from "@tanstack/react-query";
@@ -20,13 +18,15 @@ import { getProducts } from "../../services/api/products";
 import { Box, Container } from "@mui/material";
 
 export default function ProductsList() {
-  const { selectedCategory, searchedProduct } = useAppStore(
+  
+  const { selectedCategory, searchedProduct, currentPage } = useAppStore(
     useShallow((state) => ({
       selectedCategory: state.selectedCategory,
       searchedProduct: state.searchedProduct,
+      currentPage: state.currentPage,
     })),
   );
-  const [currentPage, setCurrentPage] = useState<number>(0);
+
   const [selectedFilter, setSelectedFilter] = useState("");
   const { isPending, error, data } = useQuery({
     queryKey: ["products", selectedCategory, selectedFilter, searchedProduct],
@@ -111,10 +111,7 @@ export default function ProductsList() {
           })}
         </Box>
 
-        <PaginationButtons
-          productsNumber={data?.length || 0}
-          setCurrentPage={setCurrentPage}
-        />
+        <PaginationButtons productsNumber={data?.length || 0} />
       </Container>
     </Box>
   );

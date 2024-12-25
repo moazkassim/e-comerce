@@ -21,11 +21,12 @@ export default function InputAdornments() {
   }
   return (
     <Input
-      color="secondary"
+      fullWidth={true}
+      color="inherit"
       sx={{
-        width: "100%",
+      
         borderRadius: "0.25rem",
-        padding: "5px",
+        paddingY: "5px",
       }}
       type="text"
       value={searchedProduct}

@@ -1,13 +1,13 @@
+import { useAppStore } from "@/stores/app-store";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch, { SwitchProps } from "@mui/material/Switch";
-import { toggleDarkTheme } from "@/stores/Theme";
 
+import Switch, { SwitchProps } from "@mui/material/Switch";
+
+import { useShallow } from "zustand/shallow";
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
-  height: 34,
+  height: 30,
   padding: 7,
   "& .MuiSwitch-switchBase": {
     margin: 1,
@@ -32,8 +32,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
   "& .MuiSwitch-thumb": {
     backgroundColor: "#001e3c",
-    width: 32,
-    height: 32,
+    width: 28,
+    height: 28,
     "&::before": {
       content: "''",
       position: "absolute",
@@ -60,14 +60,23 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     }),
   },
 }));
-export default function CustomizedSwitches() {
-  return (
-    <FormGroup>
-      <FormControlLabel
-        onClick={() => toggleDarkTheme}
-        control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-        label=""
-      />
-    </FormGroup>
+
+export var darkMode = false;
+export const ThemeController = () => {
+  const { toggleDarkMode } = useAppStore(
+    useShallow((state) => ({
+      darkMode: state.darkMode,
+      toggleDarkMode: state.toggleDarkMode,
+    })),
   );
-}
+
+  return (
+    <MaterialUISwitch
+      color="secondary"
+      defaultChecked={false}
+      onChange={() => {
+        toggleDarkMode();
+      }}
+    />
+  );
+};

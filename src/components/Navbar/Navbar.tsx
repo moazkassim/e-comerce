@@ -30,7 +30,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "@/services/api/categories";
 import { InboxIcon } from "lucide-react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import CustomizedSwitches from "./ThemeController";
+import { ThemeController } from "./ThemeController";
 
 function Navbar() {
   const { userToken, logOut, setSelectedCategory } = useAppStore(
@@ -164,7 +164,7 @@ function Navbar() {
                 />
               )}
             </Box>
-            <CustomizedSwitches />
+            <ThemeController />
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -193,6 +193,7 @@ function Navbar() {
               >
                 {pages.map((page) => (
                   <Link
+                    color="secondary"
                     key={page.component}
                     component={RouterLink}
                     to={page.path}
@@ -231,6 +232,7 @@ function Navbar() {
                         return (
                           <ListItemButton sx={{ pl: 4 }} key={index}>
                             <Link
+                              color="secondary"
                               component={RouterLink}
                               to="/"
                               sx={{ textDecoration: "none" }}

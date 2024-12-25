@@ -11,10 +11,7 @@ let container = document.getElementById("root");
 createRoot(container as HTMLElement).render(
   <BrowserRouter>
     <StrictMode>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
+      <App />
     </StrictMode>
   </BrowserRouter>,
 );

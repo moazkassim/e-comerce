@@ -9,40 +9,85 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { Box, Container } from "@mui/material";
+import {
+  Box,
+  Container,
+  createTheme,
+  CssBaseline,
+  ThemeProvider,
+} from "@mui/material";
+import { useShallow } from "zustand/shallow";
+import { useAppStore } from "./stores/app-store";
 
 function App() {
-  console.log("hi i am from App");
   const queryClient = new QueryClient();
+  const { darkMode } = useAppStore(
+    useShallow((state) => ({
+      darkMode: state.darkMode,
+    })),
+  );
+  const darkTheme: {} = {
+    palette: {
+      mode: "dark",
+      common: { black: "#000", white: "#fff" },
+      primary: {
+        main: "#DB4444",
+      },
+
+      secondary: {
+        main: "#fff",
+      },
+    },
+  };
+  const lightTheme: {} = {
+    palette: {
+      mode: "light",
+      common: { black: "#000", white: "#fff" },
+      primary: {
+        main: "#DB4444",
+      },
+
+      secondary: {
+        main: "#000",
+      },
+    },
+  };
+
+  let FinalTheme = darkMode ? darkTheme : lightTheme;
+  const theme = createTheme(FinalTheme);
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <>
-        <Navbar />
-        <ToastContainer
-          position="bottom-right"
-          autoClose={2000}
-          hideProgressBar={false}
-          closeOnClick={true}
-          pauseOnHover={false}
-          draggable={true}
-          progressStyle={undefined}
-          theme="light"
-        />
-        <GoToTop />
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center", // Aligns items vertically at the center
-            justifyContent: "center", // Aligns items horizontally at the center
-          }}
-        >
-          <Container maxWidth={false}>
-            <Router />
-          </Container>
-        </Box>
-        <Footer />
-      </>
-    </QueryClientProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <QueryClientProvider client={queryClient}>
+        <>
+          <Navbar />
+          <ToastContainer
+            position="bottom-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            closeOnClick={true}
+            pauseOnHover={false}
+            draggable={true}
+            progressStyle={undefined}
+            theme="light"
+          />
+          <GoToTop />
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center", // Aligns items vertically at the center
+              justifyContent: "center", // Aligns items horizontally at the center
+            }}
+          >
+            <Container maxWidth={false}>
+              <Router />
+            </Container>
+          </Box>
+          <Footer />
+        </>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 
