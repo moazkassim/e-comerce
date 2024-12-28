@@ -1,6 +1,7 @@
 import Landing from "../Landing/Landing";
 import { DividingHead } from "../DividingHead";
 import ProductsList from "../ProductsList/ProductsList";
+import { Box } from "@mui/material";
 
 export default function Home() {
   console.log("hi i am from Home");
@@ -43,10 +44,10 @@ export default function Home() {
   //  ("searced arr from state outside", productsArray);
 
   return (
-    <main>
+    <Box component="main">
       <Landing />
       <DividingHead />
       <ProductsList />
-    </main>
+    </Box>
   );
 }

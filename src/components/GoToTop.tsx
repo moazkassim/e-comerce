@@ -1,5 +1,5 @@
 import { ArrowUpward } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { Fab, Tooltip } from "@mui/material";
 import { useState, useEffect } from "react";
 
 export default function GoToTop() {
@@ -32,24 +32,26 @@ export default function GoToTop() {
   return (
     <>
       {showButton && (
-        <IconButton
+        <Fab
           type="button"
           onClick={backToTop}
           name="go-back-to-top"
+          color="primary"
           sx={{
             position: "fixed",
             bottom: "40px",
             right: "40px",
             zIndex: 50,
             borderRadius: "100%",
-            backgroundColor: "#DB4444",
             padding: "12px",
             color: "white",
             transition: "all 150ms ease-in-out",
           }}
         >
-          <ArrowUpward />
-        </IconButton>
+          <Tooltip title="Go to top">
+            <ArrowUpward />
+          </Tooltip>
+        </Fab>
       )}
     </>
   );

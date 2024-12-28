@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Cart from "../Cart/Cart";
-import { Badge, IconButton } from "@mui/material";
+import { Badge, IconButton, Tooltip } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAppStore } from "@/stores/app-store";
 export const CartViewer = () => {
@@ -23,7 +23,9 @@ export const CartViewer = () => {
     >
       <Cart cartVisible={cartVisible} setCartVisible={setCartVisible} />
       <IconButton onClick={toggleCartVisible}>
-        <ShoppingCartIcon color="secondary" />
+        <Tooltip title="Cart">
+          <ShoppingCartIcon color="secondary" />
+        </Tooltip>
       </IconButton>
     </Badge>
   );

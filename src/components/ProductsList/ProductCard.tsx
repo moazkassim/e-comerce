@@ -10,6 +10,7 @@ import {
   CardMedia,
   IconButton,
   ListItem,
+  Rating,
   Typography,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -37,6 +38,7 @@ export default function Product(props: ProductProps) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [value, setValue] = useState<number | null>(2);
   return (
     <Box
       sx={{
@@ -155,15 +157,16 @@ export default function Product(props: ProductProps) {
             width: "100%",
             flexDirection: "row",
             alignItems: "center",
-            justifyContent: "flex-start",
-            gap: "0.75rem",
+            justifyContent: "space-between",
           }}
         >
-          <ListItem disablePadding sx={{ gap: "5px" }}>
-            <Grade sx={{ color: "#FFAD33" }} />
-            <Grade sx={{ color: "#FFAD33" }} />
-            <Grade sx={{ color: "#FFAD33" }} />
-          </ListItem>
+          <Rating
+            name="simple-controlled"
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+          />
 
           <Typography
             gutterBottom

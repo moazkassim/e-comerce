@@ -22,6 +22,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Tooltip,
 } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import InfoSharpIcon from "@mui/icons-material/InfoSharp";
@@ -155,13 +156,17 @@ function Navbar() {
                     cursor: "pointer",
                   }}
                 >
-                  <PersonIcon />
+                  <Tooltip title="Account">
+                    <PersonIcon />
+                  </Tooltip>
                 </Link>
               ) : (
-                <LogoutIcon
-                  onClick={() => logOut()}
-                  sx={{ cursor: "pointer" }}
-                />
+                <Tooltip title="Logout">
+                  <LogoutIcon
+                    onClick={() => logOut()}
+                    sx={{ cursor: "pointer" }}
+                  />
+                </Tooltip>
               )}
             </Box>
             <ThemeController />

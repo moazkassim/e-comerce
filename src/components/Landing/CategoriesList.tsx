@@ -53,7 +53,7 @@ export default function CategoriesList() {
 
   return (
     <Paper
-      elevation={1}
+      elevation={2}
       sx={{
         width: "100%",
         maxWidth: 260,

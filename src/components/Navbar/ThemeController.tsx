@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 
 import { useShallow } from "zustand/shallow";
+import { Tooltip } from "@mui/material";
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 30,
@@ -71,12 +72,14 @@ export const ThemeController = () => {
   );
 
   return (
-    <MaterialUISwitch
-      color="secondary"
-      defaultChecked={false}
-      onChange={() => {
-        toggleDarkMode();
-      }}
-    />
+    <Tooltip title="Toggle theme">
+      <MaterialUISwitch
+        color="secondary"
+        defaultChecked={false}
+        onChange={() => {
+          toggleDarkMode();
+        }}
+      />
+    </Tooltip>
   );
 };
