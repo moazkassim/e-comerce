@@ -9,7 +9,6 @@ import {
   CardContent,
   CardMedia,
   IconButton,
-  ListItem,
   Rating,
   Typography,
 } from "@mui/material";

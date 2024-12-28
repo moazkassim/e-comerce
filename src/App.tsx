@@ -70,20 +70,21 @@ function App() {
             pauseOnHover={false}
             draggable={true}
             progressStyle={undefined}
-            theme="light"
+            theme={darkMode ? "dark" : "light"}
           />
           <GoToTop />
           <Box
             sx={{
               display: "flex",
-              alignItems: "center", // Aligns items vertically at the center
-              justifyContent: "center", // Aligns items horizontally at the center
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <Container maxWidth={false}>
               <Router />
             </Container>
           </Box>
+
           <Footer />
         </>
       </QueryClientProvider>
